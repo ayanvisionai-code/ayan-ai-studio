@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function SolutionsPage() {
@@ -62,6 +63,10 @@ export default function SolutionsPage() {
                 <p style={{ fontSize: "1.3rem", maxWidth: "800px", marginTop: "1.5rem", color: "var(--muted-foreground)" }}>
                   We eliminate lead decay. When inbound volume outpaces sales capacity, we engineer intelligent routing systems that qualify prospects instantly and route dossiers to the correct agent.
                 </p>
+                
+                <div style={{ position: "relative", width: "100%", height: "250px", borderRadius: "12px", overflow: "hidden", margin: "2rem 0", border: "1px solid var(--border)" }}>
+                  <Image src="/solutions_automation_1784545471642.png" alt="Automation pipeline and intelligent routing" fill style={{ objectFit: "cover", opacity: 0.8 }} />
+                </div>
               </div>
 
               {/* Technology Transparency Sub-section */}

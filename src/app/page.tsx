@@ -1,5 +1,6 @@
 import styles from "./page.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -16,6 +17,12 @@ export default function Home() {
         <p className={styles.subheadline}>
           Ambitious businesses don't need more software. They need a unified Operational Core.
         </p>
+
+        {/* Hero Visual Integration */}
+        <div style={{ position: "relative", width: "100%", maxWidth: "900px", height: "400px", margin: "3rem auto 0", borderRadius: "16px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.05)", opacity: 0, animation: "fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s", filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.5))" }}>
+          <Image src="/home_hero_architecture_1784545430311.png" alt="Unified business operating system architecture" fill style={{ objectFit: "cover", opacity: 0.9 }} priority />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, var(--background) 0%, transparent 40%, transparent 100%)" }} />
+        </div>
         <div className={styles.ctaContainer} style={{ opacity: 0, animation: "fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s", textAlign: "center" }}>
           <Link href="#chaos" className={styles.primaryBtn}>
             Discover the Process
@@ -60,6 +67,11 @@ export default function Home() {
         </div>
         
         <div className="container" style={{ maxWidth: "1200px" }}>
+          
+          <div style={{ position: "relative", width: "100%", height: "400px", borderRadius: "16px", overflow: "hidden", marginBottom: "4rem", border: "1px solid var(--border)" }}>
+            <Image src="/home_chaos_ecosystem_1784545440954.png" alt="Fractured and chaotic data ecosystem" fill style={{ objectFit: "cover", opacity: 0.7 }} />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 0%, rgba(2,2,2,0.8) 100%)" }} />
+          </div>
           <div className={styles.chaosGrid}>
             <div className={styles.chaosCard}>
               <h3>Data Silos</h3>
@@ -309,6 +321,10 @@ export default function Home() {
                   <h4>The System Architecture</h4>
                   <p>We mapped their entire lifecycle and deployed a unified client portal backed by a centralized Operational Core. We replaced manual touchpoints with an orchestrated system that automatically provisions accounts, generates bespoke contracts via AI, and synchronizes with their primary CRM in real-time.</p>
                   
+                  <div style={{ position: "relative", width: "100%", height: "250px", borderRadius: "8px", overflow: "hidden", margin: "2rem 0", border: "1px solid var(--border)" }}>
+                    <Image src="/home_case_study_1784545451058.png" alt="Unified client portal and CRM sync architecture" fill style={{ objectFit: "cover", opacity: 0.8 }} />
+                  </div>
+
                   <h4>Long-Term Impact</h4>
                   <p>The firm can now handle 5x the client volume without hiring additional administrative staff. The technology is entirely invisible to the client, providing a frictionless, white-glove experience.</p>
                 </div>

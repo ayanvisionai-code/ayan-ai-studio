@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -149,6 +150,11 @@ export default function PerspectivePage() {
               <p style={{ marginBottom: "2rem", fontSize: "1.15rem", color: "var(--foreground)", lineHeight: 1.7 }}>
                 We are moving away from the era of manual data entry and into the era of continuous orchestration.
               </p>
+              
+              <div style={{ position: "relative", width: "100%", height: "200px", borderRadius: "12px", overflow: "hidden", margin: "2rem 0", border: "1px solid var(--border)" }}>
+                <Image src="/perspective_vision_1784545461369.png" alt="Visionary business transformation and invisible orchestration" fill style={{ objectFit: "cover", opacity: 0.9 }} />
+              </div>
+
               <p style={{ marginBottom: "2rem", fontSize: "1.1rem", color: "var(--muted-foreground)", lineHeight: 1.7 }}>
                 Over the next decade, the most successful companies will not be those with the most software, but those with the most cohesive Operational Core. We are engineering a future defined by <strong>Human-AI Collaboration</strong>, where deterministic workflows and probabilistic reasoning operate seamlessly together.
               </p>
