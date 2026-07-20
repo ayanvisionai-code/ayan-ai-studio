@@ -9,6 +9,11 @@ export default function Home() {
       {/* Chapter 1: The Reality (Emotional Hook) */}
       <section className={styles.hero}>
         <div className={styles.heroBackground} />
+        
+        <div className={styles.heroBadge}>
+          Business Systems Studio
+        </div>
+
         <h1 className={styles.headline}>
           <span className="text-gradient">Designing Intelligent Systems</span>
           <br />
@@ -19,11 +24,12 @@ export default function Home() {
         </p>
 
         {/* Hero Visual Integration */}
-        <div style={{ position: "relative", width: "100%", maxWidth: "900px", height: "400px", margin: "3rem auto 0", borderRadius: "16px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.05)", opacity: 0, animation: "fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s", filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.5))" }}>
+        <div className={styles.heroVisual}>
           <Image src="/home_hero_architecture_1784545430311.png" alt="Unified business operating system architecture" fill style={{ objectFit: "cover", opacity: 0.9 }} priority />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, var(--background) 0%, transparent 40%, transparent 100%)" }} />
+          <div className={styles.heroVisualOverlay} />
         </div>
-        <div className={styles.ctaContainer} style={{ opacity: 0, animation: "fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s", textAlign: "center" }}>
+        
+        <div className={styles.ctaContainer}>
           <Link href="#chaos" className={styles.primaryBtn}>
             Discover the Process
           </Link>
@@ -31,6 +37,15 @@ export default function Home() {
             <p style={{ margin: "0.5rem 0", color: "var(--foreground)" }}>Schedule a Business Systems Assessment.</p>
             <p>Map your operational bottlenecks. Discuss your current architecture. Create a transformation roadmap.</p>
           </div>
+        </div>
+
+        {/* Trust Indicators */}
+        <div className={styles.trustIndicators}>
+          <span className={styles.trustItem}>Operational Architecture</span>
+          <span className={styles.trustItem}>Business Transformation</span>
+          <span className={styles.trustItem}>Research Driven</span>
+          <span className={styles.trustItem}>Real Implementations</span>
+          <span className={styles.trustItem}>Systems Thinking</span>
         </div>
       </section>
 
