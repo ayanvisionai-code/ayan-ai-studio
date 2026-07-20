@@ -1,0 +1,48 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(5, 5, 5, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5vw;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-weight: 500;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}
+
+.links {
+  display: flex;
+  gap: 2rem;
+}
+
+.links a {
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+  font-weight: 400;
+  transition: color var(--transition-fast);
+}
+
+.links a:hover {
+  color: var(--foreground);
+}
+
+@media (max-width: 1024px) {
+  .links {
+    display: none; /* In a full app, implement a hamburger menu */
+  }
+}
