@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Methodologies | Ayan AI Studio",
@@ -13,7 +14,7 @@ export default function MethodologiesPage() {
         <span className="section-eyebrow animate-fade-up">Methodologies</span>
         <h1 className="page-title animate-fade-up delay-1">The Architecture of Intelligence.</h1>
         <p className="page-subtitle animate-fade-up delay-2">
-          We don't guess. We deploy proven, version-controlled frameworks to systematically rebuild your Operational Core.
+          We don't guess. Before we touch any software, we map how your business actually works — then use proven, repeatable frameworks to rebuild the connected system behind it: what we call your Operational Core.
         </p>
       </header>
 
@@ -24,12 +25,14 @@ export default function MethodologiesPage() {
           <div style={{ marginBottom: "8rem" }}>
             <div style={{ textAlign: "center", marginBottom: "4rem" }}>
               <span className="section-eyebrow">The Target State</span>
-              <h2 style={{ fontSize: "2.5rem", color: "var(--foreground)" }}>The Synchronized Operational Core</h2>
+              <h2 className="heading-md" style={{ color: "var(--foreground)" }}>The Synchronized Operational Core</h2>
               <p style={{ maxWidth: "800px", margin: "1rem auto 0" }}>A modern business is not a collection of departments. It is a single, continuous system where strategy, intelligence, and execution flow flawlessly.</p>
+              <p style={{ maxWidth: "700px", margin: "1rem auto 0", fontSize: "0.95rem", color: "var(--muted-foreground)" }}>In practical terms: your strategy, your customer-facing tools, your data, and your day-to-day execution should all draw on the same information — instead of living in separate systems that don't talk to each other.</p>
             </div>
             
             {/* Massive SVG Diagram of the Modern Business OS */}
-            <div className="glass-panel" style={{ padding: "4rem", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", minHeight: "600px" }}>
+            <div className={`glass-panel panel-pad-lg ${styles.corePanel}`} style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div className={styles.diagramDesktop}>
               <svg width="100%" viewBox="0 0 1000 600" style={{ maxWidth: "900px" }}>
                 <defs>
                   <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -86,6 +89,25 @@ export default function MethodologiesPage() {
                 <circle cx="340" cy="220" r="3" fill="var(--foreground)" filter="url(#blur)" />
                 <circle cx="660" cy="380" r="3" fill="var(--foreground)" filter="url(#blur)" />
               </svg>
+              </div>
+
+              {/* Mobile/tablet composition: same hub + four satellites, reflowed vertically
+                  instead of the desktop radial arrangement, which no longer fits legibly
+                  below ~1024px. */}
+              <div className={styles.diagramMobile}>
+                <div className={styles.coreLayerLabel}>Intelligence Layer</div>
+                <div className={styles.coreHub}>
+                  <div className={styles.coreHubCircle}>THE<br />OPERATIONAL<br />CORE</div>
+                </div>
+                <div className={styles.coreConnector} />
+                <div className={styles.coreLayerLabel}>Data &amp; Automation Layer</div>
+                <div className={styles.coreGrid}>
+                  <div className={styles.coreItem}>Strategy &amp; Leadership</div>
+                  <div className={styles.coreItem}>Marketing &amp; Sales</div>
+                  <div className={styles.coreItem}>Customer Experience</div>
+                  <div className={styles.coreItem}>Delivery &amp; Finance</div>
+                </div>
+              </div>
             </div>
           </div>
           
@@ -93,11 +115,12 @@ export default function MethodologiesPage() {
 
           {/* Framework 1 */}
           <div style={{ display: "flex", flexDirection: "column", gap: "4rem" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "2rem", justifyContent: "space-between", alignItems: "flex-start" }}>
               <div>
                 <span className="section-eyebrow">Framework 01</span>
-                <h2 style={{ fontSize: "3rem", color: "var(--foreground)", marginBottom: "1rem" }}>The Connected Business Architecture (CBA)</h2>
+                <h2 className="heading-lg" style={{ color: "var(--foreground)", marginBottom: "1rem" }}>The Connected Business Architecture (CBA)</h2>
                 <p style={{ maxWidth: "600px", fontSize: "1.1rem" }}>Our foundational operating methodology for linking isolated departments, unifying data, and orchestrating enterprise-wide workflows.</p>
+                <p style={{ maxWidth: "600px", fontSize: "0.95rem", color: "var(--muted-foreground)", marginTop: "1rem" }}>What this means for your business: we connect the tools and departments that are currently working in isolation, so information doesn't have to be re-entered or chased down by hand.</p>
               </div>
               <div style={{ textAlign: "right" }}>
                 <span style={{ display: "inline-block", background: "rgba(255,255,255,0.1)", padding: "0.5rem 1rem", borderRadius: "100px", fontSize: "0.85rem", color: "var(--foreground)" }}>Version 3.2</span>
@@ -106,11 +129,14 @@ export default function MethodologiesPage() {
             </div>
 
             {/* Engagement Journey with Process Flow Visualization */}
-            <div className="glass-panel" style={{ padding: "4rem", marginTop: "2rem" }}>
+            <div className="glass-panel panel-pad-lg" style={{ marginTop: "2rem" }}>
               <h3 style={{ fontSize: "1.5rem", color: "var(--foreground)", marginBottom: "3rem", borderBottom: "1px solid var(--border)", paddingBottom: "1rem" }}>The Architecture Flow</h3>
-              
-              <div style={{ position: "relative", marginBottom: "4rem" }}>
-                {/* SVG Pipeline */}
+
+              <div style={{ position: "relative", marginBottom: "4rem" }} className={styles.diagramDesktop}>
+                {/* SVG Pipeline — purely decorative connecting line; the actual step
+                    labels/descriptions live in the grid below, which is already
+                    responsive, so below 1024px this visual is simply hidden rather
+                    than squeezed or scrolled. */}
                 <svg width="100%" height="120" viewBox="0 0 1000 120" preserveAspectRatio="xMidYMid meet">
                   <defs>
                     <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0">
@@ -153,10 +179,10 @@ export default function MethodologiesPage() {
                 </svg>
               </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: "2rem", textAlign: "center" }}>
+              <div className="grid-4col" style={{ gap: "2rem", textAlign: "center" }}>
                 <div>
                   <div style={{ color: "var(--foreground)", fontSize: "1.1rem", marginBottom: "0.5rem", fontWeight: 500 }}>01. Discovery</div>
-                  <p style={{ fontSize: "0.9rem", color: "var(--muted-foreground)" }}>Audit the physical movement of data and human decisions to map operational friction.</p>
+                  <p style={{ fontSize: "0.9rem", color: "var(--muted-foreground)" }}>See exactly how information and decisions move through your business today, and where that movement breaks down.</p>
                 </div>
                 <div>
                   <div style={{ color: "var(--foreground)", fontSize: "1.1rem", marginBottom: "0.5rem", fontWeight: 500 }}>02. System Blueprint</div>
@@ -164,11 +190,11 @@ export default function MethodologiesPage() {
                 </div>
                 <div>
                   <div style={{ color: "var(--foreground)", fontSize: "1.1rem", marginBottom: "0.5rem", fontWeight: 500 }}>03. Engineering</div>
-                  <p style={{ fontSize: "0.9rem", color: "var(--muted-foreground)" }}>Build the central logic layer, replacing fragile SaaS integrations with enterprise infrastructure.</p>
+                  <p style={{ fontSize: "0.9rem", color: "var(--muted-foreground)" }}>Build the connected system itself, replacing fragile point-to-point tool integrations with a proper foundation.</p>
                 </div>
                 <div>
                   <div style={{ color: "var(--foreground)", fontSize: "1.1rem", marginBottom: "0.5rem", fontWeight: 500 }}>04. Optimization</div>
-                  <p style={{ fontSize: "0.9rem", color: "var(--muted-foreground)" }}>Deploy intelligent agents into the layer to execute reasoning and orchestration silently.</p>
+                  <p style={{ fontSize: "0.9rem", color: "var(--muted-foreground)" }}>Add AI agents where they help — handling routine reasoning and coordination in the background.</p>
                 </div>
               </div>
             </div>
@@ -177,7 +203,7 @@ export default function MethodologiesPage() {
             <div style={{ display: "flex", gap: "3rem", justifyContent: "flex-start", borderTop: "1px solid var(--border)", paddingTop: "2rem", flexWrap: "wrap" }}>
               <div>
                   <span style={{ display: "block", fontSize: "0.8rem", color: "var(--muted-foreground)", textTransform: "uppercase", marginBottom: "0.5rem" }}>Deployed In</span>
-                  <Link href="/transformations" className="link-hover" style={{ color: "var(--foreground)", fontWeight: 500 }}>Global Professional Services Firm →</Link>
+                  <Link href="/transformations/custom-applications" className="link-hover" style={{ color: "var(--foreground)", fontWeight: 500 }}>AgencyOS →</Link>
               </div>
               <div>
                   <span style={{ display: "block", fontSize: "0.8rem", color: "var(--muted-foreground)", textTransform: "uppercase", marginBottom: "0.5rem" }}>Governed By</span>
@@ -194,11 +220,12 @@ export default function MethodologiesPage() {
 
           {/* Framework 2 */}
           <div style={{ display: "flex", flexDirection: "column", gap: "4rem" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "2rem", justifyContent: "space-between", alignItems: "flex-start" }}>
               <div>
                 <span className="section-eyebrow">Framework 02</span>
-                <h2 style={{ fontSize: "3rem", color: "var(--foreground)", marginBottom: "1rem" }}>Intelligent Orchestration (Decision Trees)</h2>
+                <h2 className="heading-lg" style={{ color: "var(--foreground)", marginBottom: "1rem" }}>Intelligent Orchestration (Decision Trees)</h2>
                 <p style={{ maxWidth: "600px", fontSize: "1.1rem" }}>Our methodology for removing humans from deterministic routing and logic evaluation. We utilize LLMs strictly for parameter extraction.</p>
+                <p style={{ maxWidth: "600px", fontSize: "0.95rem", color: "var(--muted-foreground)", marginTop: "1rem" }}>What this means for your business: instead of a person manually reading every inquiry and deciding what to do with it, the system reads it, pulls out the key details, and routes it automatically — only flagging the judgment calls that actually need a human.</p>
               </div>
               <div style={{ textAlign: "right" }}>
                 <span style={{ display: "inline-block", background: "rgba(255,255,255,0.1)", padding: "0.5rem 1rem", borderRadius: "100px", fontSize: "0.85rem", color: "var(--foreground)" }}>Version 2.0</span>
@@ -207,9 +234,10 @@ export default function MethodologiesPage() {
             </div>
 
             {/* Decision Tree Visual */}
-            <div className="glass-panel" style={{ padding: "4rem", marginTop: "2rem", display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <div className="glass-panel panel-pad-lg" style={{ marginTop: "2rem", display: "flex", flexDirection: "column", alignItems: "center" }}>
               <h3 style={{ fontSize: "1.5rem", color: "var(--foreground)", marginBottom: "3rem", alignSelf: "flex-start", width: "100%", borderBottom: "1px solid var(--border)", paddingBottom: "1rem" }}>Probabilistic to Deterministic Routing</h3>
-              
+
+              <div className={styles.diagramDesktop}>
               <svg width="100%" height="300" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet" style={{ maxWidth: "800px" }}>
                 {/* Lines */}
                 <path d="M 150 150 L 300 150" stroke="var(--border)" strokeWidth="2" />
@@ -232,19 +260,52 @@ export default function MethodologiesPage() {
                 <text x="375" y="170" fill="var(--muted-foreground)" fontSize="10" textAnchor="middle">& Validation</text>
 
                 {/* Output 1 (Qualified) */}
-                <rect x="550" y="50" width="120" height="60" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(100,255,100,0.3)" strokeWidth="1.5" />
+                <rect x="550" y="50" width="120" height="60" rx="8" fill="rgba(255,255,255,0.02)" stroke="var(--foreground)" strokeWidth="1.5" />
                 <text x="610" y="75" fill="var(--foreground)" fontSize="12" textAnchor="middle">Qualified Match</text>
                 <text x="610" y="90" fill="var(--muted-foreground)" fontSize="10" textAnchor="middle">Structured JSON</text>
                 <circle cx="760" cy="80" r="20" fill="rgba(255,255,255,0.05)" stroke="var(--border)" />
                 <text x="760" y="84" fill="var(--foreground)" fontSize="10" textAnchor="middle">CRM</text>
 
                 {/* Output 2 (Disqualified) */}
-                <rect x="550" y="190" width="120" height="60" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,100,100,0.3)" strokeWidth="1.5" />
+                <rect x="550" y="190" width="120" height="60" rx="8" fill="rgba(255,255,255,0.02)" stroke="var(--border-hover)" strokeWidth="1.5" strokeDasharray="4 4" />
                 <text x="610" y="215" fill="var(--foreground)" fontSize="12" textAnchor="middle">Disqualified</text>
                 <text x="610" y="230" fill="var(--muted-foreground)" fontSize="10" textAnchor="middle">Missing Parameters</text>
                 <circle cx="760" cy="220" r="20" fill="rgba(255,255,255,0.05)" stroke="var(--border)" />
                 <text x="760" y="224" fill="var(--foreground)" fontSize="10" textAnchor="middle">ARCHIVE</text>
               </svg>
+              </div>
+
+              {/* Mobile/tablet composition: same input → engine → two-way branch,
+                  reflowed as a vertical chain instead of the desktop's horizontal
+                  branching layout. */}
+              <div className={styles.diagramMobile}>
+                <div className={styles.flowNode}>
+                  <div className={styles.flowNodeTitle}>Unstructured Data</div>
+                  <div className={styles.flowNodeSub}>(Human Email / Voice)</div>
+                </div>
+                <div className={styles.flowArrow}>↓</div>
+                <div className={`${styles.flowNode} ${styles.flowNodeAccent}`}>
+                  <div className={styles.flowNodeTitle}>LLM Engine</div>
+                  <div className={styles.flowNodeSub}>Parameter Extraction &amp; Validation</div>
+                </div>
+                <div className={styles.flowArrow}>↓</div>
+                <div className={styles.flowBranchGrid}>
+                  <div className={styles.flowBranchItem}>
+                    <div className={`${styles.flowNode} ${styles.flowNodeAccent}`}>
+                      <div className={styles.flowNodeTitle}>Qualified Match</div>
+                      <div className={styles.flowNodeSub}>Structured JSON</div>
+                    </div>
+                    <div className={styles.flowTag}>CRM</div>
+                  </div>
+                  <div className={styles.flowBranchItem}>
+                    <div className={styles.flowNode}>
+                      <div className={styles.flowNodeTitle}>Disqualified</div>
+                      <div className={styles.flowNodeSub}>Missing Parameters</div>
+                    </div>
+                    <div className={styles.flowTag}>Archive</div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Ecosystem Interlinking */}
@@ -267,7 +328,8 @@ export default function MethodologiesPage() {
 
           <div style={{ textAlign: "center", marginTop: "8rem" }}>
              <h3 style={{ fontSize: "2rem", marginBottom: "2rem" }}>Ready to deploy this architecture?</h3>
-             <Link href="/start" className="btn-primary">Begin Diagnostic</Link>
+             <Link href="/start" className="btn-primary">Start a Conversation →</Link>
+             <p style={{ marginTop: "1.25rem", fontSize: "0.9rem", color: "var(--muted-foreground)" }}>Start with a conversation about your current business.</p>
           </div>
 
         </div>

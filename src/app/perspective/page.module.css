@@ -1,0 +1,175 @@
+/* Founder section — "The Person Behind This Perspective" */
+/* Reuses the page's existing grid (1fr/1fr, 6rem gap) and section-divider rhythm
+   (border-top + 4rem padding + 8rem margin, matching the Next Chapter transition below). */
+
+.founderSection {
+  margin-top: 8rem;
+  padding-top: 4rem;
+  border-top: 1px solid var(--border);
+}
+
+.founderIntro {
+  max-width: 700px;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+
+.founderGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+  margin-bottom: 5rem;
+}
+
+.portraitWrap {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin-left: auto;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: transform var(--transition-smooth), border-color var(--transition-smooth);
+}
+.portraitWrap:hover {
+  transform: scale(1.015);
+  border-color: var(--border-hover);
+}
+
+.founderName {
+  font-size: 1.75rem;
+  color: var(--foreground);
+  margin-bottom: 0.25rem;
+}
+
+.founderRole {
+  display: block;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted-foreground);
+  margin-bottom: 2rem;
+}
+
+.founderContent p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--muted-foreground);
+  margin-bottom: 1.5rem;
+}
+
+.approachLabel {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--foreground);
+  margin-bottom: 1rem;
+}
+
+.founderClosing {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.shapedBy {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+  letter-spacing: 0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.closingLine {
+  font-size: 1.15rem;
+  color: var(--foreground);
+  line-height: 1.7;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .founderGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .founderContent {
+    order: 2;
+  }
+  .portraitWrap {
+    order: 1;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .futureContent {
+    order: 1;
+  }
+  .futureVisual {
+    order: 2;
+  }
+}
+
+.heroDiagramPanel {
+  padding: 4rem;
+}
+.diagnosticPanel {
+  padding: 4rem;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+  margin-top: 8rem;
+  margin-bottom: 8rem;
+}
+.diagnosticCol {
+  min-width: 300px;
+}
+
+/* Below 1024px the two diagnostic columns no longer have room to sit side by
+   side without squeezing — stack them instead of just letting them shrink,
+   matching how .founderGrid / .futureContent-.futureVisual already collapse
+   at this same breakpoint elsewhere on this page. */
+@media (max-width: 1024px) {
+  .diagnosticPanel {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .founderSection {
+    margin-top: 6rem;
+    padding-top: 3rem;
+  }
+  .founderIntro {
+    margin-bottom: 3rem;
+  }
+  .founderGrid {
+    margin-bottom: 3.5rem;
+  }
+  .diagnosticPanel {
+    padding: 2.5rem 1.5rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    gap: 2.5rem;
+  }
+  .diagnosticCol {
+    min-width: 0;
+  }
+  .heroDiagramPanel {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portraitWrap {
+    transition: none;
+  }
+  .portraitWrap:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,138 @@
+/* Mobile/tablet replacements for the page's bespoke SVG diagrams.
+   Below 1024px (this codebase's established "not desktop" threshold —
+   matches Navigation's own hamburger breakpoint and every other
+   two-column/grid collapse on this site) the dense diagrams can no longer
+   fit at a legible text size without either scrolling or shrinking below
+   readable size, so instead of forcing the desktop SVG into that space,
+   swap it for an HTML composition carrying the same nodes/labels, reflowed
+   vertically. Auto-fit grids let it use more columns on tablet width and
+   fewer on phone width without extra breakpoints. */
+.diagramDesktop {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.diagramMobile {
+  display: none;
+  width: 100%;
+}
+@media (max-width: 1024px) {
+  .diagramDesktop {
+    display: none;
+  }
+  .diagramMobile {
+    display: block;
+  }
+}
+
+.corePanel {
+  min-height: 600px;
+}
+@media (max-width: 1024px) {
+  .corePanel {
+    min-height: 0;
+  }
+}
+
+/* Operational Core: central hub + four connected satellites */
+.coreHub {
+  text-align: center;
+}
+.coreHubCircle {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  border: 1px dashed var(--foreground);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--foreground);
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+  padding: 0.5rem;
+}
+.coreLayerLabel {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.coreConnector {
+  width: 1px;
+  height: 2rem;
+  margin: 0.75rem auto;
+  background: var(--border-hover);
+}
+.coreGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+.coreItem {
+  padding: 1.1rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+  background: var(--background);
+}
+
+/* Shared vertical-chain / branch pieces, used by the Decision Tree */
+.flowNode {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1.1rem 1.5rem;
+  border: 1px solid var(--border-hover);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.flowNodeAccent {
+  border-color: var(--foreground);
+  background: rgba(255, 255, 255, 0.04);
+}
+.flowNodeTitle {
+  font-size: 0.9rem;
+  color: var(--foreground);
+  font-weight: 500;
+}
+.flowNodeSub {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  margin-top: 0.35rem;
+}
+.flowArrow {
+  color: var(--border-hover);
+  font-size: 1.15rem;
+  line-height: 1;
+  text-align: center;
+  margin: 0.6rem 0;
+}
+.flowBranchGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.25rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+.flowBranchItem {
+  text-align: center;
+}
+.flowTag {
+  display: inline-block;
+  margin-top: 0.7rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+}

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
+import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Perspective | Ayan AI Studio",
@@ -18,8 +19,8 @@ export default function PerspectivePage() {
         </p>
         
         {/* Business Ecosystem Diagram */}
-        <div className="glass-panel animate-fade-up delay-3" style={{ maxWidth: "1000px", margin: "4rem auto 0", padding: "4rem", display: "flex", justifyContent: "center", background: "rgba(255,255,255,0.02)" }}>
-          <svg width="600" height="200" viewBox="0 0 600 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className={`glass-panel animate-fade-up delay-3 ${styles.heroDiagramPanel}`} style={{ maxWidth: "1200px", margin: "4rem auto 0", display: "flex", justifyContent: "center", background: "rgba(255,255,255,0.02)" }}>
+          <svg width="100%" height="auto" viewBox="0 0 600 200" style={{ maxWidth: "600px" }} fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M100 100 L250 50 L400 100 L550 50" stroke="rgba(255,255,255,0.1)" strokeWidth="2" />
             <path d="M100 100 L250 150 L400 100 L550 150" stroke="rgba(255,255,255,0.1)" strokeWidth="2" />
             <path d="M250 50 L250 150" stroke="rgba(255,255,255,0.05)" strokeWidth="1" strokeDasharray="4 4" />
@@ -41,38 +42,38 @@ export default function PerspectivePage() {
       </header>
 
       <section className="section">
-        <div className="container" style={{ maxWidth: "1000px" }}>
-          
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6rem", alignItems: "center" }}>
+        <div className="container" style={{ maxWidth: "1200px" }}>
+
+          <div className="grid-2col" style={{ gap: "6rem", alignItems: "start" }}>
             <div>
               <h2 className="section-title">The Operational Core</h2>
-              <p style={{ marginBottom: "2rem", fontSize: "1.15rem", color: "var(--foreground)", lineHeight: 1.7 }}>
-                Every business has an <strong>Operational Core</strong>—the central nervous system where data, human decisions, and workflows intersect. In most companies, this core is fractured.
-              </p>
               <p style={{ marginBottom: "2rem", fontSize: "1.1rem", color: "var(--muted-foreground)", lineHeight: 1.7 }}>
-                We spent years observing high-growth companies hit invisible ceilings. The symptoms were always the same: executives spending weekends untangling data, sales teams fighting their CRM, and customer onboarding taking days instead of minutes. 
+                We spent years observing high-growth companies hit invisible ceilings. The symptoms were always the same: executives spending weekends untangling data by hand, sales teams fighting their own CRM, and customer onboarding taking days instead of minutes.
+              </p>
+              <p style={{ marginBottom: "2rem", fontSize: "1.15rem", color: "var(--foreground)", lineHeight: 1.7 }}>
+                Every business runs on a connected system — the website, tools, data, and people that keep work moving from one part of the business to the next. We call that your <strong>Operational Core</strong>: the central nervous system where data, human decisions, and workflows intersect. In most growing companies, it&rsquo;s fractured — the pieces all exist, they just don&rsquo;t work together.
               </p>
               <p style={{ fontSize: "1.1rem", color: "var(--muted-foreground)", lineHeight: 1.7 }}>
-                The default corporate reaction is to buy more software. But if you apply perfect logic to a broken process, you only automate the chaos. This realization forced us to abandon traditional software implementation and pioneer a new discipline entirely: Business Architecture.
+                The default reaction is to buy more software. But if you apply perfect logic to a broken process, you only automate the chaos. This realization forced us to abandon traditional software implementation and pioneer a discipline we call Business Architecture — understanding how a business actually works before deciding what to build.
               </p>
             </div>
 
             {/* Operational Complexity Map */}
-            <div className="glass-panel" style={{ padding: "3rem", background: "rgba(255,255,255,0.01)" }}>
+            <div className="glass-panel" style={{ padding: "3rem", marginTop: "6rem", background: "rgba(255,255,255,0.01)" }}>
               <h5 style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--muted-foreground)", marginBottom: "2rem", textAlign: "center" }}>Fragmented vs. Architected</h5>
               
               <div style={{ display: "flex", flexDirection: "column", gap: "3rem" }}>
                 {/* Fragmented */}
                 <div style={{ position: "relative", height: "100px" }}>
                   <svg width="100%" height="100%" viewBox="0 0 300 100" preserveAspectRatio="none">
-                    <path d="M20 50 Q 80 10, 150 50 T 280 50" stroke="rgba(255,100,100,0.4)" strokeWidth="2" fill="none" />
-                    <path d="M20 20 Q 100 90, 180 30 T 280 80" stroke="rgba(255,100,100,0.3)" strokeWidth="2" fill="none" />
-                    <path d="M40 80 Q 120 20, 200 70 T 260 20" stroke="rgba(255,100,100,0.2)" strokeWidth="2" fill="none" />
-                    <circle cx="20" cy="50" r="4" fill="rgba(255,100,100,0.8)" />
-                    <circle cx="150" cy="50" r="4" fill="rgba(255,100,100,0.8)" />
-                    <circle cx="280" cy="50" r="4" fill="rgba(255,100,100,0.8)" />
+                    <path d="M20 50 Q 80 10, 150 50 T 280 50" stroke="rgba(138,138,138,0.5)" strokeWidth="2" fill="none" />
+                    <path d="M20 20 Q 100 90, 180 30 T 280 80" stroke="rgba(138,138,138,0.35)" strokeWidth="2" fill="none" />
+                    <path d="M40 80 Q 120 20, 200 70 T 260 20" stroke="rgba(138,138,138,0.2)" strokeWidth="2" fill="none" />
+                    <circle cx="20" cy="50" r="4" fill="var(--muted-foreground)" />
+                    <circle cx="150" cy="50" r="4" fill="var(--muted-foreground)" />
+                    <circle cx="280" cy="50" r="4" fill="var(--muted-foreground)" />
                   </svg>
-                  <span style={{ position: "absolute", bottom: "-20px", left: "50%", transform: "translateX(-50%)", fontSize: "0.7rem", color: "rgba(255,100,100,0.8)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Chaos (Software Patching)</span>
+                  <span style={{ position: "absolute", bottom: "-20px", left: "50%", transform: "translateX(-50%)", fontSize: "0.7rem", color: "var(--muted-foreground)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Chaos (Software Patching)</span>
                 </div>
 
                 {/* Architected */}
@@ -92,8 +93,8 @@ export default function PerspectivePage() {
             </div>
           </div>
 
-          <div className="glass-panel" style={{ padding: "4rem", marginTop: "8rem", marginBottom: "8rem", borderLeft: "4px solid var(--foreground)", display: "flex", gap: "4rem", alignItems: "center", flexWrap: "wrap" }}>
-            <div style={{ flex: 1, minWidth: "300px" }}>
+          <div className={`glass-panel ${styles.diagnosticPanel}`} style={{ borderLeft: "4px solid var(--foreground)" }}>
+            <div className={styles.diagnosticCol} style={{ flex: 1 }}>
               <h3 style={{ fontSize: "1.75rem", color: "var(--foreground)", marginBottom: "1.5rem" }}>Our Diagnostic Approach</h3>
               <p style={{ marginBottom: "1.5rem", fontSize: "1.1rem", lineHeight: 1.7, color: "var(--muted-foreground)" }}>Before we write a single line of code, we map the physics of your business. How does data move? Where does human decision-making create bottlenecks? Where is information lost?</p>
               <ul style={{ listStyleType: "none", padding: 0, color: "var(--foreground)", fontSize: "0.95rem", lineHeight: 2 }}>
@@ -104,20 +105,27 @@ export default function PerspectivePage() {
             </div>
             
             {/* Diagnostic Flow */}
-            <div style={{ flex: 1, minWidth: "300px", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-              {["Map the Physics", "Isolate the Bottleneck", "Architect the Logic", "Deploy the System"].map((step, idx) => (
-                <div key={idx} style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                  <div style={{ width: "24px", height: "24px", border: "1px solid var(--border)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.7rem", color: "var(--muted-foreground)" }}>{idx + 1}</div>
-                  <span style={{ fontSize: "0.95rem", color: "var(--foreground)", textTransform: "uppercase", letterSpacing: "0.05em" }}>{step}</span>
-                  {idx < 3 && <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />}
+            <div className={styles.diagnosticCol} style={{ flex: 1, display: "flex", flexDirection: "column", gap: "2rem" }}>
+              {[
+                { step: "Map the Physics", meaning: "We see how information and decisions actually move through your business today." },
+                { step: "Isolate the Bottleneck", meaning: "We find exactly where work slows down or information gets lost." },
+                { step: "Architect the Logic", meaning: "We design how the pieces should connect and work together." },
+                { step: "Deploy the System", meaning: "We build it." },
+              ].map((item, idx) => (
+                <div key={idx} style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+                  <div style={{ width: "24px", height: "24px", flexShrink: 0, marginTop: "1px", border: "1px solid var(--border)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.7rem", color: "var(--muted-foreground)" }}>{idx + 1}</div>
+                  <div>
+                    <span style={{ fontSize: "0.95rem", color: "var(--foreground)", textTransform: "uppercase", letterSpacing: "0.05em" }}>{item.step}</span>
+                    <p style={{ fontSize: "0.95rem", color: "var(--muted-foreground)", lineHeight: 1.6, marginTop: "0.4rem" }}>{item.meaning}</p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
           
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6rem", alignItems: "center" }}>
+          <div className="grid-2col" style={{ gap: "6rem", alignItems: "start" }}>
             {/* Transformation Journey Graphic */}
-            <div className="glass-panel" style={{ padding: "4rem 3rem", background: "rgba(255,255,255,0.01)" }}>
+            <div className={`glass-panel ${styles.futureVisual}`} style={{ padding: "4rem 3rem", marginTop: "6rem", background: "rgba(255,255,255,0.01)" }}>
               <svg width="100%" height="250" viewBox="0 0 300 250" fill="none">
                 <defs>
                   <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
@@ -145,7 +153,7 @@ export default function PerspectivePage() {
               </svg>
             </div>
 
-            <div>
+            <div className={styles.futureContent}>
               <h2 className="section-title">The Future: Invisible Orchestration</h2>
               <p style={{ marginBottom: "2rem", fontSize: "1.15rem", color: "var(--foreground)", lineHeight: 1.7 }}>
                 We are moving away from the era of manual data entry and into the era of continuous orchestration.
@@ -156,7 +164,7 @@ export default function PerspectivePage() {
               </div>
 
               <p style={{ marginBottom: "2rem", fontSize: "1.1rem", color: "var(--muted-foreground)", lineHeight: 1.7 }}>
-                Over the next decade, the most successful companies will not be those with the most software, but those with the most cohesive Operational Core. We are engineering a future defined by <strong>Human-AI Collaboration</strong>, where deterministic workflows and probabilistic reasoning operate seamlessly together.
+                Over the next decade, the most successful companies will not be those with the most software, but those with the most cohesive Operational Core. We are engineering a future defined by <strong>Human-AI Collaboration</strong>, where deterministic workflows and probabilistic reasoning operate seamlessly together — in practice, the routine steps run automatically, while AI handles the judgment calls that used to need a person, without your team having to manage the handoff between the two.
               </p>
               <p style={{ fontSize: "1.1rem", color: "var(--muted-foreground)", lineHeight: 1.7 }}>
                 The hallmark of a perfect system is invisibility. When your architecture is correct, technology disappears into the background, surfacing only when human intuition, empathy, or strategy is required.
@@ -164,14 +172,60 @@ export default function PerspectivePage() {
             </div>
           </div>
 
-          <div style={{ display: "flex", gap: "2rem", borderTop: "1px solid var(--border)", paddingTop: "4rem", marginTop: "8rem" }}>
-            <div style={{ flex: 1 }} className="glass-panel" style={{ padding: "3rem" }}>
+          {/* The Person Behind This Perspective */}
+          <section className={styles.founderSection} aria-labelledby="founder-heading">
+            <div className={styles.founderIntro}>
+              <span className="section-eyebrow">The Person Behind This Perspective</span>
+              <h2 id="founder-heading" className="section-title" style={{ marginBottom: 0 }}>Understanding the system comes before building the solution.</h2>
+            </div>
+
+            <div className={styles.founderGrid}>
+              <div className={styles.founderContent}>
+                <h3 className={styles.founderName}>Ayan Das</h3>
+                <span className={styles.founderRole}>Founder &amp; Systems Builder, Ayan AI Studio</span>
+
+                <p>
+                  I work at the point where business, technology, and human behavior meet — the layer underneath the software, where a process either holds together or quietly falls apart. Most of what I build sits across automation, AI-driven systems, and the web infrastructure a team relies on to run the business day to day.
+                </p>
+                <p>
+                  I don&rsquo;t start with the tool. I start by asking what&rsquo;s actually happening — where work slows down, where information gets re-typed by hand, where a process survives because someone remembers to do it rather than because the system supports it. The architecture comes from that answer. The technology comes after.
+                </p>
+
+                <span className={styles.approachLabel}>How I Approach a Problem</span>
+                <ul style={{ listStyleType: "none", padding: 0, color: "var(--foreground)", fontSize: "0.95rem", lineHeight: 2, margin: 0 }}>
+                  <li style={{ display: "flex", gap: "1rem" }}><span style={{ color: "var(--muted-foreground)" }}>—</span> I start with how the business actually runs, not the org chart version.</li>
+                  <li style={{ display: "flex", gap: "1rem" }}><span style={{ color: "var(--muted-foreground)" }}>—</span> I question what&rsquo;s automated by habit before deciding it should exist at all.</li>
+                  <li style={{ display: "flex", gap: "1rem" }}><span style={{ color: "var(--muted-foreground)" }}>—</span> I design how the pieces connect before I choose the tools.</li>
+                </ul>
+              </div>
+
+              <div className={styles.portraitWrap}>
+                <Image
+                  src="/1781421868452-q78na3.png"
+                  alt="Ayan Das, founder and systems builder at Ayan AI Studio"
+                  fill
+                  sizes="(max-width: 1024px) 420px, 452px"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+            </div>
+
+            <div className={styles.founderClosing}>
+              <span className={styles.shapedBy}>Shaped by systems, technology, business, psychology, art, and experimentation.</span>
+              <p className={styles.closingLine}>
+                The studio&rsquo;s philosophy isn&rsquo;t a separate methodology from how I think — it&rsquo;s that thinking, made repeatable.
+              </p>
+            </div>
+          </section>
+
+          <div className="grid-2col" style={{ gap: "2rem", borderTop: "1px solid var(--border)", paddingTop: "4rem", marginTop: "8rem" }}>
+            <div className="glass-panel panel-pad-md">
               <span className="section-eyebrow">Next Chapter</span>
               <h3 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Our Operating Principles</h3>
               <p style={{ marginBottom: "2rem", fontSize: "1rem", color: "var(--muted-foreground)" }}>Discover the non-negotiable laws that govern our engineering.</p>
               <Link href="/principles" className="link-hover">Read Principles →</Link>
             </div>
-            <div style={{ flex: 1 }} className="glass-panel" style={{ padding: "3rem" }}>
+            <div className="glass-panel panel-pad-md">
               <span className="section-eyebrow">Ecosystem</span>
               <h3 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>The Connected Architecture</h3>
               <p style={{ marginBottom: "2rem", fontSize: "1rem", color: "var(--muted-foreground)" }}>See how the Operational Core is mapped and rebuilt.</p>

@@ -32,6 +32,12 @@
   border-bottom: 1px solid var(--border);
 }
 
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .col {
   display: flex;
   flex-direction: column;
@@ -51,8 +57,14 @@
   color: var(--muted-foreground);
 }
 
-.col a:hover {
+.col a:hover,
+.col a:focus-visible {
   color: var(--foreground);
+}
+
+.col a:focus-visible {
+  outline: 1px solid var(--border-hover);
+  outline-offset: 4px;
 }
 
 .bottom {
@@ -77,3 +89,29 @@
   color: var(--muted-foreground);
 }
 .legal a:hover { color: var(--foreground); }
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 5rem 6vw 2rem;
+  }
+  .top {
+    margin-bottom: 4rem;
+  }
+  .grid {
+    gap: 3rem;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}

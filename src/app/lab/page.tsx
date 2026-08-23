@@ -7,6 +7,26 @@ export const metadata: Metadata = {
   description: "Our internal research and development division. We continuously study, design, and validate intelligent business architectures.",
 };
 
+interface LabProject {
+  category: string;
+  name: string;
+  badge?: string;
+  metadata?: { label: string; value: string }[];
+  purpose: string;
+  problem: string;
+  focus: string;
+  progress: string;
+  evolution: string;
+  relatedTransformation?: string;
+  liveLink?: string;
+  liveButtonLabel?: string;
+  isInternal?: boolean;
+  image?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+}
+
 const evolutionSteps = [
   "Business Observation",
   "Operational Analysis",
@@ -45,7 +65,7 @@ const principles = [
   }
 ];
 
-const labProjects = [
+const labProjects: LabProject[] = [
   {
     category: "Internal Operating Systems",
     name: "AgencyOS",
@@ -64,7 +84,10 @@ const labProjects = [
     liveLink: "https://agency-application-fckg.vercel.app",
     liveButtonLabel: "Explore AgencyOS",
     isInternal: true,
-    screenshotPlaceholder: true
+    image: "/agencyos-dashboard.png",
+    imageAlt: "AgencyOS unified dashboard showing leads, clients, active projects and outstanding invoices",
+    imageWidth: 1906,
+    imageHeight: 953
   },
   {
     category: "Internal Operating Systems",
@@ -142,7 +165,7 @@ export default function LabPage() {
       {/* Hero Section */}
       <header className="page-header">
         <span className="section-eyebrow animate-fade-up">Innovation Lab</span>
-        <h1 className="page-title animate-fade-up delay-1" style={{ fontSize: "4.5rem", maxWidth: "900px" }}>Research & Architecture.</h1>
+        <h1 className="page-title animate-fade-up delay-1" style={{ fontSize: "clamp(2.5rem, 8vw, 4.5rem)", maxWidth: "900px" }}>Research & Architecture.</h1>
         <p className="page-subtitle animate-fade-up delay-2" style={{ maxWidth: "800px", fontSize: "1.25rem", lineHeight: 1.7 }}>
           This laboratory is dedicated to operational research, business architecture, and workflow experimentation. Every transformation we deliver begins here through rigorous internal validation and continuous structural refinement.
         </p>
@@ -152,16 +175,16 @@ export default function LabPage() {
         <div className="container" style={{ maxWidth: "1200px" }}>
           
           {/* Research Philosophy */}
-          <div style={{ marginBottom: "8rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
+          <div className="grid-2col lab-philosophy" style={{ alignItems: "center" }}>
             <div>
-              <h2 style={{ fontSize: "3rem", color: "var(--foreground)", marginBottom: "1.5rem" }}>The Lifecycle of Innovation</h2>
+              <h2 className="heading-lg" style={{ color: "var(--foreground)", marginBottom: "1.5rem" }}>The Lifecycle of Innovation</h2>
               <p style={{ fontSize: "1.15rem", color: "var(--muted-foreground)", lineHeight: 1.7 }}>
                 Every transformation begins with observation. We do not believe in random experimentation or building software in a vacuum. Our research division continuously conducts operational analysis, tests architectural hypotheses through rapid prototyping, validates systems internally, and refines them into production-grade infrastructure.
               </p>
             </div>
-            
+
             {/* Visual Evolution Model */}
-            <div className="glass-panel" style={{ padding: "3rem 2rem", overflowX: "auto" }}>
+            <div className="glass-panel lab-evolution-panel" style={{ overflowX: "auto" }}>
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                 {evolutionSteps.map((step, idx) => (
                   <div key={idx} style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
@@ -190,12 +213,12 @@ export default function LabPage() {
           </div>
 
           {/* Research Principles */}
-          <div style={{ marginBottom: "10rem" }}>
+          <div className="lab-principles">
             <span className="section-eyebrow">Operating Standard</span>
-            <h2 style={{ fontSize: "2.5rem", color: "var(--foreground)", marginBottom: "3rem" }}>Research Principles</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2rem" }}>
+            <h2 className="heading-md" style={{ color: "var(--foreground)", marginBottom: "3rem" }}>Research Principles</h2>
+            <div className="grid-auto-md lab-principles-grid">
               {principles.map((p, i) => (
-                <div key={i} className="glass-panel" style={{ padding: "2.5rem" }}>
+                <div key={i} className="glass-panel panel-pad-sm">
                   <h4 style={{ fontSize: "1.2rem", color: "var(--foreground)", marginBottom: "1rem" }}>{p.title}</h4>
                   <p style={{ fontSize: "1rem", color: "var(--muted-foreground)", lineHeight: 1.6 }}>{p.desc}</p>
                 </div>
@@ -204,34 +227,34 @@ export default function LabPage() {
           </div>
 
           {/* Projects by Category */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "8rem" }}>
+          <div className="lab-categories-stack" style={{ display: "flex", flexDirection: "column" }}>
             {categories.map((category) => (
               <div key={category}>
-                <div style={{ borderBottom: "1px solid var(--border)", paddingBottom: "1.5rem", marginBottom: "4rem" }}>
-                  <h2 style={{ fontSize: "2rem", color: "var(--foreground)", margin: 0 }}>{category}</h2>
+                <div className="lab-category-header" style={{ borderBottom: "1px solid var(--border)" }}>
+                  <h2 className="lab-category-title" style={{ color: "var(--foreground)", margin: 0 }}>{category}</h2>
                 </div>
-                
-                <div style={{ display: "flex", flexDirection: "column", gap: "4rem" }}>
+
+                <div className="lab-projects-stack" style={{ display: "flex", flexDirection: "column" }}>
                   {labProjects.filter(p => p.category === category).map((project, idx) => (
-                    <article key={idx} className="glass-panel" style={{ padding: "4rem" }}>
-                      
+                    <article key={idx} className="glass-panel panel-pad-lg">
+
                       {/* Header */}
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "4rem", flexWrap: "wrap", gap: "2rem" }}>
+                      <div className="lab-project-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "2rem" }}>
                         <div>
-                          <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1rem" }}>
-                            <h3 style={{ fontSize: "2.5rem", color: "var(--foreground)", margin: 0 }}>{project.name}</h3>
-                            {(project as any).badge && (
+                          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "1rem", marginBottom: "1rem" }}>
+                            <h3 className="heading-md" style={{ color: "var(--foreground)", margin: 0 }}>{project.name}</h3>
+                            {project.badge && (
                               <span style={{ padding: "0.4rem 1rem", background: "var(--foreground)", color: "var(--background)", borderRadius: "100px", fontSize: "0.8rem", textTransform: "uppercase", letterSpacing: "0.05em", fontWeight: 600 }}>
-                                {(project as any).badge}
+                                {project.badge}
                               </span>
                             )}
                           </div>
 
                           {/* Metadata Grid */}
                           {project.metadata && (
-                            <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap", marginTop: "1.5rem" }}>
+                            <div className="lab-project-meta" style={{ display: "flex", flexWrap: "wrap", marginTop: "1.5rem" }}>
                               {project.metadata.map((meta, mIdx) => (
-                                <div key={mIdx} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                                <div key={mIdx} className="lab-meta-item">
                                   <span style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--muted-foreground)" }}>{meta.label}:</span>
                                   <span style={{ fontSize: "0.85rem", color: "var(--foreground)", fontWeight: 500 }}>{meta.value}</span>
                                 </div>
@@ -248,7 +271,7 @@ export default function LabPage() {
                       </div>
 
                       {/* Body Grid */}
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", marginBottom: "4rem" }}>
+                      <div className="grid-2col lab-project-body">
                         
                         <div>
                           <h5 style={{ fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--muted-foreground)", marginBottom: "1rem" }}>Purpose</h5>
@@ -273,44 +296,40 @@ export default function LabPage() {
                       </div>
 
                       {/* Visual Architecture Section */}
-                      {((project as any).image || (project as any).screenshotPlaceholder) && (
-                        <div style={{ marginBottom: "4rem" }}>
+                      {project.image && (
+                        <div className="lab-project-visual">
                           <h5 style={{ fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--muted-foreground)", marginBottom: "1.5rem" }}>System Architecture & Evidence</h5>
-                          
-                          {(project as any).image && (
-                            <div style={{ position: "relative", width: "100%", height: "400px", borderRadius: "12px", overflow: "hidden", border: "1px solid var(--border)", background: "#050505" }}>
-                              <Image 
-                                src={(project as any).image} 
-                                alt={(project as any).imageAlt} 
-                                fill 
-                                style={{ objectFit: "cover", opacity: 0.8 }} 
+
+                          {project.imageWidth ? (
+                            // Real product screenshot (e.g. AgencyOS dashboard) — sized to its
+                            // true aspect ratio with object-fit: contain so no interface chrome
+                            // is ever cropped, matching the same shot's treatment on the
+                            // Transformations → Custom Applications page.
+                            <div className="lab-evidence-shot" style={{ position: "relative", width: "100%", aspectRatio: `${project.imageWidth} / ${project.imageHeight}`, borderRadius: "12px", overflow: "hidden", border: "1px solid var(--border)", background: "#050505" }}>
+                              <Image
+                                src={project.image}
+                                alt={project.imageAlt ?? ""}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 700px"
+                                style={{ objectFit: "contain" }}
                               />
                             </div>
-                          )}
-
-                          {(project as any).screenshotPlaceholder && (
-                            <div className="browser-mockup" style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid var(--border)", background: "#000", position: "relative" }}>
-                              {/* Browser Header */}
-                              <div style={{ padding: "0.75rem 1rem", background: "rgba(255,255,255,0.03)", borderBottom: "1px solid var(--border)", display: "flex", gap: "0.5rem" }}>
-                                <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "var(--border-hover)" }} />
-                                <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "var(--border-hover)" }} />
-                                <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "var(--border-hover)" }} />
-                              </div>
-                              {/* Content Area */}
-                              <div style={{ width: "100%", height: "400px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "1rem" }}>
-                                <div style={{ width: "40px", height: "40px", border: "1px dashed var(--border)", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--muted-foreground)" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                </div>
-                                <span style={{ fontSize: "0.9rem", color: "var(--muted-foreground)", textTransform: "uppercase", letterSpacing: "0.05em" }}>Insert AgencyOS Dashboard Screenshot</span>
-                                <span style={{ fontSize: "0.75rem", color: "var(--border-hover)" }}>Recommended Size: 1920x1080</span>
-                              </div>
+                          ) : (
+                            // Illustrative architecture diagram — square source asset.
+                            <div className="lab-visual-image" style={{ position: "relative", width: "100%", borderRadius: "12px", overflow: "hidden", border: "1px solid var(--border)", background: "#050505" }}>
+                              <Image
+                                src={project.image}
+                                alt={project.imageAlt ?? ""}
+                                fill
+                                style={{ objectFit: "cover", opacity: 0.8 }}
+                              />
                             </div>
                           )}
                         </div>
                       )}
 
                       {/* Footer Grid */}
-                      <div style={{ padding: "3rem", background: "rgba(255,255,255,0.01)", borderTop: "1px solid var(--border)", display: "flex", flexDirection: "column", gap: "2rem" }}>
+                      <div className="panel-pad-md lab-project-footer" style={{ background: "rgba(255,255,255,0.01)", borderTop: "1px solid var(--border)", display: "flex", flexDirection: "column" }}>
                         <div>
                           <h5 style={{ fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--foreground)", marginBottom: "0.5rem" }}>Expected Evolution</h5>
                           <p style={{ fontSize: "1.1rem", color: "var(--foreground)", lineHeight: 1.6, margin: 0 }}>{project.evolution}</p>
@@ -332,18 +351,18 @@ export default function LabPage() {
           </div>
 
           {/* Closing Reflection */}
-          <div style={{ marginTop: "8rem", padding: "6rem 4rem", background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)", borderRadius: "24px", textAlign: "center" }}>
+          <div className="panel-pad-callout lab-reflection" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)", borderRadius: "24px", textAlign: "center" }}>
             <span className="section-eyebrow">Why This Laboratory Exists</span>
-            <h2 style={{ fontSize: "2.5rem", color: "var(--foreground)", margin: "2rem auto", maxWidth: "800px" }}>Every transformation begins as structured research.</h2>
+            <h2 className="heading-md" style={{ color: "var(--foreground)", margin: "2rem auto", maxWidth: "800px" }}>Every transformation begins as structured research.</h2>
             <p style={{ fontSize: "1.15rem", color: "var(--muted-foreground)", lineHeight: 1.7, maxWidth: "700px", margin: "0 auto 3rem" }}>
               Our internal systems are continuously analyzed, challenged, and improved through practical daily use. The most successful architectural ideas mature into production operating systems, eventually forming the foundational methodology for our client transformations.
             </p>
           </div>
 
           {/* Global CTA */}
-          <div style={{ textAlign: "center", marginTop: "8rem" }}>
-             <h3 style={{ fontSize: "2rem", marginBottom: "2rem" }}>Ready to redesign your business architecture?</h3>
-             <Link href="/start" className="btn-primary">Schedule a Business Analysis</Link>
+          <div className="lab-cta" style={{ textAlign: "center" }}>
+             <h3 className="lab-cta-title">Ready to redesign your business architecture?</h3>
+             <Link href="/start" className="btn-primary lab-cta-button">Schedule a Business Analysis →</Link>
           </div>
 
         </div>

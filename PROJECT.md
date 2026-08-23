@@ -26,6 +26,17 @@ The website operates on the following belief system. All content, design, and fu
 
 The visitor should understand within seconds: *this is not a typical tech agency. This is a Business Systems Studio that thinks in architectures, not in features.*
 
+### 2.1 Service Model — Standalone AND Combined
+
+The studio offers **four service lines**. Three are sold standalone; the fourth is what happens when two or more are combined:
+
+1. **Websites** — premium, high-converting websites, sold on their own. No existing complexity or other services required.
+2. **Automation & AI Agents** — eliminates repetitive work (lead qualification, scheduling, data entry, reporting) for businesses whose website/tools already work fine.
+3. **Custom Applications** — bespoke tools (client portals, internal dashboards, workflow systems) for needs off-the-shelf software doesn't fit.
+4. **Integrated Systems** — two or more of the above engineered to work as one Operational Core. This is the differentiator, not the only offer.
+
+**Do not present the site as if the Operational Core / combined system is the only way to engage.** Every service page, the homepage, and the `/start` flow must give a visitor who wants *only* a website, *only* automation, or *only* an app a clear, non-condescending path — without forcing them into "we sell operational clarity, not implementations" framing. The combined pitch is the upsell/differentiator, not the gate.
+
 ---
 
 ## 3. Technical Stack
@@ -200,6 +211,12 @@ The homepage is structured as a **7-chapter narrative**. Each chapter transition
 
 Horizontal stats row: `-70% Avg Onboarding Time`, `99% Manual Work Eliminated`, `12+ Core Systems Designed`
 
+### Chapter 2.5: Engagement Options (`#engagement`)
+
+**Title:** "One piece, or the whole system."
+
+Four-card grid (reuses `.chaosGrid`/`.chaosCard`) linking to the four `/solutions` anchors: Websites, Automation & AI Agents, Custom Applications, Integrated Systems. Exists so a visitor who wants only one service sees a clear path before the combined-systems narrative (Chapters 3+) begins. Do not remove this section or fold it back into a single combined pitch.
+
 ### Chapter 3: The Reality (Pain Section, `#chaos`)
 
 **Headline:** "You didn't start a business to manage 15 disconnected software tools."
@@ -261,12 +278,13 @@ Documents the Connected Business Architecture framework. Large central SVG "Sync
 
 **Headline:** "Engineered for Outcomes."
 
-Three solutions:
-1. **Customer Communication System** — Interactive 5-stage Workflow Explorer (React useState) + `solutions_automation` image
-2. **White-Glove Onboarding Architecture** — SVG provisioning architecture flow
-3. **Data Unification & Intelligence** — SVG centralized data ecosystem map
+Four service lines, each with its own anchor (`#websites`, `#automation`, `#applications`, `#integrated`) and a quick-nav chip strip at the top of the page:
+1. **Websites** (`#websites`) — Available standalone. Premium, high-converting websites. No case study attached (none built yet as a pure-website engagement) — do not fabricate one.
+2. **Automation & AI Agents** (`#automation`) — Available standalone. Customer Communication System example — Interactive 5-stage Workflow Explorer (React useState) + `solutions_automation` image.
+3. **Custom Applications** (`#applications`) — Available standalone. White-Glove Onboarding Architecture example — SVG provisioning architecture flow.
+4. **Integrated Systems** (`#integrated`) — The combined offer. Data Unification & Intelligence example — SVG centralized data ecosystem map.
 
-Each has tech tag chips and cross-links to related transformations and methodologies.
+Each has tech tag chips and cross-links to related transformations and methodologies. Each of the three standalone sections also states what it can combine with.
 
 ### `/transformations` — Executive Consulting Reports
 
@@ -327,6 +345,10 @@ Five principles with boundary statements:
 
 Engagement/contact page. Should feel like the beginning of a serious partnership conversation, not a contact form.
 
+**Flow (5 steps):** (1) What do you need? — A New Website / Automation & AI Agents / A Custom Application / An Integrated System → (2) scale of operation (ARR bands) → (3) desired outcome, options branch based on the step-1 answer (`goalOptionsByService` in `start/page.tsx`) → (4) email capture, CTA label adapts to the chosen service ("Request Website/Application/Automation/Architecture Review") → (5) confirmation.
+
+This branching exists so a visitor who wants only a website isn't funneled through "operational bottleneck" questions meant for combined-system buyers.
+
 ### `/resources` — Resources
 
 Supporting page for frameworks, templates, or reading materials.
@@ -336,8 +358,10 @@ Supporting page for frameworks, templates, or reading materials.
 ## 8. Navigation Structure
 
 ```
-[Logo: Ayan AI Studio]    Perspective  Methodologies  Solutions  Transformations  Insights    [Begin Evolution →]
+[Logo: Ayan AI Studio]    Perspective  Methodologies  Services  Transformations  Insights    [Begin Evolution →]
 ```
+
+"Solutions" nav label was renamed to **"Services"** — it now leads to four distinct standalone/combined service lines rather than implying one bundled offering. The route is unchanged (`/solutions`).
 
 - Fixed/sticky at the top
 - Logo links to `/`

@@ -55,7 +55,7 @@ export default function PrinciplesPage() {
           
           <div style={{ display: "flex", flexDirection: "column", gap: "6rem" }}>
             {principles.map((p) => (
-              <div key={p.num} style={{ display: "grid", gridTemplateColumns: "100px 1fr", gap: "3rem", alignItems: "flex-start" }}>
+              <div key={p.num} className="grid-num-col" style={{ alignItems: "flex-start" }}>
                 <div style={{ fontSize: "3rem", color: "var(--border-hover)", fontWeight: 300, lineHeight: 1 }}>{p.num}</div>
                 <div>
                   <h2 style={{ fontSize: "2rem", color: "var(--foreground)", marginBottom: "1.5rem" }}>{p.title}</h2>
@@ -69,10 +69,10 @@ export default function PrinciplesPage() {
             ))}
           </div>
 
-          <div className="glass-panel" style={{ padding: "4rem", marginTop: "8rem", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <div className="glass-panel panel-pad-lg" style={{ marginTop: "8rem", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
             <h3 style={{ fontSize: "2rem", color: "var(--foreground)", marginBottom: "1rem" }}>Ready to see these principles in action?</h3>
             <p style={{ marginBottom: "3rem", maxWidth: "600px" }}>Discover how we apply these laws of system design to rebuild a company's Operational Core.</p>
-            <div style={{ display: "flex", gap: "2rem" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "1.25rem 2rem" }}>
               <Link href="/solutions" className="btn-primary">View Solutions</Link>
               <Link href="/transformations" className="btn-secondary">Read Transformations</Link>
             </div>

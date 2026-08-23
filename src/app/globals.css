@@ -24,6 +24,8 @@
   
   --transition-smooth: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  --nav-height: 72px;
 }
 
 * {
@@ -68,6 +70,31 @@ p {
 ::selection {
   background-color: var(--foreground);
   color: var(--background);
+}
+
+/* Auto-fit card grid (minmax(300px,1fr)) used across several pages for
+   feature/principle/resource cards — at narrow phone widths (~320-360px) a
+   300px column can be wider than the available content area and overflow, so
+   force a single column once the viewport can no longer comfortably fit it.
+   Desktop column count is unaffected (only adds a new ≤680px rule); gap stays
+   whatever each usage sets inline. */
+.grid-auto-md {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+@media (max-width: 680px) {
+  .grid-auto-md {
+    grid-template-columns: 1fr;
+  }
+}
+.grid-auto-lg {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+@media (max-width: 700px) {
+  .grid-auto-lg {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Global Utilities */
@@ -122,6 +149,108 @@ p {
 .section {
   padding: 10rem 5vw;
 }
+
+@media (max-width: 768px) {
+  .page-header {
+    padding: 8rem 6vw 4rem;
+  }
+  .section {
+    padding: 6rem 6vw;
+  }
+}
+@media (max-width: 480px) {
+  .page-header {
+    padding: 7rem 6vw 3.5rem;
+  }
+  .section {
+    padding: 4.5rem 6vw;
+  }
+}
+
+/* Responsive panel padding — replaces fixed inline padding:"4rem"/"3rem"/"2.5rem"
+   on .glass-panel cards so cards can respond to breakpoints (inline styles can't).
+   Pick the tier matching the card's original desktop padding. */
+.panel-pad-lg { padding: 4rem; }
+.panel-pad-md { padding: 3rem; }
+.panel-pad-sm { padding: 2.5rem; }
+
+@media (max-width: 1024px) {
+  .panel-pad-lg { padding: 3rem; }
+  .panel-pad-md { padding: 2.5rem; }
+}
+@media (max-width: 768px) {
+  .panel-pad-lg { padding: 2.5rem 1.75rem; }
+  .panel-pad-md { padding: 2.25rem 1.5rem; }
+  .panel-pad-sm { padding: 2rem 1.5rem; }
+}
+@media (max-width: 480px) {
+  .panel-pad-lg { padding: 2rem 1.25rem; }
+  .panel-pad-md { padding: 1.75rem 1.25rem; }
+  .panel-pad-sm { padding: 1.75rem 1.25rem; }
+}
+
+/* Asymmetric content-pane padding (4rem vertical / 3rem horizontal) used by the
+   Solutions workflow explorer's content pane — kept separate from the tiers above
+   so its desktop value (4rem 3rem, not a uniform 4rem) stays pixel-exact. */
+.panel-pad-explorer {
+  padding: 4rem 3rem;
+}
+@media (max-width: 1024px) {
+  .panel-pad-explorer { padding: 3rem 2rem; }
+}
+@media (max-width: 768px) {
+  .panel-pad-explorer { padding: 2.5rem 1.5rem; }
+}
+@media (max-width: 480px) {
+  .panel-pad-explorer { padding: 2rem 1.25rem; }
+}
+
+/* Large asymmetric callout padding (6rem vertical / 4rem horizontal), e.g. a
+   closing-reflection panel. */
+.panel-pad-callout {
+  padding: 6rem 4rem;
+}
+@media (max-width: 1024px) {
+  .panel-pad-callout { padding: 4rem 3rem; }
+}
+@media (max-width: 768px) {
+  .panel-pad-callout { padding: 3rem 2rem; }
+}
+@media (max-width: 480px) {
+  .panel-pad-callout { padding: 2.5rem 1.5rem; }
+}
+
+/* Responsive heading sizes — replaces fixed inline fontSize:"3rem"/"2.5rem" headings.
+   Max reached by ~1024px so desktop rendering is unchanged; scales down below that. */
+.heading-lg {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+.heading-md {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+/* Fixed-number + content grid (e.g. "01  Title / description") — collapses to a
+   single column once the fixed number column would squeeze the content column. */
+.grid-num-col {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 3rem;
+}
+@media (max-width: 768px) {
+  .grid-num-col {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Wraps a bespoke SVG diagram so it stays legible on narrow screens: the SVG keeps
+   an explicit min-width (set per-diagram) and this container scrolls horizontally
+   instead of the diagram's text/nodes being squeezed down to illegible sizes.
+   Mirrors the pattern already used by components/transformations/RoutingDiagram.tsx. */
+.diagram-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
 .section-eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -134,6 +263,48 @@ p {
   font-size: clamp(2.5rem, 4vw, 4rem);
   font-weight: 400;
   margin-bottom: 3rem;
+}
+
+/* Responsive Grid Utilities — collapse fixed-column editorial grids below tablet width.
+   Apply as className alongside inline style; leave gap/alignItems/etc. in the inline
+   style, but let this class own grid-template-columns so it can respond per breakpoint. */
+.grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.grid-4col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.grid-asym-2col {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+/* Workflow Explorer's grid-asym-2col carries a fixed min-height so the two
+   columns line up at desktop; once it collapses to one column the content
+   already exceeds that height, so free it rather than leaving dead space. */
+.explorer-grid {
+  min-height: 400px;
+}
+
+@media (max-width: 1024px) {
+  .grid-2col,
+  .grid-asym-2col {
+    grid-template-columns: 1fr;
+  }
+  .grid-4col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .explorer-grid {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-4col {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Global Buttons */
@@ -168,6 +339,619 @@ p {
 .btn-secondary:hover {
   border-color: var(--foreground);
   background: rgba(255,255,255,0.05);
+}
+
+/* ==========================================================================
+   Solutions / Services page — mobile recomposition
+   Desktop values below match the inline styles they replace exactly, so
+   nothing renders differently above the breakpoints. Only mobile/tablet
+   tiers introduce new spacing.
+   ========================================================================== */
+
+/* Vertical gap between the four service panels. Desktop keeps the original
+   8rem editorial rhythm; mobile tightens it since 8rem of empty space reads
+   as a broken layout on a 393px screen rather than a deliberate pause. */
+.solutions-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+}
+@media (max-width: 1024px) {
+  .solutions-stack { gap: 5rem; }
+}
+@media (max-width: 768px) {
+  .solutions-stack { gap: 3rem; }
+}
+@media (max-width: 480px) {
+  .solutions-stack { gap: 2.5rem; }
+}
+
+/* Gap between the sections inside one service panel (label/title, lede,
+   tags, diagram, links). */
+.service-panel {
+  gap: 3rem;
+}
+@media (max-width: 768px) {
+  .service-panel { gap: 2rem; }
+}
+@media (max-width: 480px) {
+  .service-panel { gap: 1.75rem; }
+}
+
+/* Service lede paragraph under each heading. */
+.service-lede {
+  font-size: 1.3rem;
+  margin-top: 1.5rem;
+}
+@media (max-width: 768px) {
+  .service-lede { font-size: 1.1rem; margin-top: 1rem; }
+}
+@media (max-width: 480px) {
+  .service-lede { font-size: 1.05rem; }
+}
+
+/* Label above a chip group ("What's Included", "Technology Implementation
+   Layer"). */
+.field-label {
+  margin-bottom: 1rem;
+}
+@media (max-width: 480px) {
+  .field-label { margin-bottom: 0.75rem; }
+}
+
+/* Technology / capability chip group + chip. Chips are compact metadata —
+   they should wrap freely and sit close together, not read as cards. */
+.chip-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+@media (max-width: 768px) {
+  .chip-group { gap: 0.6rem; }
+}
+.chip {
+  padding: 0.4rem 0.8rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+@media (max-width: 480px) {
+  .chip { padding: 0.4rem 0.7rem; font-size: 0.85rem; }
+}
+
+/* "Best For" / "Can Combine With" / ecosystem-interlinking rows. */
+.section-links-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+.section-links-row--tight { margin-top: 1rem; }
+@media (max-width: 768px) {
+  .section-links-row,
+  .section-links-row--tight { gap: 1.5rem; margin-top: 1.5rem; padding-top: 1.5rem; }
+}
+@media (max-width: 480px) {
+  .section-links-row,
+  .section-links-row--tight { gap: 1.25rem; margin-top: 1.25rem; padding-top: 1.25rem; }
+}
+
+/* Quick nav row at the top of the page. */
+.quicknav-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+@media (max-width: 640px) {
+  .quicknav-row { gap: 0.6rem; }
+}
+.quicknav-btn {}
+@media (max-width: 640px) {
+  .quicknav-btn { padding: 0.7rem 1.1rem; font-size: 0.9rem; }
+}
+
+/* .container already carries its own 5vw horizontal padding, and .section
+   (its parent on this page) adds another 6vw on top of that below 768px —
+   the two stack to ~11vw (~43px at 393px) per side, leaving cards narrower
+   than intended. Both classes are shared sitewide, so rather than touching
+   them, this page-scoped class cancels the redundant inner layer below
+   768px and lets .section's own 6vw be the sole gutter (~24px at 393px) —
+   only affects elements carrying this class, i.e. only this page. */
+@media (max-width: 768px) {
+  .solutions-container { padding-left: 0; padding-right: 0; }
+}
+
+/* Interactive Workflow Explorer */
+.explorer-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+@media (max-width: 640px) {
+  .explorer-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.25rem 1.25rem;
+    gap: 0.35rem;
+  }
+}
+
+.explorer-sidebar {
+  border-right: 1px solid var(--border);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.01);
+}
+@media (max-width: 1024px) {
+  .explorer-sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+@media (max-width: 640px) {
+  .explorer-sidebar { padding: 1rem; gap: 0.5rem; }
+}
+
+.explorer-stage-btn {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+@media (max-width: 640px) {
+  .explorer-stage-btn { padding: 0.75rem 0.85rem; gap: 0.65rem; border-radius: 6px; }
+}
+
+.explorer-content-body {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+@media (max-width: 640px) {
+  .explorer-content-body { margin-top: 1.25rem; gap: 1.25rem; }
+}
+
+.explorer-primary-text {
+  font-size: 1.2rem;
+  color: var(--foreground);
+}
+.explorer-secondary-text {
+  font-size: 1.1rem;
+  color: var(--muted-foreground);
+}
+@media (max-width: 640px) {
+  .explorer-primary-text { font-size: 1.05rem; }
+  .explorer-secondary-text { font-size: 1rem; }
+}
+
+.operational-benefit-box {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid var(--foreground);
+  border-radius: 0 8px 8px 0;
+}
+@media (max-width: 640px) {
+  .operational-benefit-box { padding: 1.15rem 1.25rem; }
+}
+
+/* Compact vertical node-flow used by the mobile diagram compositions. */
+.flow-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.flow-arrow-down {
+  color: var(--muted-foreground);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.flow-node {
+  width: 100%;
+  text-align: center;
+  padding: 0.85rem 1rem;
+  border: 1.5px solid var(--foreground);
+  border-radius: var(--radius-md);
+  background: var(--background);
+  font-size: 0.88rem;
+  color: var(--foreground);
+}
+.flow-node--output {
+  background: rgba(255, 255, 255, 0.05);
+}
+/* Middle nodes in RoutingDiagram's mobile flow — mirrors the desktop SVG's
+   distinction between emphasized endpoint nodes (plain .flow-node) and the
+   more muted intermediate nodes. */
+.flow-node--muted {
+  border-color: var(--border-hover);
+  color: rgba(255, 255, 255, 0.75);
+}
+.flow-node--core {
+  border-radius: 50%;
+  width: 128px;
+  height: 128px;
+  max-width: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  font-weight: 500;
+  margin: 0.25rem 0;
+}
+.flow-node--core-rect {
+  border-width: 2px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.05);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+.flow-satellites,
+.flow-sources {
+  display: flex;
+  width: 100%;
+  gap: 0.6rem;
+}
+.flow-sources { flex-direction: column; }
+.flow-node--sm {
+  width: 100%;
+  padding: 0.55rem 0.6rem;
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-sm);
+  background: var(--background);
+  color: var(--muted-foreground);
+  font-size: 0.75rem;
+  text-align: center;
+}
+.flow-satellites > .flow-node--sm { flex: 1; }
+
+/* Diagram desktop/mobile swap — below 700px the horizontal-scroll SVG is
+   replaced by the vertical .flow-mobile composition above so nothing is
+   clipped or requires a sideways scroll. Above 700px (tablet and up)
+   there's enough room for the original diagram, scrolling if needed.
+   The base .diagram-mobile-view{display:none} is placed after the .flow-*
+   rules so it reliably wins that cascade tie at desktop/tablet widths.
+   Inside the media query, the compound .diagram-mobile-view.flow-mobile
+   selector (specificity 0,2,0) is used instead of a bare display:block —
+   a same-specificity display:block there would itself win the cascade tie
+   against .flow-mobile's display:flex by ordering, silently downgrading it
+   to a block container and breaking align-items:center on its children
+   (e.g. the Logic Core circle). The compound selector sidesteps the
+   ordering fight entirely. */
+.diagram-mobile-view { display: none; }
+@media (max-width: 700px) {
+  .diagram-desktop-view { display: none; }
+  .diagram-mobile-view.flow-mobile { display: flex; }
+}
+
+/* ==========================================================================
+   Insights / Knowledge page — mobile recomposition
+   Desktop values below match the inline styles they replace exactly, so
+   nothing renders differently above the breakpoints. Only mobile/tablet
+   tiers introduce new spacing, sizing and grouping.
+   ========================================================================== */
+
+/* Same double-padding stack as the Solutions page (.container's own 5vw +
+   .section's 6vw below 768px) — cancel the redundant inner layer here too so
+   cards get the full available width on phones instead of a doubled gutter. */
+@media (max-width: 768px) {
+  .insights-container { padding-left: 0; padding-right: 0; }
+}
+
+/* Vertical gap between the three article cards. Desktop keeps the original
+   4rem editorial rhythm; mobile tightens it so the page reads as a
+   deliberately paced sequence rather than dead space between cards. */
+.insights-stack {
+  gap: 4rem;
+}
+@media (max-width: 768px) {
+  .insights-stack { gap: 3rem; }
+}
+@media (max-width: 480px) {
+  .insights-stack { gap: 2.25rem; }
+}
+
+/* Gap between elements inside one article card (category, title, image,
+   description, metadata row). Desktop keeps the original 1.5rem. */
+.insight-card {
+  gap: 1.5rem;
+}
+@media (max-width: 480px) {
+  .insight-card { gap: 1.25rem; }
+}
+
+/* Article title. Desktop keeps the original fixed 2rem; mobile scales it
+   down so it stays the card's clear focal point without dominating a
+   ~300px-wide column or forcing awkward one-word line wraps. */
+.insight-title {
+  font-size: 2rem;
+}
+@media (max-width: 480px) {
+  .insight-title { font-size: 1.5rem; }
+}
+
+/* Insight visual. Desktop keeps the original fixed 250px height; mobile
+   lowers it to cut vertical bulk while keeping an intentional, uncropped
+   editorial aspect ratio (object-fit: cover is set inline and unchanged). */
+.insight-image {
+  height: 250px;
+}
+@media (max-width: 480px) {
+  .insight-image { height: 200px; }
+}
+
+/* Metadata + essay-status row. Desktop keeps the original space-between
+   layout (metadata left, status right); below 480px the status drops below
+   the metadata block instead of wrapping awkwardly beside it. */
+.insight-meta-row {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@media (max-width: 480px) {
+  .insight-meta-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.1rem;
+  }
+}
+
+.insight-meta-group {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+@media (max-width: 480px) {
+  .insight-meta-group { gap: 1.5rem; }
+}
+
+/* "Full Essay Coming Soon" status pill. Desktop keeps the original fixed
+   padding/font-size; mobile shrinks it slightly so it clearly reads as a
+   compact, secondary status rather than a primary tappable CTA. */
+.insight-status {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+}
+@media (max-width: 480px) {
+  .insight-status { padding: 0.6rem 1.1rem; font-size: 0.8rem; }
+}
+
+/* ==========================================================================
+   Innovation Lab page — mobile recomposition
+   Desktop values below match the inline styles they replace exactly, so
+   nothing renders differently above the breakpoints. Only mobile/tablet
+   tiers introduce new spacing, sizing and (for the diagram images) an
+   aspect-ratio fix.
+   ========================================================================== */
+
+/* Research Philosophy intro (text + Visual Evolution Model panel). */
+.lab-philosophy {
+  margin-bottom: 8rem;
+  gap: 4rem;
+}
+@media (max-width: 768px) {
+  .lab-philosophy { margin-bottom: 4.5rem; gap: 2.5rem; }
+}
+@media (max-width: 480px) {
+  .lab-philosophy { margin-bottom: 3.5rem; gap: 2rem; }
+}
+
+.lab-evolution-panel {
+  padding: 3rem 2rem;
+}
+@media (max-width: 768px) {
+  .lab-evolution-panel { padding: 2.25rem 1.5rem; }
+}
+@media (max-width: 480px) {
+  .lab-evolution-panel { padding: 1.75rem 1.25rem; }
+}
+
+/* Research Principles block. */
+.lab-principles {
+  margin-bottom: 10rem;
+}
+@media (max-width: 768px) {
+  .lab-principles { margin-bottom: 5rem; }
+}
+@media (max-width: 480px) {
+  .lab-principles { margin-bottom: 3.5rem; }
+}
+
+.lab-principles-grid {
+  gap: 2rem;
+}
+@media (max-width: 480px) {
+  .lab-principles-grid { gap: 1.5rem; }
+}
+
+/* Gap between the three project categories — the page's biggest "chapter"
+   break. Desktop keeps the original 8rem; mobile tightens it while still
+   keeping it clearly larger than the gap between cards within a category,
+   so category boundaries stay legible as the page's top-level structure. */
+.lab-categories-stack {
+  gap: 8rem;
+}
+@media (max-width: 768px) {
+  .lab-categories-stack { gap: 4.5rem; }
+}
+@media (max-width: 480px) {
+  .lab-categories-stack { gap: 3.5rem; }
+}
+
+.lab-category-header {
+  padding-bottom: 1.5rem;
+  margin-bottom: 4rem;
+}
+@media (max-width: 768px) {
+  .lab-category-header { margin-bottom: 2.5rem; }
+}
+@media (max-width: 480px) {
+  .lab-category-header { margin-bottom: 2rem; }
+}
+
+.lab-category-title {
+  font-size: 2rem;
+}
+@media (max-width: 480px) {
+  .lab-category-title { font-size: 1.5rem; }
+}
+
+/* Gap between project cards within one category. */
+.lab-projects-stack {
+  gap: 4rem;
+}
+@media (max-width: 768px) {
+  .lab-projects-stack { gap: 2.75rem; }
+}
+@media (max-width: 480px) {
+  .lab-projects-stack { gap: 2.25rem; }
+}
+
+/* Project card header (name + badge + metadata, live-link button). */
+.lab-project-header {
+  margin-bottom: 4rem;
+}
+@media (max-width: 768px) {
+  .lab-project-header { margin-bottom: 2.5rem; }
+}
+@media (max-width: 480px) {
+  .lab-project-header { margin-bottom: 2rem; }
+}
+
+.lab-project-meta {
+  gap: 1.5rem;
+}
+@media (max-width: 480px) {
+  /* Stack metadata rows instead of letting each label/value pair wrap
+     independently mid-row — the compact readable structure the task
+     asks for (one row per metadata item, aligned label/value columns). */
+  .lab-project-meta { flex-direction: column; gap: 0.6rem; }
+}
+
+/* Individual metadata row (e.g. "Current Status: Production"). Desktop
+   keeps the original inline flex label/value pair; below 480px it becomes
+   a fixed-width label column + value column so long values (e.g.
+   "Continuous Expansion") wrap cleanly under themselves instead of the
+   label and value co-wrapping into a ragged multi-line mess. */
+.lab-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+@media (max-width: 480px) {
+  .lab-meta-item {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    column-gap: 0.75rem;
+    align-items: baseline;
+  }
+}
+
+/* Purpose / Problem / Focus / Validation body grid — the main driver of
+   page length, since it repeats per project. Desktop keeps the original
+   4rem/4rem; mobile tightens both substantially once the grid is already a
+   single column (via the shared .grid-2col breakpoint) so four stacked
+   text blocks don't read as one undifferentiated wall of copy. */
+.lab-project-body {
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+@media (max-width: 768px) {
+  .lab-project-body { gap: 2.25rem; margin-bottom: 2.5rem; }
+}
+@media (max-width: 480px) {
+  .lab-project-body { gap: 2rem; margin-bottom: 2rem; }
+}
+
+.lab-project-visual {
+  margin-bottom: 4rem;
+}
+@media (max-width: 768px) {
+  .lab-project-visual { margin-bottom: 2.5rem; }
+}
+@media (max-width: 480px) {
+  .lab-project-visual { margin-bottom: 2rem; }
+}
+
+/* Diagram image container. Desktop keeps the original fixed 400px height
+   (landscape frame). The four Lab diagram images are all natively square
+   (1024x1024) full-bleed compositions — at desktop/tablet width the fixed
+   height only crops empty margin around the diagram, but on a narrow phone
+   card the frame becomes taller than wide, and cropping to fill a portrait
+   frame would clip the diagram's leftmost/rightmost labels. Below 480px —
+   comfortably covering every required phone width — switch to a 1:1
+   aspect-ratio matching the source images exactly, so object-fit: cover has
+   nothing to crop and the full diagram is always visible. */
+.lab-visual-image {
+  height: 400px;
+}
+@media (max-width: 480px) {
+  .lab-visual-image { height: auto; aspect-ratio: 1 / 1; }
+}
+
+/* Real product screenshot (AgencyOS dashboard evidence). Sized via an
+   inline aspect-ratio matching the source image exactly, so it already
+   scales correctly at every width with zero cropping — no breakpoint
+   override needed here. */
+
+.lab-project-footer {
+  gap: 2rem;
+}
+@media (max-width: 480px) {
+  .lab-project-footer { gap: 1.5rem; }
+}
+
+.lab-reflection {
+  margin-top: 8rem;
+}
+@media (max-width: 768px) {
+  .lab-reflection { margin-top: 5rem; }
+}
+@media (max-width: 480px) {
+  .lab-reflection { margin-top: 3.5rem; }
+}
+
+.lab-cta {
+  margin-top: 8rem;
+}
+@media (max-width: 768px) {
+  .lab-cta { margin-top: 5rem; }
+}
+@media (max-width: 480px) {
+  .lab-cta { margin-top: 3.5rem; }
+}
+
+.lab-cta-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 480px) {
+  .lab-cta-title { font-size: 1.5rem; }
+}
+
+/* Final CTA button. Desktop is untouched (the global .btn-primary values
+   apply as before — no rule here outside the media query). Below 480px,
+   .btn-primary's default 1rem/2rem padding at 1.1rem type makes "Schedule
+   a Business Analysis →" wrap to two lines and reads as an oversized pill;
+   trim padding/font-size just enough to keep it on one line at a ~48px
+   tall, comfortably tappable size. */
+@media (max-width: 480px) {
+  .lab-cta-button { padding: 1rem 1.5rem; font-size: 0.9rem; line-height: 1.2; }
 }
 
 /* Animations */

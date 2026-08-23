@@ -1,6 +1,21 @@
 import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import { Metadata } from "next";
+import { transformations } from "@/data/transformations";
+
+// Each of these slugs now has its own dedicated Transformation category page rather than
+// an anchor on a single long page — see src/data/transformationPortfolio.ts.
+const transformationRouteBySlug: Record<string, string> = {
+  rongdhonu: "/transformations/website-plus-applications",
+  agencyos: "/transformations/custom-applications",
+  "lead-routing": "/transformations/automations",
+};
+
+export const metadata: Metadata = {
+  title: "Ayan AI Studio | Business Systems Studio",
+  description: "We build the websites, automations, and custom software businesses run on — and connect them into one system when it matters. Business understanding first, technology second.",
+};
 
 export default function Home() {
   return (
@@ -20,22 +35,24 @@ export default function Home() {
           Behind Modern Businesses.
         </h1>
         <p className={styles.subheadline}>
-          Ambitious businesses don't need more software. They need a unified Operational Core.
+          Most businesses don't need more software — they need what they already have working together. We build websites, automation, and custom software individually, or connect them into one system when that's what actually moves the business forward.
         </p>
 
         {/* Hero Visual Integration */}
         <div className={styles.heroVisual}>
-          <Image src="/home_hero_architecture_1784545430311.png" alt="Unified business operating system architecture" fill style={{ objectFit: "cover", opacity: 0.9 }} priority />
+          <Image src="/home_hero_architecture_1784545430311.png" alt="Unified business operating system architecture" fill sizes="(max-width: 1100px) 100vw, 1100px" style={{ objectFit: "cover", objectPosition: "center 35%" }} priority />
           <div className={styles.heroVisualOverlay} />
         </div>
         
         <div className={styles.ctaContainer}>
           <Link href="#chaos" className={styles.primaryBtn}>
-            Discover the Process
+            See How We Work
           </Link>
-          <div style={{ marginTop: "1rem", fontSize: "0.85rem", color: "var(--muted-foreground)", maxWidth: "400px", margin: "1.5rem auto 0" }}>
-            <p style={{ margin: "0.5rem 0", color: "var(--foreground)" }}>Schedule a Business Systems Assessment.</p>
-            <p>Map your operational bottlenecks. Discuss your current architecture. Create a transformation roadmap.</p>
+          <div style={{ marginTop: "1rem", fontSize: "0.85rem", color: "var(--muted-foreground)", maxWidth: "420px", margin: "1.5rem auto 0" }}>
+            <p style={{ margin: "0.5rem 0", color: "var(--foreground)" }}>
+              Prefer to talk first? <Link href="/start" style={{ color: "var(--foreground)", textDecoration: "underline", textUnderlineOffset: "3px" }}>Schedule a Business Systems Assessment</Link>.
+            </p>
+            <p>A working conversation about what's slow, manual, or disconnected in your business — not a sales pitch.</p>
           </div>
         </div>
 
@@ -51,11 +68,12 @@ export default function Home() {
 
       {/* NEW: Impact Dashboard */}
       <section className={styles.section} style={{ padding: "6rem 5vw", borderBottom: "1px solid var(--border)", background: "rgba(255,255,255,0.01)" }}>
-        <div className="container">
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "2rem", alignItems: "center" }}>
+        <div className="container" style={{ maxWidth: "1200px" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", gap: "5rem" }}>
             <div>
               <span className={styles.sectionEyebrow}>Operational Impact</span>
-              <h2 style={{ fontSize: "2rem", color: "var(--foreground)", fontWeight: 300 }}>Measurable Systems Engineered.</h2>
+              <h2 style={{ fontSize: "2rem", color: "var(--foreground)", fontWeight: 300 }}>What Changes When The System Is Built Right.</h2>
+              <p style={{ margin: "0.75rem auto 0", color: "var(--muted-foreground)", fontSize: "1rem", maxWidth: "420px" }}>Typical outcomes across the connected systems we've designed and shipped.</p>
             </div>
             <div style={{ display: "flex", gap: "4rem", flexWrap: "wrap" }}>
               <div>
@@ -75,6 +93,41 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Engagement Options: standalone services or the combined system */}
+      <section className={styles.section} id="engagement" style={{ borderBottom: "1px solid var(--border)" }}>
+        <div className={styles.sectionHeader}>
+          <span className={styles.sectionEyebrow}>How We Work With You</span>
+          <h2 className={styles.sectionTitle}>One piece, or the whole system.</h2>
+          <p style={{ marginTop: "1.5rem", color: "var(--muted-foreground)", fontSize: "1.2rem" }}>
+            Every engagement is built to the same standard — whether you need one thing done right, or all of them working together.
+          </p>
+        </div>
+
+        <div className="container" style={{ maxWidth: "1400px" }}>
+          <div className={`${styles.chaosGrid} ${styles.chaosGridFour}`}>
+            <Link href="/solutions#websites" className={`${styles.chaosCard} ${styles.chaosCardFour}`} style={{ display: "block", textDecoration: "none" }}>
+              <h3>Websites</h3>
+              <p>A premium, high-converting website — built to earn trust and convert, on its own or as the front door to a larger system.</p>
+            </Link>
+            <Link href="/solutions#automation" className={`${styles.chaosCard} ${styles.chaosCardFour}`} style={{ display: "block", textDecoration: "none" }}>
+              <h3>Automation &amp; AI Agents</h3>
+              <p>Eliminate repetitive work — lead qualification, scheduling, data entry — without touching anything else you already run.</p>
+            </Link>
+            <Link href="/solutions#applications" className={`${styles.chaosCard} ${styles.chaosCardFour}`} style={{ display: "block", textDecoration: "none" }}>
+              <h3>Custom Applications</h3>
+              <p>A tool built around how your business actually operates — a client portal, an internal dashboard, a workflow no off-the-shelf software fits.</p>
+            </Link>
+            <Link href="/solutions#integrated" className={`${styles.chaosCard} ${styles.chaosCardFour}`} style={{ display: "block", textDecoration: "none" }}>
+              <h3>Integrated Systems</h3>
+              <p>Two or more of the above, engineered to work together as one connected system — so information moves between them on its own, instead of someone re-entering it by hand. The differentiator most agencies can't offer.</p>
+            </Link>
+          </div>
+          <p style={{ marginTop: "3rem", textAlign: "center", color: "var(--muted-foreground)", fontSize: "1.05rem" }}>
+            Not sure which one fits? You don't need to know yet. Tell us what's slow, manual, or breaking in your business, and we'll help you figure out whether the answer is a website, an automation, an application — or a bit of everything.
+          </p>
+        </div>
+      </section>
+
       <section className={styles.section} id="chaos" style={{ backgroundColor: "#020202" }}>
         <div className={styles.sectionHeader}>
           <span className={styles.sectionEyebrow}>The Reality of Growth</span>
@@ -84,25 +137,28 @@ export default function Home() {
         <div className="container" style={{ maxWidth: "1200px" }}>
           
           <div style={{ position: "relative", width: "100%", height: "400px", borderRadius: "16px", overflow: "hidden", marginBottom: "4rem", border: "1px solid var(--border)" }}>
-            <Image src="/home_chaos_ecosystem_1784545440954.png" alt="Fractured and chaotic data ecosystem" fill style={{ objectFit: "cover", opacity: 0.7 }} />
+            <Image src="/home_chaos_ecosystem_1784545440954.png" alt="Fractured and chaotic data ecosystem" fill sizes="(max-width: 1200px) 100vw, 1200px" style={{ objectFit: "cover", opacity: 0.7 }} />
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 0%, rgba(2,2,2,0.8) 100%)" }} />
           </div>
           <div className={styles.chaosGrid}>
             <div className={styles.chaosCard}>
               <h3>Data Silos</h3>
-              <p>Your CRM doesn't talk to your billing software. Your marketing data is isolated. Your team spends hours copying information between tabs.</p>
+              <p>Your CRM doesn't talk to your billing software. Your marketing data lives somewhere else entirely. Your team spends hours a week copying the same information from one tool to another.</p>
             </div>
             <div className={styles.chaosCard}>
               <h3>Operational Bottlenecks</h3>
-              <p>High-ticket client onboarding takes days instead of hours. Manual touchpoints slow down deal momentum and cause decision fatigue.</p>
+              <p>Bringing on a new client takes days of back-and-forth instead of hours. Every manual step in between is a place a deal can stall, or a customer can lose patience and walk.</p>
             </div>
             <div className={styles.chaosCard}>
               <h3>Brittle Automations</h3>
-              <p>You have a patchwork of workflows built by former employees that break every time an API updates, creating fragile infrastructure.</p>
+              <p>Someone set up a workflow that worked, once. Nobody quite remembers how it works now, and it quietly breaks the moment one of your tools changes.</p>
             </div>
           </div>
-          <p style={{ marginTop: "4rem", fontSize: "1.25rem", color: "var(--muted-foreground)" }}>
-            These aren't software problems. <span style={{ color: "var(--foreground)" }}>They are symptoms of a fractured Operational Core.</span>
+          <p style={{ marginTop: "4rem", fontSize: "1.25rem", color: "var(--muted-foreground)", lineHeight: 1.7 }}>
+            None of this is really a software problem. Most businesses run on a website, a CRM, spreadsheets, and a handful of tools and automations layered on over time — and when those pieces don't talk to each other, <span style={{ color: "var(--foreground)" }}>your team becomes the connection between them</span>: copying, checking, re-entering, chasing.
+          </p>
+          <p style={{ marginTop: "1.5rem", fontSize: "1.25rem", color: "var(--muted-foreground)", lineHeight: 1.7 }}>
+            We design and build the connected version instead — one system where information and work move to where they're needed on their own. <span style={{ color: "var(--foreground)" }}>We call it the Operational Core.</span>
           </p>
         </div>
       </section>
@@ -121,15 +177,15 @@ export default function Home() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "3rem", marginTop: "8rem", maxWidth: "1000px" }}>
             <div>
               <h4 style={{ fontSize: "1.2rem", color: "var(--foreground)", marginBottom: "0.5rem" }}>Clarity Before Code</h4>
-              <p style={{ color: "var(--muted-foreground)", fontSize: "1.05rem" }}>We untangle your operations and map your logic before writing a single script.</p>
+              <p style={{ color: "var(--muted-foreground)", fontSize: "1.05rem" }}>We spend time understanding how your business actually works before we decide what to build. The right answer is often not the one you expected.</p>
             </div>
             <div>
               <h4 style={{ fontSize: "1.2rem", color: "var(--foreground)", marginBottom: "0.5rem" }}>Invisible Technology</h4>
-              <p style={{ color: "var(--muted-foreground)", fontSize: "1.05rem" }}>Technology should empower people, not replace them. The interface must be seamless.</p>
+              <p style={{ color: "var(--muted-foreground)", fontSize: "1.05rem" }}>The best system doesn't ask your team to think about it. It just makes the work faster and the friction disappear.</p>
             </div>
             <div>
               <h4 style={{ fontSize: "1.2rem", color: "var(--foreground)", marginBottom: "0.5rem" }}>Long-Term Systems</h4>
-              <p style={{ color: "var(--muted-foreground)", fontSize: "1.05rem" }}>We engineer infrastructure designed to handle your next million in revenue.</p>
+              <p style={{ color: "var(--muted-foreground)", fontSize: "1.05rem" }}>We build for where your business is headed, not just the problem in front of you today — so you're not tearing it out and starting over in a year.</p>
             </div>
           </div>
         </div>
@@ -141,7 +197,7 @@ export default function Home() {
           <span className={styles.sectionEyebrow}>The Methodology</span>
           <h2 className={styles.sectionTitle}>The Connected Business Architecture</h2>
           <p style={{ marginTop: "1.5rem", color: "var(--muted-foreground)", fontSize: "1.2rem", maxWidth: "600px" }}>
-            Our proprietary framework for transforming chaotic operations into synchronized intelligence.
+            How we turn a tangle of tools, spreadsheets, and manual work into one connected system — in three phases.
           </p>
         </div>
 
@@ -152,7 +208,7 @@ export default function Home() {
               <div className={styles.cbaNumber}>01</div>
               <div className={styles.cbaContent}>
                 <h3>Operational Mapping</h3>
-                <p>We audit your current logic. Not just the tools you use, but how information physically moves through your company. We identify the exact points of friction, manual decay, and data loss.</p>
+                <p>We look at how your business actually runs today — not just the tools you use, but how information and work move between people and systems. We find exactly where things slow down, get duplicated, or fall through the cracks.</p>
                 <div className={styles.cbaTags}>
                   <Link href="/methodologies" className={styles.cbaTag}>Process Auditing</Link>
                   <span className={styles.cbaTag}>Bottleneck Analysis</span>
@@ -164,7 +220,7 @@ export default function Home() {
               <div className={styles.cbaNumber}>02</div>
               <div className={styles.cbaContent}>
                 <h3>System Architecture</h3>
-                <p>We design the blueprint. We replace fragile duct-tape solutions with an enterprise-grade logic layer. We determine how your CRM, communications, and data storage will talk to each other perfectly.</p>
+                <p>We design the blueprint for how everything should connect — replacing patched-together fixes with a proper foundation. This is where we decide exactly how your CRM, communication tools, and data should work together.</p>
                 <div className={styles.cbaTags}>
                   <Link href="/methodologies" className={styles.cbaTag}>Data Modeling</Link>
                   <span className={styles.cbaTag}>API Strategy</span>
@@ -176,7 +232,7 @@ export default function Home() {
               <div className={styles.cbaNumber}>03</div>
               <div className={styles.cbaContent}>
                 <h3>Intelligent Orchestration</h3>
-                <p>We deploy the brain. Custom AI agents and automated routing are integrated into the architecture. The Operational Core now executes complex reasoning and administrative work silently in the background.</p>
+                <p>We bring the system to life. Custom AI agents and automated workflows are built into the architecture, so routine decisions and admin work happen on their own — the Operational Core runs quietly in the background while your team focuses on the work only people can do.</p>
                 <div className={styles.cbaTags}>
                   <Link href="/solutions" className={styles.cbaTag}>Agent Integration</Link>
                   <Link href="/solutions" className={styles.cbaTag}>Workflow Automation</Link>
@@ -189,6 +245,9 @@ export default function Home() {
 
         {/* Structured OS Visual Diagram (Apple/Stripe Quality) */}
         <div className="container">
+          <p style={{ textAlign: "center", color: "var(--muted-foreground)", fontSize: "1.05rem", maxWidth: "700px", margin: "0 auto 3rem" }}>
+            In practice, this is what that looks like: your vision, your customer-facing tools, your data, and your growth goals all sitting on top of one connected core — instead of running as separate efforts that don't talk to each other.
+          </p>
           <div className={styles.osContainer}>
             <span className="section-eyebrow" style={{ position: "absolute", top: "3rem", left: "4rem", margin: 0 }}>System Topology Map</span>
             <svg viewBox="0 0 1200 600" style={{ width: "100%", height: "auto", maxWidth: "1000px" }}>
@@ -311,128 +370,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Chapter 4: The Proof (Deep Dive Case Studies) */}
+      {/* Chapter 4: The Proof — concise previews sourced from src/data/transformations.ts, linking to the full reports on /transformations */}
       <section className={styles.section} id="proof">
         <div className={styles.sectionHeader}>
           <span className={styles.sectionEyebrow}>Proof of Concept</span>
           <h2 className={styles.sectionTitle}>Transformations, Not Projects.</h2>
+          <p style={{ marginTop: "1.5rem", color: "var(--muted-foreground)", fontSize: "1.2rem" }}>
+            Real businesses, real bottlenecks, and what changed once the underlying system was redesigned around them.
+          </p>
         </div>
 
-        <div className="container">
-          <div className={styles.caseStudyWrapper}>
-            
-            {/* Case Study 1 */}
-            <div className={styles.caseStudy}>
-              <div className={styles.caseStudyHeader}>
-                <span className="section-eyebrow" style={{ color: "var(--foreground)", border: "1px solid var(--border)", padding: "0.2rem 0.8rem", borderRadius: "100px", display: "inline-block", marginBottom: "1rem" }}>Commercial Implementation</span>
-                <h3>Global Professional Services Firm</h3>
-                <p>Scaling high-ticket client onboarding without increasing headcount.</p>
-              </div>
-              <div className={styles.caseStudyContent}>
-                <div className={styles.caseStudyDetail}>
-                  <h4>The Business Context & Bottleneck</h4>
-                  <p>A leading consultancy was losing momentum during their onboarding phase. Bringing a new enterprise client into their ecosystem required manual data entry across 6 different tools, taking an average of 14 days and creating massive deal fatigue.</p>
-                  
-                  <h4>The System Architecture</h4>
-                  <p>We mapped their entire lifecycle and deployed a unified client portal backed by a centralized Operational Core. We replaced manual touchpoints with an orchestrated system that automatically provisions accounts, generates bespoke contracts via AI, and synchronizes with their primary CRM in real-time.</p>
-                  
-                  <div style={{ position: "relative", width: "100%", height: "250px", borderRadius: "8px", overflow: "hidden", margin: "2rem 0", border: "1px solid var(--border)" }}>
-                    <Image src="/home_case_study_1784545451058.png" alt="Unified client portal and CRM sync architecture" fill style={{ objectFit: "cover", opacity: 0.8 }} />
-                  </div>
-
-                  <h4>Long-Term Impact</h4>
-                  <p>The firm can now handle 5x the client volume without hiring additional administrative staff. The technology is entirely invisible to the client, providing a frictionless, white-glove experience.</p>
+        <div className="container" style={{ maxWidth: "1200px" }}>
+          <div className={styles.chaosGrid}>
+            {transformations.map((t) => (
+              <Link key={t.slug} href={transformationRouteBySlug[t.slug] ?? "/transformations"} className={styles.chaosCard} style={{ display: "block", textDecoration: "none" }}>
+                <span style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--muted-foreground)" }}>{t.type}</span>
+                <h3 style={{ marginTop: "0.75rem" }}>{t.client}</h3>
+                <p>{t.homepagePreview.problem}</p>
+                <p style={{ marginTop: "1rem" }}>{t.homepagePreview.change}</p>
+                <div style={{ marginTop: "1.5rem", paddingTop: "1.5rem", borderTop: "1px solid var(--border)" }}>
+                  {t.homepagePreview.metric ? (
+                    <>
+                      <div style={{ fontSize: "1.5rem", color: "var(--foreground)", fontWeight: 400 }}>{t.homepagePreview.metric.value}</div>
+                      <div style={{ fontSize: "0.8rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--muted-foreground)", marginTop: "0.3rem" }}>{t.homepagePreview.metric.label}</div>
+                    </>
+                  ) : (
+                    <p style={{ color: "var(--foreground)", margin: 0 }}>{t.homepagePreview.result}</p>
+                  )}
                 </div>
-                
-                <div className={styles.caseStudyMetricsGrid}>
-                  <div className={styles.primaryMetric}>
-                    <h5>14 Days → 4 Hours</h5>
-                    <span>Onboarding Time</span>
-                  </div>
-                  <div className={styles.secondaryMetricsWrapper}>
-                    <div className={styles.secondaryMetric}>
-                      <h5>Zero</h5>
-                      <span>Manual Transfers</span>
-                    </div>
-                    <div className={styles.secondaryMetric}>
-                      <h5>5x</h5>
-                      <span>Capacity Increase</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <hr style={{ borderColor: "var(--border)", opacity: 0.5, margin: "2rem 0" }} />
-
-            {/* Case Study 2 */}
-            <div className={styles.caseStudy}>
-              <div className={styles.caseStudyHeader}>
-                <span className="section-eyebrow" style={{ color: "var(--foreground)", border: "1px solid var(--border)", padding: "0.2rem 0.8rem", borderRadius: "100px", display: "inline-block", marginBottom: "1rem" }}>Internal Demonstration</span>
-                <h3>Intelligent Lead Routing</h3>
-                <p>Eliminating lead decay through intelligent conversational interfaces.</p>
-              </div>
-              <div className={styles.caseStudyContent}>
-                <div className={styles.caseStudyDetail}>
-                  <h4>The Business Context & Bottleneck</h4>
-                  <p>High-value leads were slipping through the cracks. Agents were overwhelmed with inbound inquiries, unable to qualify buyers fast enough, resulting in a 48-hour average response time and lost potential revenue.</p>
-                  
-                  <h4>The System Architecture</h4>
-                  <p>We engineered a conversational AI intake system connected directly to their Operational Core. The system instantly qualifies the lead, matches their criteria against parameters, and routes a complete dossier to the appropriate agent's phone within 3 minutes.</p>
-                  
-                  <h4>Long-Term Impact</h4>
-                  <p>Agents no longer spend hours qualifying cold leads. They only speak to buyers who match the exact criteria, allowing them to focus entirely on relationship building and closing.</p>
-                </div>
-                
-                <div className={styles.caseStudyMetricsGrid}>
-                  <div className={styles.primaryMetric}>
-                    <h5>48 Hours → 3 Minutes</h5>
-                    <span>Response Time</span>
-                  </div>
-                  <div className={styles.secondaryMetricsWrapper}>
-                    <div className={styles.secondaryMetric}>
-                      <h5>+32%</h5>
-                      <span>Closing Rate (Projected)</span>
-                    </div>
-                    <div className={styles.secondaryMetric}>
-                      <h5>100%</h5>
-                      <span>Lead Qualification</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+                <span style={{ display: "inline-block", marginTop: "1.5rem", fontSize: "0.9rem", color: "var(--foreground)" }}>Read the full report →</span>
+              </Link>
+            ))}
           </div>
-          
+
           <div style={{ textAlign: "center", marginTop: "6rem" }}>
-             <Link href="/transformations" className="btn-secondary">Read Full Architectural Deep Dives</Link>
+             <Link href="/transformations" className="btn-secondary">Read the Full Transformation Reports</Link>
           </div>
 
         </div>
       </section>
 
       {/* Chapter 5: The Future (Vision & Invitation) */}
-      <footer className={styles.section} id="vision" style={{ backgroundColor: "#020202", borderTop: "1px solid var(--border)", minHeight: "80vh", justifyContent: "center" }}>
+      <footer className={`${styles.section} ${styles.finalCtaSection}`} id="vision" style={{ backgroundColor: "#020202", borderTop: "1px solid var(--border)", justifyContent: "center" }}>
         <div className="container" style={{ maxWidth: "800px", textAlign: "center" }}>
           <span className={styles.sectionEyebrow}>The Vision</span>
           <h2 style={{ fontSize: "clamp(2.5rem, 4vw, 4rem)", fontWeight: 400, margin: "2rem 0", lineHeight: 1.1 }}>
             We are building the operating systems of future businesses.
           </h2>
-          <p style={{ color: "var(--muted-foreground)", fontSize: "1.2rem", marginBottom: "5rem", fontWeight: 300, lineHeight: 1.6 }}>
-            We don't take on projects. We seek long-term partnerships with visionary founders who want to redesign how their company operates at a fundamental level.
+          <p className={styles.finalCtaText} style={{ color: "var(--muted-foreground)", fontSize: "1.2rem", fontWeight: 300, lineHeight: 1.6 }}>
+            Every engagement — one piece or the whole system — starts the same way: understanding your business before deciding what to build. We work with founders who want technology that actually fits how their company operates, not another tool bolted on.
           </p>
-          
-          <Link href="/start" className={styles.primaryBtn} style={{ padding: "1.5rem 3.5rem", fontSize: "1.15rem" }}>
-            Begin the Evolution
+
+          <Link href="/start" className={`${styles.primaryBtn} ${styles.finalCtaBtn}`}>
+            Start a Conversation →
           </Link>
           <div style={{ marginTop: "1.5rem", fontSize: "0.95rem", color: "var(--muted-foreground)" }}>
-            <p style={{ margin: "0.5rem 0", color: "var(--foreground)" }}>Schedule a Business Systems Assessment.</p>
-            <p>Map your operational bottlenecks. Discuss your current architecture. Create a transformation roadmap.</p>
+            <p style={{ margin: "0.5rem 0", color: "var(--foreground)" }}>Begin with a Business Systems Assessment.</p>
+            <p>A conversation about your business — what's slow, what's manual, what's breaking — so we can figure out together whether the answer is a website, an automation, an application, or all three connected. No commitment, no jargon required.</p>
           </div>
 
           {/* Infrastructure / Tech Stack (Supporting Evidence) */}
-          <div style={{ marginTop: "8rem" }}>
+          <div className={styles.finalCtaTech}>
             <p style={{ color: "var(--muted-foreground)", textTransform: "uppercase", letterSpacing: "0.1em", fontSize: "0.85rem", marginBottom: "2rem" }}>
               Technology We Commonly Work With
             </p>
@@ -443,6 +441,7 @@ export default function Home() {
               <span>TypeScript</span>
               <span>PostgreSQL</span>
               <span>Supabase</span>
+              <span>n8n</span>
             </div>
             <p style={{ marginTop: "2rem", fontSize: "0.85rem", color: "var(--muted-foreground)" }}>Technology is only the implementation layer. Business transformation is the outcome.</p>
           </div>

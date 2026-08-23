@@ -107,7 +107,7 @@
 .heroVisualOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, var(--background) 0%, rgba(0,0,0,0.1) 40%, transparent 100%);
+  background: linear-gradient(to top, var(--background) 0%, transparent 22%);
   pointer-events: none;
 }
 
@@ -219,11 +219,36 @@
   width: 100%;
 }
 
+/* Additive: forces exactly four equal columns for the Engagement Options section
+   (the only chaosGrid usage with four items) without affecting the other
+   three-item chaosGrid sections elsewhere on this page. */
+.chaosGridFour {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+@media (max-width: 1024px) {
+  .chaosGridFour {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .chaosGridFour {
+    grid-template-columns: 1fr;
+  }
+}
+
 .chaosCard {
   padding: 3rem;
   border-top: 1px solid var(--border);
   text-align: left;
   transition: background var(--transition-smooth);
+}
+
+/* Additive: narrower side padding for the four-item Engagement Options section only,
+   so its columns get comparable text width to the Transformations page's editorial
+   columns instead of being squeezed by the same 3rem padding used by the wider
+   three-item chaosGrid sections elsewhere on this page. */
+.chaosCardFour {
+  padding: 2.5rem 1.5rem 2rem;
 }
 .chaosCard:hover {
   background: rgba(255, 255, 255, 0.02);
@@ -443,5 +468,43 @@
   }
   .cbaNumber {
     font-size: 3rem;
+  }
+}
+
+/* --- Final CTA (Chapter 5 / Vision), immediately above the site footer ---
+   Scoped modifiers layered on top of .section / .primaryBtn so only this one
+   CTA is affected — every other .section and .primaryBtn on the homepage is
+   untouched. Base (non-media) rules intentionally mirror the exact existing
+   inline values so desktop stays pixel-identical; only the @media blocks
+   below change anything, and only at phone widths. */
+.finalCtaSection {
+  min-height: 80vh;
+}
+.finalCtaText {
+  margin-bottom: 5rem;
+}
+.finalCtaBtn {
+  padding: 1.5rem 3.5rem;
+  font-size: 1.15rem;
+  white-space: nowrap;
+}
+.finalCtaTech {
+  margin-top: 8rem;
+}
+
+@media (max-width: 640px) {
+  .finalCtaSection {
+    padding: 6rem 6vw 5rem;
+    min-height: auto;
+  }
+  .finalCtaText {
+    margin-bottom: 2.5rem;
+  }
+  .finalCtaBtn {
+    padding: 1.1rem 2.25rem;
+    font-size: 1rem;
+  }
+  .finalCtaTech {
+    margin-top: 4.5rem;
   }
 }

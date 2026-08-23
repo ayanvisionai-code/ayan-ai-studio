@@ -1,0 +1,36 @@
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.mark {
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.name {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.nav .mark {
+  width: 28px;
+  height: 28px;
+}
+
+.nav .name {
+  font-size: 1.1rem;
+}
+
+.footer .mark {
+  width: 40px;
+  height: 40px;
+}
+
+.footer .name {
+  font-size: 1.2rem;
+}

@@ -1,25 +1,122 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import BrandLockup from "@/components/BrandLockup";
 import styles from "./Navigation.module.css";
 
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/perspective", label: "How We Think" },
+  { href: "/methodologies", label: "How We Work" },
+  { href: "/solutions", label: "Services" },
+  { href: "/transformations", label: "Transformations" },
+  { href: "/insights", label: "Insights" },
+];
+
+function isActive(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export default function Navigation() {
+  const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Close the mobile menu whenever the route changes.
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setIsMenuOpen(false);
+  }
+
+  // Lock body scroll while the mobile menu is open, and allow Escape to close it.
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMenuOpen]);
+
   return (
     <nav className={styles.nav}>
       <div className={styles.navContainer}>
-        <Link href="/" className={styles.logo}>
-          Ayan AI Studio
-        </Link>
+        <BrandLockup variant="nav" />
         <div className={styles.links}>
-          <Link href="/perspective">Perspective</Link>
-          <Link href="/methodologies">Methodologies</Link>
-          <Link href="/solutions">Solutions</Link>
-          <Link href="/transformations">Transformations</Link>
-          <Link href="/insights">Insights</Link>
+          {navItems.map((item) => {
+            const active = isActive(pathname, item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={active ? styles.active : undefined}
+                aria-current={active ? "page" : undefined}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
         <div className={styles.cta}>
           <Link href="/start" className="btn-primary" style={{ padding: "0.5rem 1.5rem", fontSize: "0.95rem" }}>
-            Begin Evolution
+            Start a Conversation →
           </Link>
         </div>
+
+        <button
+          type="button"
+          className={styles.menuToggle}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-nav-menu"
+          onClick={() => setIsMenuOpen((open) => !open)}
+        >
+          <span className={`${styles.menuBar} ${isMenuOpen ? styles.menuBarTopOpen : ""}`} />
+          <span className={`${styles.menuBar} ${isMenuOpen ? styles.menuBarMiddleOpen : ""}`} />
+          <span className={`${styles.menuBar} ${isMenuOpen ? styles.menuBarBottomOpen : ""}`} />
+        </button>
+      </div>
+
+      <div
+        id="mobile-nav-menu"
+        className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuOpen : ""}`}
+        aria-hidden={!isMenuOpen}
+      >
+        <div className={styles.mobileLinks}>
+          {navItems.map((item) => {
+            const active = isActive(pathname, item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={active ? styles.mobileActive : undefined}
+                aria-current={active ? "page" : undefined}
+                tabIndex={isMenuOpen ? 0 : -1}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
+        <Link
+          href="/start"
+          className="btn-primary"
+          style={{ padding: "1rem 2rem", fontSize: "1rem", justifyContent: "center" }}
+          tabIndex={isMenuOpen ? 0 : -1}
+        >
+          Start a Conversation →
+        </Link>
       </div>
     </nav>
   );

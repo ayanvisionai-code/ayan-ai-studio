@@ -15,14 +15,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 5vw;
+  min-height: var(--nav-height);
   max-width: 1600px;
   margin: 0 auto;
-}
-
-.logo {
-  font-weight: 500;
-  font-size: 1.1rem;
-  letter-spacing: -0.02em;
 }
 
 .links {
@@ -41,8 +36,119 @@
   color: var(--foreground);
 }
 
+.links a.active {
+  position: relative;
+  color: var(--foreground);
+}
+
+.links a.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.4rem;
+  height: 1px;
+  background: var(--foreground);
+}
+
+.menuToggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.menuBar {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--foreground);
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.menuBarTopOpen {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.menuBarMiddleOpen {
+  opacity: 0;
+}
+.menuBarBottomOpen {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+.mobileMenu {
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  max-height: calc(100vh - var(--nav-height));
+  max-height: calc(100dvh - var(--nav-height));
+  overflow-y: auto;
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+  padding: 2rem 5vw 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity var(--transition-fast), transform var(--transition-fast), visibility 0s linear var(--transition-fast);
+}
+
+.mobileMenuOpen {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity var(--transition-fast), transform var(--transition-fast), visibility 0s linear 0s;
+}
+
+.mobileLinks {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileLinks a {
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+  color: var(--muted-foreground);
+  border-bottom: 1px solid var(--border);
+}
+.mobileLinks a:last-child {
+  border-bottom: none;
+}
+.mobileLinks a:hover,
+.mobileLinks a:focus-visible {
+  color: var(--foreground);
+}
+
+.mobileLinks a.mobileActive {
+  color: var(--foreground);
+}
+
 @media (max-width: 1024px) {
   .links {
-    display: none; /* In a full app, implement a hamburger menu */
+    display: none;
+  }
+  .cta {
+    display: none;
+  }
+  .menuToggle {
+    display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menuBar,
+  .mobileMenu {
+    transition: none;
   }
 }

@@ -1,42 +1,123 @@
 "use client";
-import { useState } from "react";
+import { useState, KeyboardEvent } from "react";
+import styles from "./page.module.css";
+
+const SERVICE_OPTIONS = ["A New Website", "Automation & AI Agents", "A Custom Application", "An Integrated System"];
+
+const goalOptionsByService: Record<string, string[]> = {
+  "A New Website": ["Generate more leads", "Look credible / more premium", "Replace an outdated site", "Not sure yet"],
+  "Automation & AI Agents": ["Client Onboarding & Experience", "Sales & Lead Routing", "Internal Data Silos", "We don't know, everything feels slow"],
+  "A Custom Application": ["Internal tool for my team", "Client-facing portal", "Replace spreadsheets / manual tracking", "Not sure yet"],
+  "An Integrated System": ["Client Onboarding & Experience", "Sales & Lead Routing", "Internal Data Silos", "We don't know, everything feels slow"],
+};
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function BackLink({ onClick }: { onClick: () => void }) {
+  return (
+    <button type="button" onClick={onClick} className={styles.backLink}>
+      ← Back
+    </button>
+  );
+}
 
 export default function StartPage() {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    revenue: "",
-    bottleneck: "",
-    email: ""
+    service: "",
+    currentOperation: "",
+    desiredOutcome: "",
+    email: "",
+    additionalContext: "",
   });
+  const [fieldError, setFieldError] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const nextStep = () => setStep(step + 1);
+  const nextStep = () => {
+    setFieldError(null);
+    setStep((s) => s + 1);
+  };
+  const prevStep = () => {
+    setFieldError(null);
+    setSubmitError(null);
+    setStep((s) => s - 1);
+  };
+
+  const goalOptions = goalOptionsByService[formData.service] || [];
+
+  const handleSubmit = async () => {
+    if (!EMAIL_RE.test(formData.email.trim())) {
+      setFieldError("Please enter a valid email address.");
+      return;
+    }
+    setFieldError(null);
+    setSubmitError(null);
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service: formData.service,
+          currentOperation: formData.currentOperation,
+          desiredOutcome: formData.desiredOutcome,
+          email: formData.email.trim(),
+          additionalContext: formData.additionalContext,
+        }),
+      });
+
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok || !data?.success) {
+        setSubmitError(data?.error || "We couldn't send your request. Please try again.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      setIsSubmitting(false);
+      setStep(5);
+    } catch {
+      setSubmitError("We couldn't reach the server. Check your connection and try again.");
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleEmailKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !isSubmitting) {
+      e.preventDefault();
+      handleSubmit();
+    }
+  };
 
   return (
     <main>
-      <header className="page-header" style={{ paddingBottom: "3rem", borderBottom: "none" }}>
+      <header className="page-header" style={{ paddingTop: "calc(var(--nav-height) + 6rem)", paddingBottom: "3rem", borderBottom: "none" }}>
         <span className="section-eyebrow animate-fade-up">Begin Evolution</span>
-        <h1 className="page-title animate-fade-up delay-1">Let's map your chaos.</h1>
+        <h1 className="page-title animate-fade-up delay-1">Let&rsquo;s map what you need.</h1>
         <p className="page-subtitle animate-fade-up delay-2" style={{ maxWidth: "600px" }}>
-          We don't do traditional sales calls. We perform operational diagnostics. Help us understand your current friction.
+          We don&rsquo;t do traditional sales calls. Whether you need one thing done right or a whole system, tell us where you&rsquo;re starting.
         </p>
       </header>
 
       <section className="section" style={{ paddingTop: "2rem" }}>
         <div className="container" style={{ maxWidth: "700px" }}>
-          
-          <div className="glass-panel animate-fade-up delay-3" style={{ padding: "4rem", minHeight: "400px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-            
+
+          <div className={`${styles.card} animate-fade-up delay-3`}>
+
             {step === 1 && (
-              <div style={{ display: "flex", flexDirection: "column", gap: "2rem", animation: "fadeUp 0.4s ease-out" }}>
-                <h2 style={{ fontSize: "2rem", color: "var(--foreground)" }}>What is the scale of your current operation?</h2>
-                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  {["Pre-revenue / Startup", "$1M - $5M ARR", "$5M - $20M ARR", "Enterprise ($20M+)"].map((opt) => (
-                    <button 
+              <div className={styles.stepInner} style={{ animation: "fadeUp 0.4s ease-out" }}>
+                <div className={styles.stepHeading}>
+                  <h2>What do you need?</h2>
+                </div>
+                <div className={styles.optionList}>
+                  {SERVICE_OPTIONS.map((opt) => (
+                    <button
                       key={opt}
-                      onClick={() => { setFormData({...formData, revenue: opt}); nextStep(); }}
-                      style={{ padding: "1.5rem", background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", color: "var(--foreground)", fontSize: "1.1rem", textAlign: "left", cursor: "pointer", transition: "all var(--transition-fast)" }}
-                      onMouseEnter={(e) => e.currentTarget.style.borderColor = "var(--foreground)"}
-                      onMouseLeave={(e) => e.currentTarget.style.borderColor = "var(--border)"}
+                      type="button"
+                      className={styles.optionButton}
+                      onClick={() => { setFormData({ ...formData, service: opt }); nextStep(); }}
                     >
                       {opt}
                     </button>
@@ -46,48 +127,144 @@ export default function StartPage() {
             )}
 
             {step === 2 && (
-              <div style={{ display: "flex", flexDirection: "column", gap: "2rem", animation: "fadeUp 0.4s ease-out" }}>
-                <h2 style={{ fontSize: "2rem", color: "var(--foreground)" }}>Where is your primary operational bottleneck?</h2>
-                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  {["Client Onboarding & Experience", "Sales & Lead Routing", "Internal Data Silos", "We don't know, everything feels slow"].map((opt) => (
-                    <button 
-                      key={opt}
-                      onClick={() => { setFormData({...formData, bottleneck: opt}); nextStep(); }}
-                      style={{ padding: "1.5rem", background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", color: "var(--foreground)", fontSize: "1.1rem", textAlign: "left", cursor: "pointer", transition: "all var(--transition-fast)" }}
-                      onMouseEnter={(e) => e.currentTarget.style.borderColor = "var(--foreground)"}
-                      onMouseLeave={(e) => e.currentTarget.style.borderColor = "var(--border)"}
-                    >
-                      {opt}
-                    </button>
-                  ))}
+              <div className={styles.stepInner} style={{ animation: "fadeUp 0.4s ease-out" }}>
+                <BackLink onClick={prevStep} />
+                <div className={styles.stepHeading}>
+                  <h2>Tell us about your current operation.</h2>
+                  <p>What&rsquo;s happening in your business today — what&rsquo;s manual, what&rsquo;s slow, or what feels like it&rsquo;s breaking?</p>
+                </div>
+                <textarea
+                  aria-label="Current operation"
+                  rows={5}
+                  placeholder="Describe how things currently work…"
+                  className={`${styles.field} ${styles.textarea}`}
+                  value={formData.currentOperation}
+                  onChange={(e) => setFormData({ ...formData, currentOperation: e.target.value })}
+                />
+                {fieldError && <p className={styles.fieldError} role="alert">{fieldError}</p>}
+                <div className={styles.ctaRow}>
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    onClick={() => {
+                      if (formData.currentOperation.trim().length < 3) {
+                        setFieldError("Please share a little about your current operation.");
+                        return;
+                      }
+                      nextStep();
+                    }}
+                  >
+                    Continue →
+                  </button>
                 </div>
               </div>
             )}
 
             {step === 3 && (
-              <div style={{ display: "flex", flexDirection: "column", gap: "2rem", animation: "fadeUp 0.4s ease-out" }}>
-                <h2 style={{ fontSize: "2rem", color: "var(--foreground)" }}>Where should we send the diagnostic brief?</h2>
-                <input 
-                  type="email" 
-                  placeholder="founder@company.com" 
-                  style={{ padding: "1.5rem", background: "rgba(255,255,255,0.05)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", color: "var(--foreground)", fontSize: "1.2rem", outline: "none" }}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+              <div className={styles.stepInner} style={{ animation: "fadeUp 0.4s ease-out" }}>
+                <BackLink onClick={prevStep} />
+                <div className={styles.stepHeading}>
+                  <h2>What outcome are you looking for?</h2>
+                  <p>What should be different once this is solved?</p>
+                </div>
+                {goalOptions.length > 0 && (
+                  <div className={styles.chipGroup} role="group" aria-label="Suggested outcomes">
+                    {goalOptions.map((opt) => (
+                      <button
+                        key={opt}
+                        type="button"
+                        aria-pressed={formData.desiredOutcome === opt}
+                        className={styles.chip}
+                        onClick={() => setFormData({ ...formData, desiredOutcome: opt })}
+                      >
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                )}
+                {goalOptions.length > 0 && <div className={styles.orDivider}>Or describe it yourself</div>}
+                <textarea
+                  aria-label="Desired outcome"
+                  rows={4}
+                  placeholder="Describe it in your own words…"
+                  className={`${styles.field} ${styles.textarea}`}
+                  value={formData.desiredOutcome}
+                  onChange={(e) => setFormData({ ...formData, desiredOutcome: e.target.value })}
                 />
-                <button 
-                  className="btn-primary" 
-                  style={{ alignSelf: "flex-start", marginTop: "1rem" }}
-                  onClick={() => setStep(4)}
-                >
-                  Request Architecture Review
-                </button>
+                {fieldError && <p className={styles.fieldError} role="alert">{fieldError}</p>}
+                <div className={styles.ctaRow}>
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    onClick={() => {
+                      if (formData.desiredOutcome.trim().length < 3) {
+                        setFieldError("Please share the outcome you're looking for.");
+                        return;
+                      }
+                      nextStep();
+                    }}
+                  >
+                    Continue →
+                  </button>
+                </div>
               </div>
             )}
 
             {step === 4 && (
+              <div className={styles.stepInner} style={{ animation: "fadeUp 0.4s ease-out" }}>
+                <BackLink onClick={prevStep} />
+                <div className={styles.stepHeading}>
+                  <h2>Where should we send the diagnostic brief?</h2>
+                </div>
+
+                <div className={styles.fieldGroup}>
+                  <label htmlFor="email" className={styles.fieldLabel}>Email — required</label>
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="founder@company.com"
+                    className={styles.field}
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onKeyDown={handleEmailKeyDown}
+                  />
+                </div>
+
+                <div className={styles.fieldGroup}>
+                  <label htmlFor="additionalContext" className={styles.fieldLabelOptional}>
+                    Anything else you&rsquo;d like us to understand? (optional)
+                  </label>
+                  <textarea
+                    id="additionalContext"
+                    rows={3}
+                    className={`${styles.field} ${styles.textarea}`}
+                    value={formData.additionalContext}
+                    onChange={(e) => setFormData({ ...formData, additionalContext: e.target.value })}
+                  />
+                </div>
+
+                {fieldError && <p className={styles.fieldError} role="alert">{fieldError}</p>}
+                {submitError && <p className={styles.fieldError} role="alert">{submitError}</p>}
+
+                <div className={styles.ctaRow}>
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    style={{ opacity: isSubmitting ? 0.6 : 1, cursor: isSubmitting ? "not-allowed" : "pointer" }}
+                    onClick={handleSubmit}
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending Request…" : "Send Request →"}
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {step === 5 && (
               <div style={{ textAlign: "center", animation: "fadeUp 0.4s ease-out" }}>
-                <div style={{ fontSize: "4rem", marginBottom: "2rem" }}>✓</div>
-                <h2 style={{ fontSize: "2rem", color: "var(--foreground)", marginBottom: "1rem" }}>Diagnostic Initiated.</h2>
-                <p>We are reviewing your operational footprint. An architect will reach out within 24 hours.</p>
+                <div className={styles.successIcon}>✓</div>
+                <h2 style={{ fontSize: "2rem", color: "var(--foreground)", marginBottom: "1rem" }}>Request Received.</h2>
+                <p>We have your details and can now review what you&rsquo;re trying to solve. An architect will reach out within 24 hours.</p>
               </div>
             )}
 
