@@ -311,38 +311,6 @@
   margin-bottom: 1.5rem;
 }
 
-.cbaTags {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.cbaTag {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.4rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  color: var(--muted-foreground);
-}
-
-/* --- Interactive OS Visual --- */
-.osContainer {
-  width: 100%;
-  max-width: 1200px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 6rem 0;
-  padding: 4rem 2rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  background: rgba(255, 255, 255, 0.01);
-  overflow: hidden;
-}
-
 /* --- Deep Dive Case Studies --- */
 .caseStudyWrapper {
   display: flex;
@@ -506,5 +474,17 @@
   }
   .finalCtaTech {
     margin-top: 4.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroBadge,
+  .headline,
+  .subheadline,
+  .heroVisual,
+  .ctaContainer,
+  .trustIndicators {
+    animation: none;
+    opacity: 1;
   }
 }
