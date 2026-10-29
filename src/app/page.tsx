@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Metadata } from "next";
 import SectionEyebrow from "@/components/SectionEyebrow";
 import DiagnosticContactForm from "@/components/DiagnosticContactForm";
+import HeroSection from "@/components/hero/HeroSection";
 
 export const metadata: Metadata = {
   title: "Ayan AI Studio | Business Systems Studio",
@@ -106,59 +107,8 @@ const insights = [
 export default function Home() {
   return (
     <main className={styles.main}>
-      {/* 01 — HERO SECTION */}
-      <section className={styles.hero}>
-        <div className={styles.heroBgGlow} aria-hidden="true" />
-        <div className={styles.heroGridPattern} aria-hidden="true" />
-
-        <div className={styles.heroContent}>
-          <SectionEyebrow label="Business Systems Studio" variant="teal" />
-
-          <h1 className={styles.headline}>
-            Build the systems that <br />
-            <span className="title-gradient">move your business forward.</span>
-          </h1>
-
-          <p className={styles.subheadline}>
-            We design premium websites, intelligent automation, and custom software that work independently or connect into one coherent business system.
-          </p>
-
-          <div className={styles.heroCtaRow}>
-            <Link href="/start" className="btn-growrev-primary">
-              Start a Business Conversation →
-            </Link>
-            <Link href="#transformations" className="btn-growrev-secondary">
-              Explore Our Work
-            </Link>
-          </div>
-        </div>
-
-        {/* Hero Architectural Visual Showcase */}
-        <div className={styles.heroShowcase}>
-          <div className={styles.heroShowcaseInner}>
-            {/* Top Left Floating Status Pill */}
-            <div className={styles.heroStatusBadgeTopLeft}>
-              <span className={styles.pulseDot} />
-              <span>Operational Core · Live</span>
-            </div>
-
-            {/* Bottom Right Floating Metric Pill */}
-            <div className={styles.heroStatusBadgeBottomRight}>
-              <span>Zero Fragmented Logic · Multi-Agent Active</span>
-            </div>
-
-            <Image
-              src="/home_hero_architecture_1784545430311.png"
-              alt="Connected business systems architectural diagram"
-              fill
-              priority
-              sizes="(max-width: 1200px) 100vw, 1160px"
-              style={{ objectFit: "cover", objectPosition: "center 30%" }}
-            />
-            <div className={styles.heroShowcaseOverlay} />
-          </div>
-        </div>
-      </section>
+      {/* 01 — HERO SECTION (Interactive 3D Globe) */}
+      <HeroSection />
 
       {/* 02 — TECHNOLOGY CAPABILITY STRIP */}
       <div className={styles.techStrip}>

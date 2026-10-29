@@ -23,6 +23,9 @@ function isActive(pathname: string, href: string) {
 export default function Navigation() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const isHomepage = pathname === "/";
 
   // Close the mobile menu whenever the route changes.
   const [prevPathname, setPrevPathname] = useState(pathname);
@@ -30,6 +33,16 @@ export default function Navigation() {
     setPrevPathname(pathname);
     setIsMenuOpen(false);
   }
+
+  // Track scroll position for transparent → solid nav transition
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 60);
+    };
+    handleScroll(); // initial check
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Lock body scroll while the mobile menu is open, and allow Escape to close it.
   useEffect(() => {
@@ -49,8 +62,16 @@ export default function Navigation() {
     };
   }, [isMenuOpen]);
 
+  // Build nav class: transparent when at top of homepage, solid otherwise
+  const navClassName = [
+    styles.nav,
+    isHomepage && !isScrolled ? styles.navTransparent : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <nav className={styles.nav}>
+    <nav className={navClassName}>
       <div className={styles.navContainer}>
         <BrandLockup variant="nav" />
         <div className={styles.links}>
