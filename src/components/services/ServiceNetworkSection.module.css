@@ -311,36 +311,6 @@
   }
 }
 
-/* 12-Band Signal Distribution Manifold (Integrated Transition Zone) */
-.signalBarsContainer {
-  display: flex;
-  align-items: flex-start;
-  gap: 4.5px;
-  height: 28px;
-  margin-top: 3px;
-}
-
-.signalBar {
-  width: 2.5px;
-  border-radius: 1.5px;
-  background-color: var(--bar-color, #18D9D0);
-  box-shadow: 0 0 6px var(--bar-color, #18D9D0);
-  animation: barPulse 2.4s ease-in-out infinite alternate;
-  animation-delay: var(--bar-delay, 0s);
-}
-
-@keyframes barPulse {
-  0% {
-    height: 16px;
-    opacity: 0.55;
-    box-shadow: 0 0 4px var(--bar-color, #18D9D0);
-  }
-  100% {
-    height: 26px;
-    opacity: 0.95;
-    box-shadow: 0 0 8px var(--bar-color, #18D9D0);
-  }
-}
 
 /* ─── 05. Enlarged Central AI Microprocessor Hardware Hub (~164px) ─── */
 .centralHub {
@@ -616,10 +586,6 @@
   }
   .scanningArcWrapper {
     animation: none;
-  }
-  .signalBar {
-    animation: none;
-    height: 22px;
   }
   .cavityCoreDot {
     animation: none;

@@ -56,21 +56,7 @@ const servicesList: ServiceItem[] = [
   },
 ];
 
-// 12-Band Equalizer Signal Bars bridging Circular Node and Processor
-const signalBars = [
-  { color: "#8EFFEA", delay: "0.1s" },
-  { color: "#40DDE1", delay: "0.45s" },
-  { color: "#2568D1", delay: "0.2s" },
-  { color: "#FD6BC4", delay: "0.75s" },
-  { color: "#FFDA5C", delay: "0.3s" },
-  { color: "#FF864C", delay: "0.55s" },
-  { color: "#7DFF32", delay: "0.25s" },
-  { color: "#19CBAC", delay: "0.65s" },
-  { color: "#8EFFEA", delay: "0.4s" },
-  { color: "#40DDE1", delay: "0.8s" },
-  { color: "#2568D1", delay: "0.35s" },
-  { color: "#FD6BC4", delay: "0.15s" },
-];
+
 
 interface CircuitRoute {
   id: string;
@@ -446,11 +432,13 @@ const circuitRoutes: CircuitRoute[] = [
   },
 
   // ── 9 VERTICAL TRACES (UPPER CIRCULAR NODE -> CHIP TOP PINS) ──
+  // Paths start at y=158 — inside the circular housing bottom edge (y≈162),
+  // so the housing naturally masks the origin. No HTML bars needed.
   {
     id: "route-v1",
     source: "node",
     destPin: "Top Pin 2 (x=552, y=268)",
-    d: "M 552 154 V 268",
+    d: "M 552 158 V 268",
     stroke: "#00F0C8", // Cyan
     strokeWidth: 2.2,
     duration: 2.0,
@@ -461,7 +449,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v2",
     source: "node",
     destPin: "Top Pin 3 (x=564, y=268)",
-    d: "M 564 154 V 268",
+    d: "M 564 158 V 268",
     stroke: "#8EFFEA", // Turquoise
     strokeWidth: 2.2,
     duration: 1.9,
@@ -472,7 +460,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v3",
     source: "node",
     destPin: "Top Pin 4 (x=576, y=268)",
-    d: "M 576 154 V 268",
+    d: "M 576 158 V 268",
     stroke: "#38BDF8", // Electric Blue
     strokeWidth: 2.2,
     duration: 2.1,
@@ -483,7 +471,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v4",
     source: "node",
     destPin: "Top Pin 5 (x=588, y=268)",
-    d: "M 588 154 V 268",
+    d: "M 588 158 V 268",
     stroke: "#FFDA5C", // Amber
     strokeWidth: 2.2,
     duration: 2.0,
@@ -494,7 +482,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v5",
     source: "node",
     destPin: "Top Pin 6 (x=600, y=268)",
-    d: "M 600 154 V 268",
+    d: "M 600 158 V 268",
     stroke: "#00F0C8", // Cyan
     strokeWidth: 2.4,
     duration: 1.8,
@@ -505,7 +493,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v6",
     source: "node",
     destPin: "Top Pin 7 (x=612, y=268)",
-    d: "M 612 154 V 268",
+    d: "M 612 158 V 268",
     stroke: "#10B981", // Emerald Green
     strokeWidth: 2.2,
     duration: 2.2,
@@ -516,7 +504,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v7",
     source: "node",
     destPin: "Top Pin 8 (x=624, y=268)",
-    d: "M 624 154 V 268",
+    d: "M 624 158 V 268",
     stroke: "#7DFF32", // Muted Lime
     strokeWidth: 2.2,
     duration: 1.9,
@@ -527,7 +515,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v8",
     source: "node",
     destPin: "Top Pin 9 (x=636, y=268)",
-    d: "M 636 154 V 268",
+    d: "M 636 158 V 268",
     stroke: "#FD6BC4", // Magenta
     strokeWidth: 2.2,
     duration: 2.1,
@@ -538,7 +526,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v9",
     source: "node",
     destPin: "Top Pin 10 (x=648, y=268)",
-    d: "M 648 154 V 268",
+    d: "M 648 158 V 268",
     stroke: "#A855F7", // Violet
     strokeWidth: 2.2,
     duration: 2.0,
@@ -770,21 +758,6 @@ export default function ServiceNetworkSection() {
             </div>
           </div>
 
-          {/* 12-Band Vertical Signal Bars Overlay */}
-          <div className={styles.signalBarsContainer}>
-            {signalBars.map((bar, idx) => (
-              <span
-                key={idx}
-                className={styles.signalBar}
-                style={
-                  {
-                    "--bar-color": bar.color,
-                    "--bar-delay": bar.delay,
-                  } as React.CSSProperties
-                }
-              />
-            ))}
-          </div>
         </div>
 
         {/* ─── 05. Enlarged Central AI Microprocessor Hardware Hub (~164px) ─── */}
