@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import SectionEyebrow from "@/components/SectionEyebrow";
@@ -533,6 +533,29 @@ const circuitRoutes: CircuitRoute[] = [
 
 export default function ServiceNetworkSection() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+
+    const updateScale = () => {
+      const w = el.clientWidth;
+      if (w <= 0) return;
+      if (w >= 1200) {
+        el.style.setProperty("--diagram-scale", "1");
+      } else if (w >= 640) {
+        // Continuous smooth scaling between 640px and 1200px
+        const scale = Math.min(1, Math.max(0.48, w / 1200));
+        el.style.setProperty("--diagram-scale", scale.toFixed(4));
+      }
+    };
+
+    updateScale();
+    const ro = new ResizeObserver(updateScale);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   return (
     <section className={styles.section} id="services">
@@ -553,7 +576,8 @@ export default function ServiceNetworkSection() {
       </div>
 
       {/* Interactive Connected Service Network Diagram */}
-      <div className={styles.diagramViewport}>
+      <div className={styles.diagramWrapper} ref={wrapperRef}>
+        <div className={styles.diagramViewport}>
         {/* SVG Circuit Traces & Signal Pulses Canvas */}
         <svg
           className={styles.circuitSvg}
@@ -879,6 +903,7 @@ export default function ServiceNetworkSection() {
             </Link>
           );
         })}
+        </div>
       </div>
     </section>
   );

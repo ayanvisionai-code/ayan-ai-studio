@@ -58,13 +58,29 @@
   margin: 0 auto;
 }
 
-/* ─── 02. Interactive Diagram Viewport ─── */
-.diagramViewport {
+/* ─── 02. Interactive Diagram Wrapper & Viewport ─── */
+.diagramWrapper {
+  --diagram-scale: 1;
   position: relative;
   width: 100%;
   max-width: 1200px;
-  min-height: 700px;
+  height: calc(700px * var(--diagram-scale, 1));
   margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.diagramViewport {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1200px;
+  height: 700px;
+  transform: translateX(-50%) scale(var(--diagram-scale, 1));
+  transform-origin: top center;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -504,70 +520,66 @@
   color: #F4F5F6;
 }
 
-/* ─── 07. Responsive Layouts ─── */
-@media (max-width: 1180px) {
-  .diagramViewport {
-    min-height: 640px;
+/* ─── 07. Responsive Breakpoint Rules ─── */
+
+/* Pure CSS Scale Fallbacks for Tablet Breakpoints (640px to 1200px) */
+@media (max-width: 1240px) {
+  .diagramWrapper {
+    --diagram-scale: 0.88;
   }
-  .serviceModule {
-    width: 285px;
-    height: 104px;
-    padding: 0.95rem 1.15rem;
-    gap: 1rem;
+}
+
+@media (max-width: 1080px) {
+  .diagramWrapper {
+    --diagram-scale: 0.78;
   }
-  .moduleIconCol,
-  .moduleIconImg {
-    width: 52px;
-    height: 52px;
-  }
-  .moduleTitle {
-    font-size: 1.25rem;
-  }
-  .module1 { left: 3%; top: 13%; }
-  .module2 { right: 3%; top: 13%; }
-  .module3 { left: 3%; bottom: 12%; }
-  .module4 { right: 3%; bottom: 12%; }
 }
 
 @media (max-width: 960px) {
-  .diagramViewport {
-    min-height: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 1rem 0;
+  .diagramWrapper {
+    --diagram-scale: 0.68;
+  }
+}
+
+@media (max-width: 840px) {
+  .diagramWrapper {
+    --diagram-scale: 0.60;
+  }
+}
+
+@media (max-width: 740px) {
+  .diagramWrapper {
+    --diagram-scale: 0.52;
+  }
+}
+
+/* ─── 08. Smartphone Breakpoint: Below 640px ─── */
+/* Completely remove central processor, cards, nodes, and circuit network */
+@media (max-width: 639px) {
+  .section {
+    padding: 3.5rem 5vw 3.5rem;
   }
 
-  .circuitSvg {
-    display: none; /* Hide complex 2D desktop SVG canvas on mobile */
+  .ambientGlow {
+    display: none;
   }
 
-  .nodeAbove {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    margin-bottom: 0.25rem;
-  }
-
-  .centralHub {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    margin: 0.5rem auto 1.5rem;
-  }
-
-  /* Cards in stacked vertical grid on tablet/mobile */
-  .serviceModule {
-    position: relative;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    width: 100%;
-    max-width: 440px;
+  .sectionHeader {
     margin: 0 auto;
+  }
+
+  .sectionTitle {
+    font-size: clamp(1.85rem, 6.5vw, 2.3rem);
+    margin-bottom: 0.9rem;
+  }
+
+  .sectionDescription {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .diagramWrapper {
+    display: none !important;
   }
 }
 
