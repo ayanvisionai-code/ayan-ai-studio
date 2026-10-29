@@ -603,8 +603,8 @@ export default function ServiceNetworkSection() {
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            {/* Soft Glow Filter for Moving Light Segments */}
-            <filter id="segmentGlow" x="-30%" y="-30%" width="160%" height="160%">
+            {/* Soft Glow Filter for Moving Light Segments (userSpaceOnUse prevents degenerate clipping on vertical lines) */}
+            <filter id="segmentGlow" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="700">
               <feGaussianBlur stdDeviation="2.2" result="blur" />
               <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
@@ -672,35 +672,27 @@ export default function ServiceNetworkSection() {
 
             {/*
               ── INLINE SVG STYLE BLOCK ─────────────────────────────────────────
-              Vertical signal keyframe lives here — NOT in the CSS Module file.
-              CSS Modules hash class names AND keyframe names at build time, which
-              breaks the animation-name → @keyframes link when the two are split
-              across different specificity layers. Embedding the keyframe directly
-              in the SVG <defs> guarantees a global, un-hashed name that the
-              .vert-sig global class can reference without any scoping issues.
+              Vertical pulse keyframe and class defined here for global resolution.
               ────────────────────────────────────────────────────────────────── */}
             <style>{`
               @keyframes vertSignalDown {
                 0%   { stroke-dashoffset: 0;    opacity: 0;    }
-                5%   {                          opacity: 0.92; }
-                60%  {                          opacity: 0.92; }
-                70%  { stroke-dashoffset: -168; opacity: 0;    }
-                100% { stroke-dashoffset: -168; opacity: 0;    }
+                8%   {                          opacity: 0.95; }
+                65%  {                          opacity: 0.95; }
+                78%  { stroke-dashoffset: -170; opacity: 0;    }
+                100% { stroke-dashoffset: -170; opacity: 0;    }
               }
-              .vert-sig {
+              .vert-sig-pulse {
                 fill: none;
-                stroke-dasharray: 50 160;
+                stroke-dasharray: 45 180;
                 animation-name: vertSignalDown;
                 animation-timing-function: linear;
                 animation-iteration-count: infinite;
                 animation-fill-mode: both;
-                opacity: 0;
               }
               @media (prefers-reduced-motion: reduce) {
-                .vert-sig {
-                  animation: none !important;
-                  opacity: 0.3;
-                  stroke-dasharray: none;
+                .vert-sig-pulse {
+                  display: none;
                 }
               }
             `}</style>
@@ -743,20 +735,37 @@ export default function ServiceNetworkSection() {
              ════════════════════════════════════════════════════════════════════ */}
           <g className={styles.activeSignalsGroup}>
             {circuitRoutes.map((route) => {
-              // ── VERTICAL routes: permanently visible colored glow lines.
-              // Always-on colored traces from circular node to chip top pins.
+              // ── VERTICAL routes: Always-active colorful traces + moving pulses
               if (route.type === "vertical") {
                 return (
-                  <path
-                    key={`sig-${route.id}`}
-                    d={route.d}
-                    stroke={route.stroke}
-                    strokeWidth={route.strokeWidth}
-                    strokeLinecap="round"
-                    fill="none"
-                    opacity={0.72}
-                    filter="url(#segmentGlow)"
-                  />
+                  <g key={`vert-${route.id}`}>
+                    {/* Layer A: Always-Active Illuminated Colored Circuit Line */}
+                    <path
+                      d={route.d}
+                      stroke={route.stroke}
+                      strokeWidth={2.4}
+                      strokeLinecap="round"
+                      fill="none"
+                      opacity={0.88}
+                      style={{
+                        filter: `drop-shadow(0 0 5px ${route.stroke})`,
+                      }}
+                    />
+                    {/* Layer B: Brilliant Moving Signal Pulse Flowing Downward to Chip */}
+                    <path
+                      d={route.d}
+                      stroke="#FFFFFF"
+                      strokeWidth={2.8}
+                      strokeLinecap="round"
+                      fill="none"
+                      className="vert-sig-pulse"
+                      style={{
+                        animationDuration: `${route.duration}s`,
+                        animationDelay: `${route.delay}s`,
+                        filter: `drop-shadow(0 0 7px ${route.stroke})`,
+                      }}
+                    />
+                  </g>
                 );
               }
 
