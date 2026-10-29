@@ -43,8 +43,8 @@ const dotVertexShader = `
   void main() {
     vOpacity = aOpacity;
     vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-    // Perspective-scaled point size: ~2.5 px at camera distance 3.2
-    gl_PointSize = max(1.2, 6.0 / -mvPosition.z);
+    // Perspective-scaled point size: ~2.2 px at camera distance 3.15
+    gl_PointSize = max(1.5, 6.8 / -mvPosition.z);
     gl_Position = projectionMatrix * mvPosition;
   }
 `;
@@ -100,6 +100,7 @@ export default function InteractiveGlobe({ className }: InteractiveGlobeProps) {
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
+    renderer.domElement.style.display = "block";
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
@@ -109,7 +110,7 @@ export default function InteractiveGlobe({ className }: InteractiveGlobeProps) {
 
     // Camera
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    camera.position.set(0, 0, 2.65);
+    camera.position.set(0, 0, 3.15);
     cameraRef.current = camera;
 
     // Globe group
@@ -207,7 +208,7 @@ export default function InteractiveGlobe({ className }: InteractiveGlobeProps) {
     for (let i = 0; i < particleCount; i++) {
       const phi = rng() * Math.PI * 2;
       const theta = rng() * Math.PI;
-      const pr = GLOBE_RADIUS * (1.15 + rng() * 0.25);
+      const pr = GLOBE_RADIUS * (1.15 + rng() * 0.15);
       particlePositions[i * 3] = pr * Math.sin(theta) * Math.cos(phi);
       particlePositions[i * 3 + 1] = pr * Math.cos(theta);
       particlePositions[i * 3 + 2] = pr * Math.sin(theta) * Math.sin(phi);
@@ -312,11 +313,17 @@ export default function InteractiveGlobe({ className }: InteractiveGlobeProps) {
       if (!container || !rendererRef.current || !cameraRef.current) return;
       const w = container.clientWidth;
       const h = container.clientHeight;
+      if (w === 0 || h === 0) return;
       rendererRef.current.setSize(w, h);
       cameraRef.current.aspect = w / h;
       cameraRef.current.updateProjectionMatrix();
     };
     window.addEventListener("resize", handleResize);
+
+    const resizeObserver = new ResizeObserver(() => {
+      handleResize();
+    });
+    if (container) resizeObserver.observe(container);
 
     // Intersection Observer for visibility-aware rendering
     const observer = new IntersectionObserver(
@@ -332,6 +339,7 @@ export default function InteractiveGlobe({ className }: InteractiveGlobeProps) {
       container?.removeEventListener("pointermove", handlePointerMove);
       container?.removeEventListener("pointerleave", handlePointerLeave);
       window.removeEventListener("resize", handleResize);
+      resizeObserver.disconnect();
       if (container) observer.unobserve(container);
 
       // Dispose Three.js resources

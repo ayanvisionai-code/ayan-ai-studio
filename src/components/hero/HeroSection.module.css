@@ -24,14 +24,14 @@
   width: 100%;
   max-width: 1500px;
   margin: 0 auto;
-  padding: calc(var(--nav-height) + 4rem) 5vw 3rem;
+  padding: calc(var(--nav-height) + 2.5rem) 5vw 2.5rem;
   gap: 2rem;
 }
 
 /* ── Left column: headline + CTA ── */
 .heroLeft {
   flex: 0 0 46%;
-  max-width: 640px;
+  max-width: 620px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -149,20 +149,23 @@
 
 /* ── Right column: 3D globe ── */
 .heroRight {
-  flex: 0 0 52%;
+  flex: 0 0 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2;
-  min-height: 440px;
+  min-height: 400px;
 }
 
 .globeContainer {
   width: 100%;
-  height: 100%;
-  min-height: 460px;
-  max-height: 740px;
+  max-width: min(600px, calc(100vh - var(--nav-height) - 5.5rem));
+  max-height: min(600px, calc(100vh - var(--nav-height) - 5.5rem));
   aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 /* ── Abstract wave layer ── */
@@ -243,8 +246,9 @@
 }
 
 .globeFallbackCircle {
-  width: 380px;
-  height: 380px;
+  width: min(380px, 80%);
+  height: min(380px, 80%);
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #0a0a18 0%, #050510 60%, #000 100%);
   border: 1px solid rgba(24, 217, 208, 0.15);
@@ -261,7 +265,7 @@
   .heroInner {
     flex-direction: column;
     text-align: center;
-    padding-top: calc(var(--nav-height) + 3rem);
+    padding-top: calc(var(--nav-height) + 2.5rem);
     gap: 2rem;
   }
 
@@ -282,13 +286,15 @@
   .heroRight {
     flex: none;
     width: 100%;
-    max-width: 480px;
-    min-height: 320px;
+    max-width: 460px;
+    min-height: 300px;
   }
 
   .globeContainer {
-    min-height: 320px;
+    width: 100%;
+    max-width: 420px;
     max-height: 420px;
+    min-height: 280px;
   }
 
   .scrollCue {
@@ -300,7 +306,7 @@
 
 @media (max-width: 640px) {
   .heroInner {
-    padding-top: calc(var(--nav-height) + 2rem);
+    padding-top: calc(var(--nav-height) + 1.5rem);
     padding-bottom: 1.5rem;
     gap: 1.5rem;
   }
@@ -317,12 +323,14 @@
 
   .heroRight {
     max-width: 320px;
-    min-height: 240px;
+    min-height: 220px;
   }
 
   .globeContainer {
-    min-height: 240px;
-    max-height: 320px;
+    width: 100%;
+    max-width: 290px;
+    max-height: 290px;
+    min-height: 220px;
   }
 
   .heroCtaPrimary,
