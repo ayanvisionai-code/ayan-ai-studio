@@ -669,6 +669,41 @@ export default function ServiceNetworkSection() {
               <stop offset="70%" stopColor="#FD6BC4" stopOpacity="0.9" />
               <stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
             </linearGradient>
+
+            {/*
+              ── INLINE SVG STYLE BLOCK ─────────────────────────────────────────
+              Vertical signal keyframe lives here — NOT in the CSS Module file.
+              CSS Modules hash class names AND keyframe names at build time, which
+              breaks the animation-name → @keyframes link when the two are split
+              across different specificity layers. Embedding the keyframe directly
+              in the SVG <defs> guarantees a global, un-hashed name that the
+              .vert-sig global class can reference without any scoping issues.
+              ────────────────────────────────────────────────────────────────── */}
+            <style>{`
+              @keyframes vertSignalDown {
+                0%   { stroke-dashoffset: 0;    opacity: 0;    }
+                5%   {                          opacity: 0.92; }
+                60%  {                          opacity: 0.92; }
+                70%  { stroke-dashoffset: -168; opacity: 0;    }
+                100% { stroke-dashoffset: -168; opacity: 0;    }
+              }
+              .vert-sig {
+                fill: none;
+                stroke-dasharray: 50 160;
+                animation-name: vertSignalDown;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+                animation-fill-mode: both;
+                opacity: 0;
+              }
+              @media (prefers-reduced-motion: reduce) {
+                .vert-sig {
+                  animation: none !important;
+                  opacity: 0.3;
+                  stroke-dasharray: none;
+                }
+              }
+            `}</style>
           </defs>
 
           {/* ════════════════════════════════════════════════════════════════════
@@ -708,9 +743,32 @@ export default function ServiceNetworkSection() {
              ════════════════════════════════════════════════════════════════════ */}
           <g className={styles.activeSignalsGroup}>
             {circuitRoutes.map((route) => {
-              let animClass = styles.signalSegment;
-              if (route.type === "vertical") animClass = styles.signalSegmentVert;
-              else if (route.type === "bus") animClass = styles.signalSegmentBus;
+              // ── Vertical routes: use global .vert-sig class (defined in the
+              // inline SVG <style> block above) so the @keyframes name is NOT
+              // hashed by CSS Modules and the animation-name resolves correctly.
+              if (route.type === "vertical") {
+                return (
+                  <path
+                    key={`sig-${route.id}`}
+                    d={route.d}
+                    stroke={route.stroke}
+                    strokeWidth={route.strokeWidth}
+                    strokeLinecap="round"
+                    className="vert-sig"
+                    style={{
+                      animationDuration: `${route.duration}s`,
+                      animationDelay: `${route.delay}s`,
+                    }}
+                    filter="url(#segmentGlow)"
+                  />
+                );
+              }
+
+              // ── Horizontal / bus routes: existing CSS Module class works fine.
+              const animClass =
+                route.type === "bus"
+                  ? styles.signalSegmentBus
+                  : styles.signalSegment;
 
               return (
                 <path
