@@ -108,10 +108,6 @@ export default function ServiceNetworkSection() {
               <feGaussianBlur stdDeviation="2.2" result="blur" />
               <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
-            <filter id="pinGlintGlow" x="-60%" y="-60%" width="220%" height="220%">
-              <feGaussianBlur stdDeviation="3.5" result="blur" />
-              <feComposite in="SourceGraphic" in2="blur" operator="over" />
-            </filter>
 
             {/* Linear Gradients for Elongated Signal Segments */}
             <linearGradient id="seg-cyan" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -453,27 +449,6 @@ export default function ServiceNetworkSection() {
             className={`${styles.signalSegmentVert} ${styles.segV4}`}
             filter="url(#segmentGlow)"
           />
-
-          {/* ════════════════════════════════════════════════════════════════════
-              LAYER 3: RESTRAINED PIN ARRIVAL GLINTS AT PROCESSOR PINS
-             ════════════════════════════════════════════════════════════════════ */}
-          {/* Left Pins */}
-          <circle cx="506" cy="296" r="3" fill="#00F0C8" className={styles.pinGlint1} filter="url(#pinGlintGlow)" />
-          <circle cx="506" cy="308" r="2.8" fill="#8EFFEA" className={styles.pinGlint2} filter="url(#pinGlintGlow)" />
-          <circle cx="506" cy="404" r="2.8" fill="#00F0C8" className={styles.pinGlint3} filter="url(#pinGlintGlow)" />
-          <circle cx="506" cy="416" r="3" fill="#7DFF32" className={styles.pinGlint4} filter="url(#pinGlintGlow)" />
-
-          {/* Right Pins */}
-          <circle cx="694" cy="296" r="3" fill="#38BDF8" className={styles.pinGlint5} filter="url(#pinGlintGlow)" />
-          <circle cx="694" cy="308" r="2.8" fill="#00F0C8" className={styles.pinGlint6} filter="url(#pinGlintGlow)" />
-          <circle cx="694" cy="404" r="2.8" fill="#A855F7" className={styles.pinGlint7} filter="url(#pinGlintGlow)" />
-          <circle cx="694" cy="416" r="3" fill="#FD6BC4" className={styles.pinGlint8} filter="url(#pinGlintGlow)" />
-
-          {/* Top Pins (Receiving from Circular Node) */}
-          <circle cx="564" cy="266" r="2.8" fill="#00F0C8" className={styles.pinGlintV1} filter="url(#pinGlintGlow)" />
-          <circle cx="588" cy="266" r="2.8" fill="#FFDA5C" className={styles.pinGlintV2} filter="url(#pinGlintGlow)" />
-          <circle cx="612" cy="266" r="2.8" fill="#38BDF8" className={styles.pinGlintV3} filter="url(#pinGlintGlow)" />
-          <circle cx="636" cy="266" r="2.8" fill="#FD6BC4" className={styles.pinGlintV4} filter="url(#pinGlintGlow)" />
         </svg>
 
         {/* ─── 04. Refined Upper Circular Orbital Node (~132px) ─── */}
