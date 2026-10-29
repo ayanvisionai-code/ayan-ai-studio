@@ -101,15 +101,28 @@
 /* ─── Elongated Colored Light Segments (Data Streams Inward to Chip) ─── */
 .signalSegment {
   fill: none;
-  stroke-dasharray: 55 500;
-  animation: segmentInward linear infinite;
+  stroke-dasharray: 52 550;
+  animation-name: segmentInward;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
   opacity: 0;
 }
 
 .signalSegmentVert {
   fill: none;
-  stroke-dasharray: 40 250;
-  animation: segmentVertDown linear infinite;
+  stroke-dasharray: 38 300;
+  animation-name: segmentVertDown;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  opacity: 0;
+}
+
+.signalSegmentBus {
+  fill: none;
+  stroke-dasharray: 45 350;
+  animation-name: segmentBusDown;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
   opacity: 0;
 }
 
@@ -118,14 +131,18 @@
     stroke-dashoffset: 0;
     opacity: 0;
   }
-  12% {
+  6% {
     opacity: 0.85;
   }
-  85% {
+  42% {
     opacity: 0.85;
+  }
+  49% {
+    stroke-dashoffset: -480;
+    opacity: 0;
   }
   100% {
-    stroke-dashoffset: -460;
+    stroke-dashoffset: -480;
     opacity: 0;
   }
 }
@@ -135,11 +152,15 @@
     stroke-dashoffset: 0;
     opacity: 0;
   }
-  15% {
+  8% {
     opacity: 0.9;
   }
-  85% {
+  42% {
     opacity: 0.9;
+  }
+  49% {
+    stroke-dashoffset: -220;
+    opacity: 0;
   }
   100% {
     stroke-dashoffset: -220;
@@ -147,29 +168,26 @@
   }
 }
 
-/* 16 Concurrent Asynchronous Horizontal/Angled Light Segments */
-.segH1  { animation-duration: 1.9s; animation-delay: 0s; }
-.segH2  { animation-duration: 2.2s; animation-delay: 0.6s; }
-.segH3  { animation-duration: 2.0s; animation-delay: 1.2s; }
-.segH4  { animation-duration: 2.3s; animation-delay: 0.3s; }
-.segH5  { animation-duration: 2.1s; animation-delay: 0.8s; }
-.segH6  { animation-duration: 1.8s; animation-delay: 0.2s; }
-.segH7  { animation-duration: 2.4s; animation-delay: 1.4s; }
-.segH8  { animation-duration: 2.0s; animation-delay: 0.5s; }
-.segH9  { animation-duration: 2.2s; animation-delay: 0.1s; }
-.segH10 { animation-duration: 1.9s; animation-delay: 0.9s; }
-.segH11 { animation-duration: 2.3s; animation-delay: 1.5s; }
-.segH12 { animation-duration: 2.0s; animation-delay: 0.4s; }
-.segH13 { animation-duration: 1.9s; animation-delay: 0.7s; }
-.segH14 { animation-duration: 2.2s; animation-delay: 1.3s; }
-.segH15 { animation-duration: 2.4s; animation-delay: 0.2s; }
-.segH16 { animation-duration: 2.1s; animation-delay: 1.0s; }
-
-/* 4 Downward Light Segments (Node to Chip Top Pins) */
-.segV1  { animation-duration: 1.8s; animation-delay: 0.1s; }
-.segV2  { animation-duration: 2.1s; animation-delay: 0.7s; }
-.segV3  { animation-duration: 1.9s; animation-delay: 0.4s; }
-.segV4  { animation-duration: 2.2s; animation-delay: 1.1s; }
+@keyframes segmentBusDown {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.85;
+  }
+  42% {
+    opacity: 0.85;
+  }
+  49% {
+    stroke-dashoffset: -320;
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: -320;
+    opacity: 0;
+  }
+}
 
 /* ─── 04. Refined Upper Circular Orbital Node (Proportionate ~132px) ─── */
 .nodeAbove {
@@ -578,9 +596,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .signalSegment {
-    animation: none;
-    opacity: 0.4;
+  .signalSegment,
+  .signalSegmentVert,
+  .signalSegmentBus {
+    animation: none !important;
+    opacity: 0.35;
     stroke-dasharray: none;
   }
   .scanningArcWrapper {
