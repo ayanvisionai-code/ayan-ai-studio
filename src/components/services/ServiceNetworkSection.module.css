@@ -101,8 +101,15 @@
 /* ─── Elongated Colored Light Segments (Data Streams Inward to Chip) ─── */
 .signalSegment {
   fill: none;
-  stroke-dasharray: 48 850;
+  stroke-dasharray: 55 500;
   animation: segmentInward linear infinite;
+  opacity: 0;
+}
+
+.signalSegmentVert {
+  fill: none;
+  stroke-dasharray: 40 250;
+  animation: segmentVertDown linear infinite;
   opacity: 0;
 }
 
@@ -111,82 +118,92 @@
     stroke-dashoffset: 0;
     opacity: 0;
   }
-  8% {
-    opacity: 0.8;
+  12% {
+    opacity: 0.85;
   }
   85% {
-    opacity: 0.8;
+    opacity: 0.85;
   }
   100% {
-    stroke-dashoffset: -850;
+    stroke-dashoffset: -460;
     opacity: 0;
   }
 }
 
-/* Independent Asynchronous Timing for Concurrent Signals (1.9s - 2.4s) */
-.seg1 {
-  animation-duration: 1.9s;
-  animation-delay: 0s;
+@keyframes segmentVertDown {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    stroke-dashoffset: -220;
+    opacity: 0;
+  }
 }
-.seg2 {
-  animation-duration: 2.2s;
-  animation-delay: 0.8s;
-}
-.seg3 {
-  animation-duration: 2.0s;
-  animation-delay: 0.3s;
-}
-.seg4 {
-  animation-duration: 2.3s;
-  animation-delay: 1.1s;
-}
-.seg5 {
-  animation-duration: 1.9s;
-  animation-delay: 0.5s;
-}
-.seg6 {
-  animation-duration: 2.4s;
-  animation-delay: 1.3s;
-}
-.seg7 {
-  animation-duration: 2.1s;
-  animation-delay: 0.7s;
-}
-.seg8 {
-  animation-duration: 2.2s;
-  animation-delay: 1.5s;
-}
+
+/* 16 Concurrent Asynchronous Horizontal/Angled Light Segments */
+.segH1  { animation-duration: 1.9s; animation-delay: 0s; }
+.segH2  { animation-duration: 2.2s; animation-delay: 0.6s; }
+.segH3  { animation-duration: 2.0s; animation-delay: 1.2s; }
+.segH4  { animation-duration: 2.3s; animation-delay: 0.3s; }
+.segH5  { animation-duration: 2.1s; animation-delay: 0.8s; }
+.segH6  { animation-duration: 1.8s; animation-delay: 0.2s; }
+.segH7  { animation-duration: 2.4s; animation-delay: 1.4s; }
+.segH8  { animation-duration: 2.0s; animation-delay: 0.5s; }
+.segH9  { animation-duration: 2.2s; animation-delay: 0.1s; }
+.segH10 { animation-duration: 1.9s; animation-delay: 0.9s; }
+.segH11 { animation-duration: 2.3s; animation-delay: 1.5s; }
+.segH12 { animation-duration: 2.0s; animation-delay: 0.4s; }
+.segH13 { animation-duration: 1.9s; animation-delay: 0.7s; }
+.segH14 { animation-duration: 2.2s; animation-delay: 1.3s; }
+.segH15 { animation-duration: 2.4s; animation-delay: 0.2s; }
+.segH16 { animation-duration: 2.1s; animation-delay: 1.0s; }
+
+/* 4 Downward Light Segments (Node to Chip Top Pins) */
+.segV1  { animation-duration: 1.8s; animation-delay: 0.1s; }
+.segV2  { animation-duration: 2.1s; animation-delay: 0.7s; }
+.segV3  { animation-duration: 1.9s; animation-delay: 0.4s; }
+.segV4  { animation-duration: 2.2s; animation-delay: 1.1s; }
 
 /* Subtle Receiving Glints at Processor Connection Pins */
-.pinGlint1 {
-  animation: glintPulse 1.9s ease-out infinite;
-  animation-delay: 1.75s;
-}
-.pinGlint2 {
-  animation: glintPulse 2.0s ease-out infinite;
-  animation-delay: 1.85s;
-}
-.pinGlint3 {
-  animation: glintPulse 1.9s ease-out infinite;
-  animation-delay: 1.75s;
-}
-.pinGlint4 {
-  animation: glintPulse 2.1s ease-out infinite;
-  animation-delay: 1.95s;
+.pinGlint1, .pinGlint2, .pinGlint3, .pinGlint4,
+.pinGlint5, .pinGlint6, .pinGlint7, .pinGlint8,
+.pinGlintV1, .pinGlintV2, .pinGlintV3, .pinGlintV4 {
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
+.pinGlint1  { animation: glintPulse 1.9s ease-out infinite; animation-delay: 1.7s; }
+.pinGlint2  { animation: glintPulse 2.2s ease-out infinite; animation-delay: 2.0s; }
+.pinGlint3  { animation: glintPulse 2.3s ease-out infinite; animation-delay: 2.1s; }
+.pinGlint4  { animation: glintPulse 2.0s ease-out infinite; animation-delay: 1.8s; }
+.pinGlint5  { animation: glintPulse 2.1s ease-out infinite; animation-delay: 1.9s; }
+.pinGlint6  { animation: glintPulse 1.8s ease-out infinite; animation-delay: 1.6s; }
+.pinGlint7  { animation: glintPulse 2.2s ease-out infinite; animation-delay: 2.0s; }
+.pinGlint8  { animation: glintPulse 2.1s ease-out infinite; animation-delay: 1.9s; }
+.pinGlintV1 { animation: glintPulse 1.8s ease-out infinite; animation-delay: 1.6s; }
+.pinGlintV2 { animation: glintPulse 2.1s ease-out infinite; animation-delay: 1.9s; }
+.pinGlintV3 { animation: glintPulse 1.9s ease-out infinite; animation-delay: 1.7s; }
+.pinGlintV4 { animation: glintPulse 2.2s ease-out infinite; animation-delay: 2.0s; }
+
 @keyframes glintPulse {
-  0%, 75% {
+  0%, 72% {
     opacity: 0;
     transform: scale(0.6);
   }
-  85% {
+  86% {
     opacity: 0.95;
-    transform: scale(1.5);
+    transform: scale(1.4);
   }
   100% {
     opacity: 0;
-    transform: scale(0.8);
+    transform: scale(0.7);
   }
 }
 

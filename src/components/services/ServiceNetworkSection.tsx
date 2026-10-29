@@ -56,7 +56,7 @@ const servicesList: ServiceItem[] = [
   },
 ];
 
-// 12-Band Equalizer Signal Bars connecting Circular Node and Processor
+// 12-Band Equalizer Signal Bars bridging Circular Node and Processor
 const signalBars = [
   { color: "#8EFFEA", delay: "0.1s" },
   { color: "#40DDE1", delay: "0.45s" },
@@ -105,7 +105,7 @@ export default function ServiceNetworkSection() {
           <defs>
             {/* Soft Glow Filter for Moving Light Segments */}
             <filter id="segmentGlow" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="2" result="blur" />
+              <feGaussianBlur stdDeviation="2.2" result="blur" />
               <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
             <filter id="pinGlintGlow" x="-60%" y="-60%" width="220%" height="220%">
@@ -115,226 +115,368 @@ export default function ServiceNetworkSection() {
 
             {/* Linear Gradients for Elongated Signal Segments */}
             <linearGradient id="seg-cyan" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#00F0C8" stopOpacity="0.2" />
+              <stop offset="0%" stopColor="#00F0C8" stopOpacity="0.15" />
               <stop offset="60%" stopColor="#00F0C8" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#E0FFFF" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="#E0FFFF" stopOpacity="1" />
+            </linearGradient>
+
+            <linearGradient id="seg-mint" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#19CBAC" stopOpacity="0.15" />
+              <stop offset="60%" stopColor="#8EFFEA" stopOpacity="0.85" />
+              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
             </linearGradient>
 
             <linearGradient id="seg-blue" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#2568D1" stopOpacity="0.2" />
+              <stop offset="0%" stopColor="#2568D1" stopOpacity="0.15" />
               <stop offset="60%" stopColor="#38BDF8" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#E0F2FE" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="#E0F2FE" stopOpacity="1" />
             </linearGradient>
 
             <linearGradient id="seg-green" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#10B981" stopOpacity="0.2" />
+              <stop offset="0%" stopColor="#10B981" stopOpacity="0.15" />
               <stop offset="60%" stopColor="#7DFF32" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#F0FDF4" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="#F0FDF4" stopOpacity="1" />
             </linearGradient>
 
             <linearGradient id="seg-magenta" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.2" />
+              <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.15" />
               <stop offset="60%" stopColor="#FD6BC4" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#FDF2F8" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="#FDF2F8" stopOpacity="1" />
             </linearGradient>
 
             <linearGradient id="seg-amber" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#FF864C" stopOpacity="0.2" />
+              <stop offset="0%" stopColor="#FF864C" stopOpacity="0.15" />
               <stop offset="60%" stopColor="#FFDA5C" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#FFFBEB" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="#FFFBEB" stopOpacity="1" />
             </linearGradient>
 
             <linearGradient id="seg-violet" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#6D28D9" stopOpacity="0.2" />
+              <stop offset="0%" stopColor="#6D28D9" stopOpacity="0.15" />
               <stop offset="60%" stopColor="#A855F7" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#FAF5FF" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="#FAF5FF" stopOpacity="1" />
+            </linearGradient>
+
+            <linearGradient id="seg-vert-cyan" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#0FB6B8" stopOpacity="0.2" />
+              <stop offset="70%" stopColor="#00F0C8" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
+            </linearGradient>
+
+            <linearGradient id="seg-vert-blue" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#2568D1" stopOpacity="0.2" />
+              <stop offset="70%" stopColor="#40DDE1" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
+            </linearGradient>
+
+            <linearGradient id="seg-vert-magenta" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#9333EA" stopOpacity="0.2" />
+              <stop offset="70%" stopColor="#FD6BC4" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
             </linearGradient>
           </defs>
 
           {/* ════════════════════════════════════════════════════════════════════
-              LAYER 1: DENSE INACTIVE PCB TRACES (Subdued dark graphite #12181C)
-              Tightened gap: card inner edges at x=400 (left) and x=800 (right).
-              Processor pins at x=506 (left) and x=694 (right).
+              LAYER 1: DENSE INACTIVE PCB TRACES (Dark graphite #12181C)
+              Full bridge from service cards (x=400, x=800) into processor pins.
+              Continuous vertical tracks from circular node (y=130) to top pins.
              ════════════════════════════════════════════════════════════════════ */}
           <g className={styles.baseTracesGroup}>
             {/* ── QUADRANT 1: UPPER-LEFT (AI AUTOMATION) ── */}
-            {/* Trace A1: Main bus into Left Pin 1 (y=296) */}
-            <path d="M 400 130 H 450 Q 460 130 460 140 V 286 Q 460 296 470 296 H 506" className={styles.traceBase} />
-            {/* Trace A2: Parallel into Left Pin 2 (y=308) */}
-            <path d="M 400 150 H 430 Q 440 150 440 160 V 298 Q 440 308 450 308 H 506" className={styles.traceBase} />
-            {/* Trace A3: Parallel into Left Pin 3 (y=320) */}
-            <path d="M 400 170 H 420 Q 430 170 430 180 V 310 Q 430 320 440 320 H 506" className={styles.traceBase} />
-            {/* Trace A4: Into Left Pin 4 (y=332) */}
-            <path d="M 400 190 H 470 Q 480 190 480 200 V 322 Q 480 332 490 332 H 506" className={styles.traceBase} />
-            {/* Trace A5: Route connecting into Top Pin 2 (x=552, y=266) */}
-            <path d="M 400 115 H 490 Q 500 115 500 125 V 220 Q 500 230 510 230 H 542 Q 552 230 552 240 V 266" className={styles.traceBase} />
-            {/* Trace A6: Stepped branch into Left Pin 5 (y=344) */}
-            <path d="M 370 210 H 435 Q 445 210 445 220 V 250 Q 445 260 455 260 H 475 Q 485 260 485 270 V 334 Q 485 344 495 344 H 506" className={styles.traceBase} />
-            {/* Trace A7: Fine nested trace into Left Pin 1 */}
-            <path d="M 400 140 H 442 Q 452 140 452 150 V 278 Q 452 288 462 288 H 506" className={styles.traceBase} />
-            {/* Trace A8: Auxiliary branch with test pad */}
-            <path d="M 400 180 H 425 Q 435 180 435 190 V 240" className={styles.traceBase} />
+            {/* Route A1: Main bus into Left Pin 1 (y=296) */}
+            <path d="M 400 125 H 445 Q 455 125 455 135 V 286 Q 455 296 465 296 H 506" className={styles.traceBase} />
+            {/* Route A2: Parallel into Left Pin 2 (y=308) */}
+            <path d="M 400 145 H 420 Q 430 145 430 155 V 298 Q 430 308 440 308 H 506" className={styles.traceBase} />
+            {/* Route A3: Parallel into Left Pin 3 (y=320) */}
+            <path d="M 400 165 H 400 Q 410 165 410 175 V 310 Q 410 320 420 320 H 506" className={styles.traceBase} />
+            {/* Route A4: Connecting to Top Pin 1 (x=540, y=266) */}
+            <path d="M 400 105 H 470 Q 480 105 480 115 V 215 Q 480 225 490 225 H 530 Q 540 225 540 235 V 266" className={styles.traceBase} />
+            {/* Route A5: Into Left Pin 4 (y=332) */}
+            <path d="M 400 185 H 455 Q 465 185 465 195 V 322 Q 465 332 475 332 H 506" className={styles.traceBase} />
+            {/* Route A6: Stepped branch into Left Pin 5 (y=344) */}
+            <path d="M 375 205 H 430 Q 440 205 440 215 V 240 Q 440 250 450 250 H 470 Q 480 250 480 260 V 334 Q 480 344 490 344 H 506" className={styles.traceBase} />
+            {/* Route A7: Fine nested trace into Left Pin 1 */}
+            <path d="M 400 135 H 430 Q 440 135 440 145 V 276 Q 440 286 450 286 H 506" className={styles.traceBase} />
+            {/* Route A8: Auxiliary branch with test pad */}
+            <path d="M 400 175 H 415 Q 425 175 425 185 V 240" className={styles.traceBase} />
 
             {/* ── QUADRANT 2: UPPER-RIGHT (WEB DEVELOPMENT) ── */}
-            {/* Trace B1: Main bus into Right Pin 1 (y=296) */}
-            <path d="M 800 130 H 750 Q 740 130 740 140 V 286 Q 740 296 730 296 H 694" className={styles.traceBase} />
-            {/* Trace B2: Parallel into Right Pin 2 (y=308) */}
-            <path d="M 800 150 H 770 Q 760 150 760 160 V 298 Q 760 308 750 308 H 694" className={styles.traceBase} />
-            {/* Trace B3: Parallel into Right Pin 3 (y=320) */}
-            <path d="M 800 170 H 780 Q 770 170 770 180 V 310 Q 770 320 760 320 H 694" className={styles.traceBase} />
-            {/* Trace B4: Into Right Pin 4 (y=332) */}
-            <path d="M 800 190 H 730 Q 720 190 720 200 V 322 Q 720 332 710 332 H 694" className={styles.traceBase} />
-            {/* Trace B5: Route connecting into Top Pin 9 (x=648, y=266) */}
-            <path d="M 800 115 H 710 Q 700 115 700 125 V 220 Q 700 230 690 230 H 658 Q 648 230 648 240 V 266" className={styles.traceBase} />
-            {/* Trace B6: Stepped branch into Right Pin 5 (y=344) */}
-            <path d="M 830 210 H 765 Q 755 210 755 220 V 250 Q 755 260 745 260 H 725 Q 715 260 715 270 V 334 Q 715 344 705 344 H 694" className={styles.traceBase} />
-            {/* Trace B7: Fine nested trace into Right Pin 1 */}
-            <path d="M 800 140 H 758 Q 748 140 748 150 V 278 Q 748 288 738 288 H 694" className={styles.traceBase} />
-            {/* Trace B8: Auxiliary branch with test pad */}
-            <path d="M 800 180 H 775 Q 765 180 765 190 V 240" className={styles.traceBase} />
+            {/* Route B1: Main bus into Right Pin 1 (y=296) */}
+            <path d="M 800 125 H 755 Q 745 125 745 135 V 286 Q 745 296 735 296 H 694" className={styles.traceBase} />
+            {/* Route B2: Parallel into Right Pin 2 (y=308) */}
+            <path d="M 800 145 H 780 Q 770 145 770 155 V 298 Q 770 308 760 308 H 694" className={styles.traceBase} />
+            {/* Route B3: Parallel into Right Pin 3 (y=320) */}
+            <path d="M 800 165 H 800 Q 790 165 790 175 V 310 Q 790 320 780 320 H 694" className={styles.traceBase} />
+            {/* Route B4: Connecting to Top Pin 11 (x=660, y=266) */}
+            <path d="M 800 105 H 730 Q 720 105 720 115 V 215 Q 720 225 710 225 H 670 Q 660 225 660 235 V 266" className={styles.traceBase} />
+            {/* Route B5: Into Right Pin 4 (y=332) */}
+            <path d="M 800 185 H 745 Q 735 185 735 195 V 322 Q 735 332 725 332 H 694" className={styles.traceBase} />
+            {/* Route B6: Stepped branch into Right Pin 5 (y=344) */}
+            <path d="M 825 205 H 770 Q 760 205 760 215 V 240 Q 760 250 750 250 H 730 Q 720 250 720 260 V 334 Q 720 344 710 344 H 694" className={styles.traceBase} />
+            {/* Route B7: Fine nested trace into Right Pin 1 */}
+            <path d="M 800 135 H 770 Q 760 135 760 145 V 276 Q 760 286 750 286 H 694" className={styles.traceBase} />
+            {/* Route B8: Auxiliary branch with test pad */}
+            <path d="M 800 175 H 785 Q 775 175 775 185 V 240" className={styles.traceBase} />
 
             {/* ── QUADRANT 3: LOWER-LEFT (LOCAL SEO) ── */}
-            {/* Trace C1: Main bus into Left Pin 11 (y=416) */}
-            <path d="M 400 570 H 450 Q 460 570 460 560 V 426 Q 460 416 470 416 H 506" className={styles.traceBase} />
-            {/* Trace C2: Parallel into Left Pin 10 (y=404) */}
-            <path d="M 400 550 H 430 Q 440 550 440 540 V 414 Q 440 404 450 404 H 506" className={styles.traceBase} />
-            {/* Trace C3: Parallel into Left Pin 9 (y=392) */}
-            <path d="M 400 530 H 420 Q 430 530 430 520 V 402 Q 430 392 440 392 H 506" className={styles.traceBase} />
-            {/* Trace C4: Into Left Pin 8 (y=380) */}
-            <path d="M 400 510 H 470 Q 480 510 480 500 V 390 Q 480 380 490 380 H 506" className={styles.traceBase} />
-            {/* Trace C5: Route connecting into Bottom Pin 2 (x=552, y=454) */}
-            <path d="M 400 585 H 480 Q 490 585 490 575 V 490 Q 490 480 500 480 H 542 Q 552 480 552 470 V 454" className={styles.traceBase} />
-            {/* Trace C6: Stepped branch into Left Pin 7 (y=368) */}
-            <path d="M 370 490 H 435 Q 445 490 445 480 V 450 Q 445 440 455 440 H 475 Q 485 440 485 430 V 378 Q 485 368 495 368 H 506" className={styles.traceBase} />
-            {/* Trace C7: Fine nested trace into Left Pin 11 */}
-            <path d="M 400 560 H 442 Q 452 560 452 550 V 434 Q 452 424 462 424 H 506" className={styles.traceBase} />
-            {/* Trace C8: Auxiliary branch with test pad */}
-            <path d="M 400 520 H 435 Q 445 520 445 510 V 460" className={styles.traceBase} />
+            {/* Route C1: Main bus into Left Pin 11 (y=416) */}
+            <path d="M 400 575 H 445 Q 455 575 455 565 V 426 Q 455 416 465 416 H 506" className={styles.traceBase} />
+            {/* Route C2: Parallel into Left Pin 10 (y=404) */}
+            <path d="M 400 555 H 420 Q 430 555 430 545 V 414 Q 430 404 440 404 H 506" className={styles.traceBase} />
+            {/* Route C3: Parallel into Left Pin 9 (y=392) */}
+            <path d="M 400 535 H 400 Q 410 535 410 525 V 402 Q 410 392 420 392 H 506" className={styles.traceBase} />
+            {/* Route C4: Connecting to Bottom Pin 1 (x=540, y=454) */}
+            <path d="M 400 595 H 465 Q 475 595 475 585 V 505 Q 475 495 485 495 H 530 Q 540 495 540 485 V 454" className={styles.traceBase} />
+            {/* Route C5: Into Left Pin 8 (y=380) */}
+            <path d="M 400 515 H 455 Q 465 515 465 505 V 390 Q 465 380 475 380 H 506" className={styles.traceBase} />
+            {/* Route C6: Stepped branch into Left Pin 7 (y=368) */}
+            <path d="M 375 495 H 430 Q 440 495 440 485 V 470 Q 440 460 450 460 H 470 Q 480 460 480 450 V 378 Q 480 368 490 368 H 506" className={styles.traceBase} />
+            {/* Route C7: Fine nested trace into Left Pin 11 */}
+            <path d="M 400 565 H 430 Q 440 565 440 555 V 434 Q 440 424 450 424 H 506" className={styles.traceBase} />
+            {/* Route C8: Auxiliary branch with test pad */}
+            <path d="M 400 525 H 415 Q 425 525 425 515 V 470" className={styles.traceBase} />
 
             {/* ── QUADRANT 4: LOWER-RIGHT (AI CHAT ASSISTANTS) ── */}
-            {/* Trace D1: Main bus into Right Pin 11 (y=416) */}
-            <path d="M 800 570 H 750 Q 740 570 740 560 V 426 Q 740 416 730 416 H 694" className={styles.traceBase} />
-            {/* Trace D2: Parallel into Right Pin 10 (y=404) */}
-            <path d="M 800 550 H 770 Q 760 550 760 540 V 414 Q 760 404 750 404 H 694" className={styles.traceBase} />
-            {/* Trace D3: Parallel into Right Pin 9 (y=392) */}
-            <path d="M 800 530 H 780 Q 770 530 770 520 V 402 Q 770 392 760 392 H 694" className={styles.traceBase} />
-            {/* Trace D4: Into Right Pin 8 (y=380) */}
-            <path d="M 800 510 H 730 Q 720 510 720 500 V 390 Q 720 380 710 380 H 694" className={styles.traceBase} />
-            {/* Trace D5: Route connecting into Bottom Pin 9 (x=648, y=454) */}
-            <path d="M 800 585 H 720 Q 710 585 710 575 V 490 Q 710 480 700 480 H 658 Q 648 480 648 470 V 454" className={styles.traceBase} />
-            {/* Trace D6: Stepped branch into Right Pin 7 (y=368) */}
-            <path d="M 830 490 H 765 Q 755 490 755 480 V 450 Q 755 440 745 440 H 725 Q 715 440 715 430 V 378 Q 715 368 705 368 H 694" className={styles.traceBase} />
-            {/* Trace D7: Fine nested trace into Right Pin 11 */}
-            <path d="M 800 560 H 758 Q 748 560 748 550 V 434 Q 748 424 738 424 H 694" className={styles.traceBase} />
-            {/* Trace D8: Auxiliary branch with test pad */}
-            <path d="M 800 520 H 765 Q 755 520 755 510 V 460" className={styles.traceBase} />
+            {/* Route D1: Main bus into Right Pin 11 (y=416) */}
+            <path d="M 800 575 H 755 Q 745 575 745 565 V 426 Q 745 416 735 416 H 694" className={styles.traceBase} />
+            {/* Route D2: Parallel into Right Pin 10 (y=404) */}
+            <path d="M 800 555 H 780 Q 770 555 770 545 V 414 Q 770 404 760 404 H 694" className={styles.traceBase} />
+            {/* Route D3: Parallel into Right Pin 9 (y=392) */}
+            <path d="M 800 535 H 800 Q 790 535 790 525 V 402 Q 790 392 780 392 H 694" className={styles.traceBase} />
+            {/* Route D4: Connecting to Bottom Pin 11 (x=660, y=454) */}
+            <path d="M 800 595 H 735 Q 725 595 725 585 V 505 Q 725 495 715 495 H 670 Q 660 495 660 485 V 454" className={styles.traceBase} />
+            {/* Route D5: Into Right Pin 8 (y=380) */}
+            <path d="M 800 515 H 745 Q 735 515 735 505 V 390 Q 735 380 725 380 H 694" className={styles.traceBase} />
+            {/* Route D6: Stepped branch into Right Pin 7 (y=368) */}
+            <path d="M 825 495 H 770 Q 760 495 760 485 V 470 Q 760 460 750 460 H 730 Q 720 460 720 450 V 378 Q 720 368 710 368 H 694" className={styles.traceBase} />
+            {/* Route D7: Fine nested trace into Right Pin 11 */}
+            <path d="M 800 565 H 770 Q 760 565 760 555 V 434 Q 760 424 750 424 H 694" className={styles.traceBase} />
+            {/* Route D8: Auxiliary branch with test pad */}
+            <path d="M 800 525 H 785 Q 775 525 775 515 V 470" className={styles.traceBase} />
+
+            {/* ── 9 CONTINUOUS VERTICAL TRACES (CIRCULAR NODE -> CHIP TOP PINS) ── */}
+            <path d="M 552 130 V 266" className={styles.traceBase} />
+            <path d="M 564 130 V 266" className={styles.traceBase} />
+            <path d="M 576 130 V 266" className={styles.traceBase} />
+            <path d="M 588 130 V 266" className={styles.traceBase} />
+            <path d="M 600 130 V 266" className={styles.traceBase} />
+            <path d="M 612 130 V 266" className={styles.traceBase} />
+            <path d="M 624 130 V 266" className={styles.traceBase} />
+            <path d="M 636 130 V 266" className={styles.traceBase} />
+            <path d="M 648 130 V 266" className={styles.traceBase} />
 
             {/* ── DOWNWARD MOTHERBOARD BUS LINES ── */}
-            <path d="M 588 454 V 660" className={styles.traceBase} />
-            <path d="M 600 454 V 675" className={styles.traceBase} />
-            <path d="M 612 454 V 660" className={styles.traceBase} />
+            <path d="M 588 454 V 670" className={styles.traceBase} />
+            <path d="M 600 454 V 685" className={styles.traceBase} />
+            <path d="M 612 454 V 670" className={styles.traceBase} />
 
             {/* Solder Test Pads / Hardware Vias */}
-            <circle cx="435" cy="240" r="2.5" className={styles.solderPad} />
-            <circle cx="765" cy="240" r="2.5" className={styles.solderPad} />
-            <circle cx="445" cy="460" r="2.5" className={styles.solderPad} />
-            <circle cx="755" cy="460" r="2.5" className={styles.solderPad} />
-            <circle cx="588" cy="660" r="2.5" className={styles.solderPad} />
-            <circle cx="600" cy="675" r="2.5" className={styles.solderPad} />
-            <circle cx="612" cy="660" r="2.5" className={styles.solderPad} />
+            <circle cx="425" cy="240" r="2.5" className={styles.solderPad} />
+            <circle cx="775" cy="240" r="2.5" className={styles.solderPad} />
+            <circle cx="425" cy="470" r="2.5" className={styles.solderPad} />
+            <circle cx="775" cy="470" r="2.5" className={styles.solderPad} />
+            <circle cx="588" cy="670" r="2.5" className={styles.solderPad} />
+            <circle cx="600" cy="685" r="2.5" className={styles.solderPad} />
+            <circle cx="612" cy="670" r="2.5" className={styles.solderPad} />
           </g>
 
           {/* ════════════════════════════════════════════════════════════════════
-              LAYER 2: ELONGATED COLORED SIGNAL SEGMENTS (DATA STREAMS)
-              Direction: Strictly FROM SERVICE CARD ORIGIN -> INWARD TO PROCESSOR
-              Length: 40–50px illuminated line segments traveling at medium speed (1.9s–2.4s)
+              LAYER 2: 20 CONCURRENT ELONGATED MOVING LIGHT SEGMENTS
+              Direction: Strictly FROM SERVICE CARDS / NODE -> INWARD TO PROCESSOR
+              Length: 45–60px illuminated segments traveling at medium speed (1.8s–2.3s)
              ════════════════════════════════════════════════════════════════════ */}
-          {/* Segment 1A: Cyan Pulse (AI Automation -> Left Pin 1) */}
+          {/* ── QUADRANT 1 ACTIVE SIGNALS (AI AUTOMATION -> PROCESSOR) ── */}
           <path
-            d="M 400 130 H 450 Q 460 130 460 140 V 286 Q 460 296 470 296 H 506"
+            d="M 400 125 H 445 Q 455 125 455 135 V 286 Q 455 296 465 296 H 506"
             stroke="url(#seg-cyan)"
             strokeWidth="2.4"
             strokeLinecap="round"
-            className={`${styles.signalSegment} ${styles.seg1}`}
+            className={`${styles.signalSegment} ${styles.segH1}`}
             filter="url(#segmentGlow)"
           />
-          {/* Segment 1B: Amber Pulse (AI Automation -> Left Pin 3) */}
           <path
-            d="M 400 170 H 420 Q 430 170 430 180 V 310 Q 430 320 440 320 H 506"
+            d="M 400 145 H 420 Q 430 145 430 155 V 298 Q 430 308 440 308 H 506"
+            stroke="url(#seg-mint)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            className={`${styles.signalSegment} ${styles.segH2}`}
+            filter="url(#segmentGlow)"
+          />
+          <path
+            d="M 400 165 H 400 Q 410 165 410 175 V 310 Q 410 320 420 320 H 506"
             stroke="url(#seg-amber)"
             strokeWidth="2.2"
             strokeLinecap="round"
-            className={`${styles.signalSegment} ${styles.seg2}`}
+            className={`${styles.signalSegment} ${styles.segH3}`}
+            filter="url(#segmentGlow)"
+          />
+          <path
+            d="M 400 105 H 470 Q 480 105 480 115 V 215 Q 480 225 490 225 H 530 Q 540 225 540 235 V 266"
+            stroke="url(#seg-blue)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            className={`${styles.signalSegment} ${styles.segH4}`}
             filter="url(#segmentGlow)"
           />
 
-          {/* Segment 2A: Electric Blue Pulse (Web Dev -> Right Pin 1) */}
+          {/* ── QUADRANT 2 ACTIVE SIGNALS (WEB DEV -> PROCESSOR) ── */}
           <path
-            d="M 800 130 H 750 Q 740 130 740 140 V 286 Q 740 296 730 296 H 694"
+            d="M 800 125 H 755 Q 745 125 745 135 V 286 Q 745 296 735 296 H 694"
             stroke="url(#seg-blue)"
             strokeWidth="2.4"
             strokeLinecap="round"
-            className={`${styles.signalSegment} ${styles.seg3}`}
+            className={`${styles.signalSegment} ${styles.segH5}`}
             filter="url(#segmentGlow)"
           />
-          {/* Segment 2B: Cyan Pulse (Web Dev -> Top Pin 9) */}
           <path
-            d="M 800 115 H 710 Q 700 115 700 125 V 220 Q 700 230 690 230 H 658 Q 648 230 648 240 V 266"
+            d="M 800 145 H 780 Q 770 145 770 155 V 298 Q 770 308 760 308 H 694"
             stroke="url(#seg-cyan)"
             strokeWidth="2.2"
             strokeLinecap="round"
-            className={`${styles.signalSegment} ${styles.seg4}`}
+            className={`${styles.signalSegment} ${styles.segH6}`}
+            filter="url(#segmentGlow)"
+          />
+          <path
+            d="M 800 165 H 800 Q 790 165 790 175 V 310 Q 790 320 780 320 H 694"
+            stroke="url(#seg-green)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            className={`${styles.signalSegment} ${styles.segH7}`}
+            filter="url(#segmentGlow)"
+          />
+          <path
+            d="M 800 105 H 730 Q 720 105 720 115 V 215 Q 720 225 710 225 H 670 Q 660 225 660 235 V 266"
+            stroke="url(#seg-amber)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            className={`${styles.signalSegment} ${styles.segH8}`}
             filter="url(#segmentGlow)"
           />
 
-          {/* Segment 3A: Emerald Green Pulse (Local SEO -> Left Pin 11) */}
+          {/* ── QUADRANT 3 ACTIVE SIGNALS (LOCAL SEO -> PROCESSOR) ── */}
           <path
-            d="M 400 570 H 450 Q 460 570 460 560 V 426 Q 460 416 470 416 H 506"
+            d="M 400 575 H 445 Q 455 575 455 565 V 426 Q 455 416 465 416 H 506"
             stroke="url(#seg-green)"
             strokeWidth="2.4"
             strokeLinecap="round"
-            className={`${styles.signalSegment} ${styles.seg5}`}
+            className={`${styles.signalSegment} ${styles.segH9}`}
             filter="url(#segmentGlow)"
           />
-          {/* Segment 3B: Cyan Pulse (Local SEO -> Bottom Pin 2) */}
           <path
-            d="M 400 585 H 480 Q 490 585 490 575 V 490 Q 490 480 500 480 H 542 Q 552 480 552 470 V 454"
+            d="M 400 555 H 420 Q 430 555 430 545 V 414 Q 430 404 440 404 H 506"
             stroke="url(#seg-cyan)"
             strokeWidth="2.2"
             strokeLinecap="round"
-            className={`${styles.signalSegment} ${styles.seg6}`}
+            className={`${styles.signalSegment} ${styles.segH10}`}
+            filter="url(#segmentGlow)"
+          />
+          <path
+            d="M 400 535 H 400 Q 410 535 410 525 V 402 Q 410 392 420 392 H 506"
+            stroke="url(#seg-mint)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            className={`${styles.signalSegment} ${styles.segH11}`}
+            filter="url(#segmentGlow)"
+          />
+          <path
+            d="M 400 595 H 465 Q 475 595 475 585 V 505 Q 475 495 485 495 H 530 Q 540 495 540 485 V 454"
+            stroke="url(#seg-amber)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            className={`${styles.signalSegment} ${styles.segH12}`}
             filter="url(#segmentGlow)"
           />
 
-          {/* Segment 4A: Magenta Pulse (Chat Assistants -> Right Pin 11) */}
+          {/* ── QUADRANT 4 ACTIVE SIGNALS (CHAT ASSISTANTS -> PROCESSOR) ── */}
           <path
-            d="M 800 570 H 750 Q 740 570 740 560 V 426 Q 740 416 730 416 H 694"
+            d="M 800 575 H 755 Q 745 575 745 565 V 426 Q 745 416 735 416 H 694"
             stroke="url(#seg-magenta)"
             strokeWidth="2.4"
             strokeLinecap="round"
-            className={`${styles.signalSegment} ${styles.seg7}`}
+            className={`${styles.signalSegment} ${styles.segH13}`}
             filter="url(#segmentGlow)"
           />
-          {/* Segment 4B: Violet Pulse (Chat Assistants -> Right Pin 9) */}
           <path
-            d="M 800 530 H 780 Q 770 530 770 520 V 402 Q 770 392 760 392 H 694"
+            d="M 800 555 H 780 Q 770 555 770 545 V 414 Q 770 404 760 404 H 694"
             stroke="url(#seg-violet)"
             strokeWidth="2.2"
             strokeLinecap="round"
-            className={`${styles.signalSegment} ${styles.seg8}`}
+            className={`${styles.signalSegment} ${styles.segH14}`}
+            filter="url(#segmentGlow)"
+          />
+          <path
+            d="M 800 535 H 800 Q 790 535 790 525 V 402 Q 790 392 780 392 H 694"
+            stroke="url(#seg-cyan)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            className={`${styles.signalSegment} ${styles.segH15}`}
+            filter="url(#segmentGlow)"
+          />
+          <path
+            d="M 800 595 H 735 Q 725 595 725 585 V 505 Q 725 495 715 495 H 670 Q 660 495 660 485 V 454"
+            stroke="url(#seg-blue)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            className={`${styles.signalSegment} ${styles.segH16}`}
+            filter="url(#segmentGlow)"
+          />
+
+          {/* ── 4 ACTIVE DOWNWARD SIGNALS (CIRCULAR NODE -> CHIP TOP PINS) ── */}
+          <path
+            d="M 564 130 V 266"
+            stroke="url(#seg-vert-cyan)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            className={`${styles.signalSegmentVert} ${styles.segV1}`}
+            filter="url(#segmentGlow)"
+          />
+          <path
+            d="M 588 130 V 266"
+            stroke="url(#seg-amber)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            className={`${styles.signalSegmentVert} ${styles.segV2}`}
+            filter="url(#segmentGlow)"
+          />
+          <path
+            d="M 612 130 V 266"
+            stroke="url(#seg-vert-blue)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            className={`${styles.signalSegmentVert} ${styles.segV3}`}
+            filter="url(#segmentGlow)"
+          />
+          <path
+            d="M 636 130 V 266"
+            stroke="url(#seg-vert-magenta)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            className={`${styles.signalSegmentVert} ${styles.segV4}`}
             filter="url(#segmentGlow)"
           />
 
           {/* ════════════════════════════════════════════════════════════════════
-              LAYER 3: RESTRAINED PIN ARRIVAL GLINTS
+              LAYER 3: RESTRAINED PIN ARRIVAL GLINTS AT PROCESSOR PINS
              ════════════════════════════════════════════════════════════════════ */}
+          {/* Left Pins */}
           <circle cx="506" cy="296" r="3" fill="#00F0C8" className={styles.pinGlint1} filter="url(#pinGlintGlow)" />
-          <circle cx="694" cy="296" r="3" fill="#38BDF8" className={styles.pinGlint2} filter="url(#pinGlintGlow)" />
-          <circle cx="506" cy="416" r="3" fill="#7DFF32" className={styles.pinGlint3} filter="url(#pinGlintGlow)" />
-          <circle cx="694" cy="416" r="3" fill="#FD6BC4" className={styles.pinGlint4} filter="url(#pinGlintGlow)" />
+          <circle cx="506" cy="308" r="2.8" fill="#8EFFEA" className={styles.pinGlint2} filter="url(#pinGlintGlow)" />
+          <circle cx="506" cy="404" r="2.8" fill="#00F0C8" className={styles.pinGlint3} filter="url(#pinGlintGlow)" />
+          <circle cx="506" cy="416" r="3" fill="#7DFF32" className={styles.pinGlint4} filter="url(#pinGlintGlow)" />
+
+          {/* Right Pins */}
+          <circle cx="694" cy="296" r="3" fill="#38BDF8" className={styles.pinGlint5} filter="url(#pinGlintGlow)" />
+          <circle cx="694" cy="308" r="2.8" fill="#00F0C8" className={styles.pinGlint6} filter="url(#pinGlintGlow)" />
+          <circle cx="694" cy="404" r="2.8" fill="#A855F7" className={styles.pinGlint7} filter="url(#pinGlintGlow)" />
+          <circle cx="694" cy="416" r="3" fill="#FD6BC4" className={styles.pinGlint8} filter="url(#pinGlintGlow)" />
+
+          {/* Top Pins (Receiving from Circular Node) */}
+          <circle cx="564" cy="266" r="2.8" fill="#00F0C8" className={styles.pinGlintV1} filter="url(#pinGlintGlow)" />
+          <circle cx="588" cy="266" r="2.8" fill="#FFDA5C" className={styles.pinGlintV2} filter="url(#pinGlintGlow)" />
+          <circle cx="612" cy="266" r="2.8" fill="#38BDF8" className={styles.pinGlintV3} filter="url(#pinGlintGlow)" />
+          <circle cx="636" cy="266" r="2.8" fill="#FD6BC4" className={styles.pinGlintV4} filter="url(#pinGlintGlow)" />
         </svg>
 
-        {/* ─── 04. Refined Upper Circular Orbital Node (Proportionate ~132px) ─── */}
+        {/* ─── 04. Refined Upper Circular Orbital Node (~132px) ─── */}
         <div className={styles.nodeAbove} aria-hidden="true">
           <div className={styles.circularHousing}>
             {/* Concentric Precision Rings */}
@@ -363,7 +505,7 @@ export default function ServiceNetworkSection() {
             </div>
           </div>
 
-          {/* 12-Band Vertical Signal Bars Bridge */}
+          {/* 12-Band Vertical Signal Bars Overlay */}
           <div className={styles.signalBarsContainer}>
             {signalBars.map((bar, idx) => (
               <span
