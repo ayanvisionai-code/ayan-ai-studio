@@ -109,7 +109,7 @@ export default function InteractiveGlobe({ className }: InteractiveGlobeProps) {
 
     // Camera
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    camera.position.set(0, 0, 3.2);
+    camera.position.set(0, 0, 2.65);
     cameraRef.current = camera;
 
     // Globe group
