@@ -1,0 +1,220 @@
+/* ═════════════════════════════════════════════════════════════════════════
+   ServicesShowcaseSection.module.css — Editorial Services Showcase
+   ═════════════════════════════════════════════════════════════════════════ */
+
+.sectionContainer {
+  position: relative;
+  background-color: #030405;
+  padding: 8rem 5vw 8rem;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Ambient Radial Lighting */
+.sectionAmbientGlow {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1100px;
+  height: 800px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(147, 51, 234, 0.06) 0%,
+    rgba(15, 182, 184, 0.03) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contentWrapper {
+  position: relative;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 7rem;
+  z-index: 1;
+}
+
+/* ─── Service Row Editorial Split Layout ─── */
+.serviceRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4.5rem;
+  padding-bottom: 7rem;
+}
+
+.visualLeftRow {
+  flex-direction: row;
+}
+
+.visualRightRow {
+  flex-direction: row-reverse;
+}
+
+/* Visual Column */
+.visualCol {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+/* Editorial Copy Column */
+.copyCol {
+  flex: 1.15;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  min-width: 0;
+}
+
+/* Eyebrow */
+.eyebrow {
+  font-family: var(--font-anton), Anton, sans-serif;
+  font-size: 0.88rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--service-accent, #9333EA);
+  display: inline-block;
+}
+
+/* Main Headline */
+.headline {
+  font-size: clamp(2.3rem, 4vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* Introductory Description */
+.description {
+  font-size: clamp(1.05rem, 1.6vw, 1.18rem);
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.65;
+  font-weight: 300;
+  margin: 0;
+  max-width: 620px;
+}
+
+/* 3 Supporting Information Blocks */
+.blocksGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.blockItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.blockLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+}
+
+.blockText {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.52);
+  line-height: 1.55;
+  font-weight: 300;
+  margin: 0;
+}
+
+/* Primary CTA Link */
+.ctaRow {
+  margin-top: 0.75rem;
+}
+
+.primaryCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--service-accent, #9333EA);
+  text-decoration: none !important;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.primaryCta:hover {
+  transform: translateX(4px);
+  opacity: 0.9;
+}
+
+/* Row Divider */
+.rowDivider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.07) 15%,
+    rgba(255, 255, 255, 0.07) 85%,
+    transparent 100%
+  );
+}
+
+/* ─── Responsive Adjustments ─── */
+@media (max-width: 1080px) {
+  .serviceRow {
+    gap: 3rem;
+    padding-bottom: 5.5rem;
+  }
+  .contentWrapper {
+    gap: 5.5rem;
+  }
+  .blocksGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .sectionContainer {
+    padding: 5rem 5vw;
+  }
+  .serviceRow {
+    flex-direction: column !important;
+    gap: 2.5rem;
+    padding-bottom: 4.5rem;
+  }
+  .contentWrapper {
+    gap: 4.5rem;
+  }
+  .visualCol {
+    width: 100%;
+  }
+  .copyCol {
+    width: 100%;
+  }
+  .blocksGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryCta {
+    transition: none;
+  }
+}

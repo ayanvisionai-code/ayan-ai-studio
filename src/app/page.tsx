@@ -6,6 +6,7 @@ import SectionEyebrow from "@/components/SectionEyebrow";
 import DiagnosticContactForm from "@/components/DiagnosticContactForm";
 import HeroSection from "@/components/hero/HeroSection";
 import ServiceNetworkSection from "@/components/services/ServiceNetworkSection";
+import ServicesShowcaseSection from "@/components/services/ServicesShowcaseSection";
 
 export const metadata: Metadata = {
   title: "Ayan AI Studio | Business Systems Studio",
@@ -92,7 +93,10 @@ export default function Home() {
       {/* 03 — CONNECTED SERVICE NETWORK (GrowRev Microprocessor & Circuit Architecture) */}
       <ServiceNetworkSection />
 
-      {/* 04 — THE BUSINESS PROBLEM & THE OPERATIONAL CORE */}
+      {/* 04 — SERVICES EDITORIAL SHOWCASE (Spline 3D Automation & Core Disciplines) */}
+      <ServicesShowcaseSection />
+
+      {/* 05 — THE BUSINESS PROBLEM & THE OPERATIONAL CORE */}
       <section className={`${styles.section} ${styles.sectionDarker}`} id="approach">
         <div className={styles.sectionHeader}>
           <SectionEyebrow label="The Operational Core" variant="teal" />
