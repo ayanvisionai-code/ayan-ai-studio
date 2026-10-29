@@ -5,47 +5,13 @@ import { Metadata } from "next";
 import SectionEyebrow from "@/components/SectionEyebrow";
 import DiagnosticContactForm from "@/components/DiagnosticContactForm";
 import HeroSection from "@/components/hero/HeroSection";
+import ServiceNetworkSection from "@/components/services/ServiceNetworkSection";
 
 export const metadata: Metadata = {
   title: "Ayan AI Studio | Business Systems Studio",
   description:
     "We design premium websites, intelligent automation, and custom software that work independently or connect into one coherent business system.",
 };
-
-const services = [
-  {
-    number: "01",
-    title: "PREMIUM DIGITAL EXPERIENCES",
-    slug: "/solutions#websites",
-    description:
-      "A flagship web presence engineered for maximum trust and measurable conversion. Designed with architectural precision, fluid performance, and editorial clarity.",
-    tags: ["High-Conversion Architecture", "Ultra-Fast Performance", "Brand Storytelling", "System Front-Doors"],
-  },
-  {
-    number: "02",
-    title: "INTELLIGENT AUTOMATION & AI AGENTS",
-    slug: "/solutions#automation",
-    description:
-      "Autonomous systems that handle lead triage, client onboarding, data synchronization, and operational workflows — eliminating hours of manual overhead daily.",
-    tags: ["Autonomous Lead Triage", "Instant Qualification", "Zero Manual Handoffs", "Resilient Webhooks"],
-  },
-  {
-    number: "03",
-    title: "CUSTOM APPLICATIONS & INTERNAL TOOLS",
-    slug: "/solutions#applications",
-    description:
-      "Purpose-built software tailored precisely to how your business operates: client portals, executive dashboards, and specialized tooling no off-the-shelf software solves.",
-    tags: ["Unified Portals", "Role-Based Logic", "PostgreSQL / Supabase", "Custom Workflows"],
-  },
-  {
-    number: "04",
-    title: "INTEGRATED BUSINESS SYSTEMS",
-    slug: "/solutions#integrated",
-    description:
-      "Unifying your website, CRM, automated agents, and database into a single Operational Core. Information moves effortlessly without humans acting as the connective glue.",
-    tags: ["The Operational Core", "End-to-End Orchestration", "Single Source of Truth", "Long-Term Scalability"],
-  },
-];
 
 const transformations = [
   {
@@ -123,46 +89,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 03 — SERVICES SECTION (GrowRev Split Row Style) */}
-      <section className={styles.section} id="services">
-        <div className={styles.sectionHeader}>
-          <SectionEyebrow label="What We Build" variant="teal" />
-          <h2 className={styles.sectionTitle}>
-            Four Disciplines. <br />
-            <span className="title-gradient">One Connected Engine.</span>
-          </h2>
-          <p className={styles.sectionDescription}>
-            Engage us for a single high-impact solution, or connect all four into a unified operating foundation for your company.
-          </p>
-        </div>
-
-        <div className={styles.servicesContainer}>
-          {services.map((s) => (
-            <Link key={s.number} href={s.slug} className={styles.serviceRow}>
-              <div className={styles.serviceTitleCol}>
-                <span className={styles.serviceNumber}>{s.number}</span>
-                <h3 className={styles.serviceTitle}>{s.title}</h3>
-              </div>
-
-              <div className={styles.serviceContentCol}>
-                <p className={styles.serviceDescription}>{s.description}</p>
-                <div className={styles.serviceTags}>
-                  {s.tags.map((tag) => (
-                    <span key={tag} className={styles.serviceTag}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div className={styles.serviceActionRow}>
-                  <span className="btn-pill-arrow">
-                    Explore Solution <span>→</span>
-                  </span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      {/* 03 — CONNECTED SERVICE NETWORK (GrowRev Microprocessor & Circuit Architecture) */}
+      <ServiceNetworkSection />
 
       {/* 04 — THE BUSINESS PROBLEM & THE OPERATIONAL CORE */}
       <section className={`${styles.section} ${styles.sectionDarker}`} id="approach">
