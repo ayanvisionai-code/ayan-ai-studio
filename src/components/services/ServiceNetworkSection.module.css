@@ -1,11 +1,11 @@
 /* ═════════════════════════════════════════════════════════════════════════
-   ServiceNetworkSection.module.css — Connected Service Network (GrowRev Style)
+   ServiceNetworkSection.module.css — High-Fidelity GrowRev-Style Service Network
    ═════════════════════════════════════════════════════════════════════════ */
 
 .section {
   position: relative;
   background-color: #030405;
-  padding: 8rem 5vw 7rem;
+  padding: 8rem 5vw 7.5rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -16,15 +16,15 @@
 /* Subtle ambient backdrop glow */
 .ambientGlow {
   position: absolute;
-  top: 35%;
+  top: 42%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 900px;
-  height: 600px;
+  width: 960px;
+  height: 640px;
   background: radial-gradient(
     ellipse at center,
-    rgba(15, 182, 184, 0.09) 0%,
-    rgba(116, 102, 223, 0.05) 40%,
+    rgba(15, 182, 184, 0.08) 0%,
+    rgba(116, 102, 223, 0.04) 40%,
     transparent 70%
   );
   pointer-events: none;
@@ -54,7 +54,7 @@
   color: var(--growrev-text-muted, rgba(255, 255, 255, 0.65));
   line-height: 1.6;
   font-weight: 300;
-  max-width: 680px;
+  max-width: 720px;
   margin: 0 auto;
 }
 
@@ -83,173 +83,46 @@
 
 /* Base inactive circuit traces */
 .traceBase {
-  stroke: #161D24;
+  stroke: #141A20;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
 }
 
-/* Active colored circuit traces */
+/* Active illuminated circuit traces */
 .traceActive {
   stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
   opacity: 0.85;
-  transition: opacity 0.3s ease, filter 0.3s ease;
+  transition: opacity 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease;
 }
 
 .traceActive.highlighted {
   opacity: 1;
-  stroke-width: 2.8;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+/* Solder pads / hardware test points */
+.solderPad {
+  fill: #0F1418;
+  stroke: #252F38;
+  stroke-width: 1.5;
+}
+
+/* Animated signal pulse traveling along circuit paths */
+.pulseDot {
+  fill: #ffffff;
   filter: drop-shadow(0 0 6px currentColor);
 }
 
-/* Animated signal pulse along circuit paths */
-.pulseDot {
-  fill: #ffffff;
-  filter: drop-shadow(0 0 5px currentColor);
-}
-
-/* ─── 04. Central Hub (Microprocessor) ─── */
-.centralHub {
-  position: absolute;
-  top: 52%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 164px;
-  height: 164px;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Hardware IC pins on chip perimeter */
-.chipPinsTop,
-.chipPinsBottom {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  pointer-events: none;
-}
-.chipPinsTop {
-  top: -10px;
-}
-.chipPinsBottom {
-  bottom: -10px;
-}
-.pinV {
-  width: 4px;
-  height: 12px;
-  background: linear-gradient(180deg, #3A4753 0%, #1A2127 100%);
-  border-radius: 2px;
-}
-
-.chipPinsLeft,
-.chipPinsRight {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  pointer-events: none;
-}
-.chipPinsLeft {
-  left: -10px;
-}
-.chipPinsRight {
-  right: -10px;
-}
-.pinH {
-  width: 12px;
-  height: 4px;
-  background: linear-gradient(90deg, #3A4753 0%, #1A2127 100%);
-  border-radius: 2px;
-}
-
-/* Chip physical enclosure */
-.chipBody {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #181E24 0%, #0E1216 60%, #090C0E 100%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  box-shadow:
-    0 16px 40px rgba(0, 0, 0, 0.9),
-    0 0 35px rgba(15, 182, 184, 0.18),
-    inset 0 1px 1px rgba(255, 255, 255, 0.18),
-    inset 0 -1px 1px rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: default;
-  transition: box-shadow 0.4s ease, border-color 0.4s ease;
-}
-
-.chipBody:hover {
-  border-color: rgba(15, 182, 184, 0.4);
-  box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.95),
-    0 0 50px rgba(15, 182, 184, 0.35);
-}
-
-/* Recessed center well for brand logo */
-.chipCore {
-  width: 90px;
-  height: 90px;
-  background: #090B0D;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
-  position: relative;
-  padding: 8px;
-}
-
-.chipLogoWrapper {
-  position: relative;
-  width: 44px;
-  height: 44px;
-}
-
-.chipBrandLabel {
-  font-size: 0.6rem;
-  letter-spacing: 0.14em;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
-  margin-top: 4px;
-}
-
-/* Subtle corner indicator dots */
-.chipCornerTL,
-.chipCornerTR,
-.chipCornerBL,
-.chipCornerBR {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-}
-.chipCornerTL { top: 8px; left: 8px; }
-.chipCornerTR { top: 8px; right: 8px; }
-.chipCornerBL { bottom: 8px; left: 8px; }
-.chipCornerBR { bottom: 8px; right: 8px; }
-
-/* ─── 05. Circular Node Above Processor ─── */
+/* ─── 04. Circular Radar Node Above Processor ─── */
 .nodeAbove {
   position: absolute;
-  top: 13%;
+  top: 40px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -261,95 +134,279 @@
 
 .circularNode {
   position: relative;
-  width: 90px;
-  height: 90px;
+  width: 104px;
+  height: 104px;
   border-radius: 50%;
   background: radial-gradient(circle at 45% 40%, #2A333E 0%, #171E26 60%, #0D1217 100%);
   border: 1.5px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(15, 182, 184, 0.15);
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.9),
+    0 0 25px rgba(15, 182, 184, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
-/* Concentric cyan rings */
+/* Concentric layered rings */
 .nodeRingOuter {
   position: absolute;
   inset: 6px;
   border-radius: 50%;
-  border: 1.5px solid rgba(15, 182, 184, 0.35);
-  box-shadow: 0 0 10px rgba(15, 182, 184, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nodeRingMid {
+  position: absolute;
+  inset: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(15, 182, 184, 0.3);
 }
 
 .nodeRingInner {
   position: absolute;
-  inset: 16px;
+  inset: 24px;
   border-radius: 50%;
-  border: 1.5px solid rgba(15, 182, 184, 0.6);
+  border: 1.5px solid rgba(15, 182, 184, 0.7);
+  box-shadow: 0 0 10px rgba(15, 182, 184, 0.4);
 }
 
+/* Animated Rotating Cyan Radar Sweep */
+.radarScanner {
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 250deg,
+    rgba(15, 182, 184, 0.05) 280deg,
+    rgba(15, 182, 184, 0.35) 340deg,
+    rgba(0, 240, 200, 0.85) 360deg
+  );
+  animation: radarSweep 3.6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes radarSweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Recessed core well */
 .nodeCore {
-  width: 32px;
-  height: 32px;
+  position: relative;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.9);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.95);
+  z-index: 2;
 }
 
 .nodeCoreDot {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: #18D9D0;
-  box-shadow: 0 0 8px #18D9D0, 0 0 14px rgba(24, 217, 208, 0.8);
-  animation: nodePulse 3s ease-in-out infinite;
+  background: #00F0C8;
+  box-shadow: 0 0 8px #00F0C8, 0 0 16px rgba(0, 240, 200, 0.8);
+  animation: nodePulse 2.8s ease-in-out infinite;
 }
 
 @keyframes nodePulse {
-  0%, 100% { opacity: 0.6; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.15); }
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
 
-/* Equalizer / Vertical Colored Signal Bars */
+/* 12-Band Equalizer / Vertical Colored Signal Bars */
 .signalBarsContainer {
   display: flex;
   align-items: flex-start;
   gap: 5px;
-  height: 56px;
+  height: 64px;
   margin-top: 4px;
 }
 
 .signalBar {
-  width: 3px;
+  width: 3.5px;
   border-radius: 2px;
   background-color: var(--bar-color, #18D9D0);
-  box-shadow: 0 0 6px var(--bar-color, #18D9D0);
+  box-shadow: 0 0 8px var(--bar-color, #18D9D0);
   animation: barOscillate 2.4s ease-in-out infinite alternate;
   animation-delay: var(--bar-delay, 0s);
 }
 
 @keyframes barOscillate {
-  0% { height: 16px; opacity: 0.45; }
-  100% { height: 50px; opacity: 0.95; }
+  0% {
+    height: 14px;
+    opacity: 0.4;
+  }
+  100% {
+    height: 56px;
+    opacity: 1;
+  }
 }
 
-/* ─── 06. Surrounding Service Cards ─── */
-.cardBase {
+/* ─── 05. Central Hub (Hardware Microprocessor Chip) ─── */
+.centralHub {
   position: absolute;
-  width: 340px;
-  background: #101416;
-  border: 1px solid #1C2428;
-  border-radius: 12px;
-  padding: 1.15rem 1.4rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 146px;
+  height: 146px;
+  z-index: 10;
   display: flex;
   align-items: center;
-  gap: 1.1rem;
+  justify-content: center;
+}
+
+/* 11 IC Pins on Chip Edges */
+.chipPinsTop,
+.chipPinsBottom {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  pointer-events: none;
+}
+.chipPinsTop {
+  top: -8px;
+}
+.chipPinsBottom {
+  bottom: -8px;
+}
+.pinV {
+  width: 3.5px;
+  height: 10px;
+  background: linear-gradient(180deg, #3A4753 0%, #1A2127 100%);
+  border-radius: 1.5px;
+}
+
+.chipPinsLeft,
+.chipPinsRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+}
+.chipPinsLeft {
+  left: -8px;
+}
+.chipPinsRight {
+  right: -8px;
+}
+.pinH {
+  width: 10px;
+  height: 3.5px;
+  background: linear-gradient(90deg, #3A4753 0%, #1A2127 100%);
+  border-radius: 1.5px;
+}
+
+/* Microprocessor Enclosure */
+.chipBody {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #181E24 0%, #0E1216 60%, #080B0D 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.95),
+    0 0 35px rgba(15, 182, 184, 0.22),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.chipBody:hover {
+  border-color: rgba(15, 182, 184, 0.45);
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, 0.95),
+    0 0 50px rgba(15, 182, 184, 0.38);
+}
+
+/* 4 Corner Screws / Mounting Studs */
+.chipCornerTL,
+.chipCornerTR,
+.chipCornerBL,
+.chipCornerBR {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #040507;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.chipCornerTL { top: 7px; left: 7px; }
+.chipCornerTR { top: 7px; right: 7px; }
+.chipCornerBL { bottom: 7px; left: 7px; }
+.chipCornerBR { bottom: 7px; right: 7px; }
+
+/* Recessed Inner Chamber */
+.chipCore {
+  width: 82px;
+  height: 82px;
+  background: #050809;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.85);
+  padding: 6px;
+}
+
+.chipLogoWrapper {
+  position: relative;
+  width: 42px;
+  height: 42px;
+}
+
+.chipBrandLabel {
+  font-family: var(--font-anton), Anton, sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 4px;
+}
+
+/* ─── 06. Floating Service Cards ─── */
+.cardBase {
+  position: absolute;
+  width: 330px;
+  background: #0E1215;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  flex-direction: column;
   text-decoration: none !important;
   color: #ffffff;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 5;
   cursor: pointer;
@@ -360,47 +417,47 @@
   transform: translateY(-4px);
   border-color: var(--card-accent, #0FB6B8);
   box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.85),
-    0 0 25px var(--card-glow, rgba(15, 182, 184, 0.25));
+    0 20px 50px rgba(0, 0, 0, 0.9),
+    0 0 30px var(--card-glow, rgba(15, 182, 184, 0.28));
   outline: none;
 }
 
-/* Positions on desktop */
+/* Asymmetrical Positioning Matching Reference Diagram */
 .card1 {
-  top: 17%;
-  left: 2%;
+  top: 15%;
+  left: 3%;
   --card-accent: #00F0C8;
-  --card-glow: rgba(0, 240, 200, 0.22);
+  --card-glow: rgba(0, 240, 200, 0.25);
 }
 
 .card2 {
-  top: 17%;
-  right: 2%;
+  top: 15%;
+  right: 3%;
   --card-accent: #3984F6;
-  --card-glow: rgba(57, 132, 246, 0.22);
+  --card-glow: rgba(57, 132, 246, 0.25);
 }
 
 .card3 {
   bottom: 12%;
-  left: 2%;
+  left: 3%;
   --card-accent: #10B981;
-  --card-glow: rgba(16, 185, 129, 0.22);
+  --card-glow: rgba(16, 185, 129, 0.25);
 }
 
 .card4 {
   bottom: 12%;
-  right: 2%;
+  right: 3%;
   --card-accent: #8B5CF6;
-  --card-glow: rgba(139, 92, 246, 0.22);
+  --card-glow: rgba(139, 92, 246, 0.25);
 }
 
-/* Primary AI Automation distinction */
+/* Primary AI Automation Distinction */
 .cardPrimary {
   border-color: rgba(0, 240, 200, 0.3);
   box-shadow:
-    0 14px 35px rgba(0, 0, 0, 0.8),
-    0 0 20px rgba(0, 240, 200, 0.12),
-    inset 0 1px 0 rgba(0, 240, 200, 0.15);
+    0 16px 40px rgba(0, 0, 0, 0.85),
+    0 0 24px rgba(0, 240, 200, 0.15),
+    inset 0 1px 0 rgba(0, 240, 200, 0.2);
 }
 
 .coreServiceBadge {
@@ -409,44 +466,62 @@
   right: 14px;
   background: linear-gradient(90deg, #0FB6B8 0%, #10B981 100%);
   color: #000000;
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 2px 8px;
+  font-family: var(--font-anton), Anton, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  padding: 3px 9px;
   border-radius: 100px;
-  box-shadow: 0 0 10px rgba(0, 240, 200, 0.5);
+  box-shadow: 0 0 12px rgba(0, 240, 200, 0.6);
 }
 
-/* Card Content layout */
-.cardIconCol {
-  flex-shrink: 0;
+/* Card Header: 3D Icon & Anton Numeric Index */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.cardIconWrap {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.cardTextCol {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  flex: 1;
+.cardNumber {
+  font-family: var(--font-anton), Anton, sans-serif;
+  font-size: 1.35rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.22);
+  transition: color 0.3s ease;
 }
 
+.cardBase:hover .cardNumber {
+  color: var(--card-accent, #0FB6B8);
+}
+
+/* Card Body */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Anton Condensed Bold Headline */
 .cardTitle {
-  font-family: var(--font-sans);
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-family: var(--font-anton), Anton, sans-serif;
+  font-size: 1.25rem;
   line-height: 1.15;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
   color: #ffffff;
   margin: 0;
 }
 
 .cardConcept {
-  font-size: 0.76rem;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.58);
   line-height: 1.45;
   font-weight: 300;
   margin: 0;
@@ -459,34 +534,42 @@
 .cardAction {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.4rem;
   font-size: 0.72rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
   color: var(--card-accent, #0FB6B8);
-  margin-top: 0.4rem;
-  opacity: 0.8;
+  margin-top: 0.5rem;
+  opacity: 0.85;
   transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.cardArrow {
+  transition: transform 0.2s ease;
 }
 
 .cardBase:hover .cardAction {
   opacity: 1;
-  transform: translateX(3px);
+}
+
+.cardBase:hover .cardArrow {
+  transform: translateX(4px);
 }
 
 /* ─── 07. Responsive Layouts ─── */
-@media (max-width: 1140px) {
+@media (max-width: 1180px) {
   .diagramViewport {
-    min-height: 620px;
+    min-height: 640px;
   }
   .cardBase {
     width: 290px;
-    padding: 0.95rem 1.15rem;
+    padding: 1rem 1.2rem;
   }
   .cardTitle {
-    font-size: 0.95rem;
+    font-size: 1.1rem;
   }
-  .card1 { left: 1%; top: 16%; }
-  .card2 { right: 1%; top: 16%; }
+  .card1 { left: 1%; top: 14%; }
+  .card2 { right: 1%; top: 14%; }
   .card3 { left: 1%; bottom: 10%; }
   .card4 { right: 1%; bottom: 10%; }
 }
@@ -534,9 +617,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .radarScanner {
+    animation: none;
+  }
   .signalBar {
     animation: none;
-    height: 30px;
+    height: 32px;
   }
   .nodeCoreDot {
     animation: none;
