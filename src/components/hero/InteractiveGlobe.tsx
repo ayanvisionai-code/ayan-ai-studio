@@ -134,7 +134,7 @@ export default function InteractiveGlobe({ className }: InteractiveGlobeProps) {
 
     // ─── B. Dotted continents ───
     // Place dots slightly above the sphere surface to avoid z-fighting.
-    const landPositions = generateLandPoints(2800, GLOBE_RADIUS * 1.008);
+    const landPositions = generateLandPoints(4289, GLOBE_RADIUS * 1.008);
     const dotGeo = new THREE.BufferGeometry();
     dotGeo.setAttribute("position", new THREE.BufferAttribute(landPositions, 3));
 
