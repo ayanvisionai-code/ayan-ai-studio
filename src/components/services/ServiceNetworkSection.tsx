@@ -857,8 +857,8 @@ export default function ServiceNetworkSection() {
                 <Image
                   src={svc.iconSrc}
                   alt={svc.name}
-                  width={56}
-                  height={56}
+                  width={64}
+                  height={64}
                   className={styles.moduleIconImg}
                   priority
                 />
