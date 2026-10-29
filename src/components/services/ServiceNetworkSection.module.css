@@ -119,10 +119,13 @@
 
 .signalSegmentVert {
   fill: none;
-  stroke-dasharray: 45 300;
+  /* segment=50px, gap=160px — fires every 210px cycle on a 110px path    */
+  /* segment is visible for ~79% of active phase = stays bright and clear  */
+  stroke-dasharray: 50 160;
   animation-name: segmentVertDown;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  animation-fill-mode: both;
   opacity: 0;
 }
 
@@ -157,22 +160,25 @@
 }
 
 @keyframes segmentVertDown {
+  /* Path length = 118px (y=150→268). stroke-dasharray: 50 160 (cycle=210px)  */
+  /* dashoffset=0   → segment at y=150 (deep inside housing, fully masked)     */
+  /* dashoffset=-168 → segment trailing edge past y=268 (chip top pins)        */
   0% {
-    stroke-dashoffset: 45;
+    stroke-dashoffset: 0;
     opacity: 0;
   }
-  6% {
-    opacity: 0.85;
+  5% {
+    opacity: 0.92;
   }
-  74% {
-    opacity: 0.85;
+  60% {
+    opacity: 0.92;
   }
-  82% {
-    stroke-dashoffset: -155;
+  70% {
+    stroke-dashoffset: -168;
     opacity: 0;
   }
   100% {
-    stroke-dashoffset: -155;
+    stroke-dashoffset: -168;
     opacity: 0;
   }
 }
