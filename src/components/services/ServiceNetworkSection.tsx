@@ -449,100 +449,100 @@ const circuitRoutes: CircuitRoute[] = [
   {
     id: "route-v1",
     source: "node",
-    destPin: "Top Pin 2 (x=552, y=266)",
-    d: "M 552 130 V 266",
+    destPin: "Top Pin 2 (x=552, y=268)",
+    d: "M 560 145 Q 552 150 552 160 V 268",
     stroke: "#00F0C8", // Cyan
     strokeWidth: 2.2,
-    duration: 3.8,
-    delay: 0.2,
+    duration: 2.0,
+    delay: 0.0,
     type: "vertical",
   },
   {
     id: "route-v2",
     source: "node",
-    destPin: "Top Pin 3 (x=564, y=266)",
-    d: "M 564 130 V 266",
+    destPin: "Top Pin 3 (x=564, y=268)",
+    d: "M 564 145 V 268",
     stroke: "#8EFFEA", // Turquoise
     strokeWidth: 2.2,
-    duration: 3.6,
-    delay: 1.0,
+    duration: 1.9,
+    delay: 0.45,
     type: "vertical",
   },
   {
     id: "route-v3",
     source: "node",
-    destPin: "Top Pin 4 (x=576, y=266)",
-    d: "M 576 130 V 266",
+    destPin: "Top Pin 4 (x=576, y=268)",
+    d: "M 576 145 V 268",
     stroke: "#38BDF8", // Electric Blue
     strokeWidth: 2.2,
-    duration: 4.0,
-    delay: 2.2,
+    duration: 2.1,
+    delay: 0.9,
     type: "vertical",
   },
   {
     id: "route-v4",
     source: "node",
-    destPin: "Top Pin 5 (x=588, y=266)",
-    d: "M 588 130 V 266",
+    destPin: "Top Pin 5 (x=588, y=268)",
+    d: "M 588 145 V 268",
     stroke: "#FFDA5C", // Amber
     strokeWidth: 2.2,
-    duration: 3.7,
-    delay: 0.6,
+    duration: 2.0,
+    delay: 1.35,
     type: "vertical",
   },
   {
     id: "route-v5",
     source: "node",
-    destPin: "Top Pin 6 (x=600, y=266)",
-    d: "M 600 130 V 266",
+    destPin: "Top Pin 6 (x=600, y=268)",
+    d: "M 600 145 V 268",
     stroke: "#00F0C8", // Cyan
     strokeWidth: 2.4,
-    duration: 3.9,
-    delay: 1.8,
+    duration: 1.8,
+    delay: 0.2,
     type: "vertical",
   },
   {
     id: "route-v6",
     source: "node",
-    destPin: "Top Pin 7 (x=612, y=266)",
-    d: "M 612 130 V 266",
-    stroke: "#38BDF8", // Electric Blue
+    destPin: "Top Pin 7 (x=612, y=268)",
+    d: "M 612 145 V 268",
+    stroke: "#10B981", // Emerald Green
     strokeWidth: 2.2,
-    duration: 3.6,
-    delay: 3.0,
+    duration: 2.2,
+    delay: 0.7,
     type: "vertical",
   },
   {
     id: "route-v7",
     source: "node",
-    destPin: "Top Pin 8 (x=624, y=266)",
-    d: "M 624 130 V 266",
+    destPin: "Top Pin 8 (x=624, y=268)",
+    d: "M 624 145 V 268",
     stroke: "#7DFF32", // Muted Lime
     strokeWidth: 2.2,
-    duration: 3.8,
-    delay: 1.4,
+    duration: 1.9,
+    delay: 1.15,
     type: "vertical",
   },
   {
     id: "route-v8",
     source: "node",
-    destPin: "Top Pin 9 (x=636, y=266)",
-    d: "M 636 130 V 266",
+    destPin: "Top Pin 9 (x=636, y=268)",
+    d: "M 636 145 V 268",
     stroke: "#FD6BC4", // Magenta
     strokeWidth: 2.2,
-    duration: 4.0,
-    delay: 2.6,
+    duration: 2.1,
+    delay: 1.6,
     type: "vertical",
   },
   {
     id: "route-v9",
     source: "node",
-    destPin: "Top Pin 10 (x=648, y=266)",
-    d: "M 648 130 V 266",
+    destPin: "Top Pin 10 (x=648, y=268)",
+    d: "M 640 145 Q 648 150 648 160 V 268",
     stroke: "#A855F7", // Violet
     strokeWidth: 2.2,
-    duration: 3.7,
-    delay: 0.8,
+    duration: 2.0,
+    delay: 0.35,
     type: "vertical",
   },
 
@@ -687,13 +687,19 @@ export default function ServiceNetworkSection() {
               Continuous vertical tracks from circular node (y=130) to top pins.
              ════════════════════════════════════════════════════════════════════ */}
           <g className={styles.baseTracesGroup}>
-            {circuitRoutes.map((route) => (
-              <path
-                key={`base-${route.id}`}
-                d={route.d}
-                className={styles.traceBase}
-              />
-            ))}
+            {circuitRoutes.map((route) => {
+              const baseClass =
+                route.type === "vertical"
+                  ? styles.traceBaseVert
+                  : styles.traceBase;
+              return (
+                <path
+                  key={`base-${route.id}`}
+                  d={route.d}
+                  className={baseClass}
+                />
+              );
+            })}
 
             {/* Solder Test Pads / Hardware Vias */}
             <circle cx="425" cy="240" r="2.5" className={styles.solderPad} />

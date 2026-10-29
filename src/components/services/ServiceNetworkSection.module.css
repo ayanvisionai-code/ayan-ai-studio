@@ -91,6 +91,15 @@
   opacity: 0.9;
 }
 
+/* Distinct Vertical Bus Circuit Traces (Connecting Node directly to Chip Top Pins) */
+.traceBaseVert {
+  stroke: #1D2730;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  fill: none;
+  opacity: 0.95;
+}
+
 /* Solder test points / hardware vias */
 .solderPad {
   fill: #090C0E;
@@ -110,7 +119,7 @@
 
 .signalSegmentVert {
   fill: none;
-  stroke-dasharray: 38 300;
+  stroke-dasharray: 32 180;
   animation-name: segmentVertDown;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
@@ -152,18 +161,18 @@
     stroke-dashoffset: 0;
     opacity: 0;
   }
-  8% {
-    opacity: 0.9;
+  6% {
+    opacity: 0.85;
   }
-  42% {
-    opacity: 0.9;
+  68% {
+    opacity: 0.85;
   }
-  49% {
-    stroke-dashoffset: -220;
+  75% {
+    stroke-dashoffset: -155;
     opacity: 0;
   }
   100% {
-    stroke-dashoffset: -220;
+    stroke-dashoffset: -155;
     opacity: 0;
   }
 }
