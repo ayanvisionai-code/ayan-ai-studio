@@ -60,14 +60,14 @@ const servicesList: ServiceItem[] = [
 
 interface CircuitRoute {
   id: string;
-  source: "automation" | "webdev" | "localseo" | "assistants" | "node" | "bus";
+  source: "automation" | "webdev" | "localseo" | "assistants" | "node";
   destPin: string;
   d: string;
   stroke: string;
   strokeWidth: number;
   duration: number;
   delay: number;
-  type: "horizontal" | "vertical" | "bus";
+  type: "horizontal" | "vertical";
 }
 
 const circuitRoutes: CircuitRoute[] = [
@@ -535,41 +535,6 @@ const circuitRoutes: CircuitRoute[] = [
     delay: 0.45,
     type: "vertical",
   },
-
-  // ── DOWNWARD MOTHERBOARD BUS LINES ──
-  {
-    id: "route-mb1",
-    source: "bus",
-    destPin: "Bottom Pin 5 (x=588, y=454 to 670)",
-    d: "M 588 454 V 670",
-    stroke: "#00F0C8", // Cyan
-    strokeWidth: 2.2,
-    duration: 4.2,
-    delay: 0.5,
-    type: "bus",
-  },
-  {
-    id: "route-mb2",
-    source: "bus",
-    destPin: "Bottom Pin 6 (x=600, y=454 to 685)",
-    d: "M 600 454 V 685",
-    stroke: "#38BDF8", // Electric Blue
-    strokeWidth: 2.2,
-    duration: 4.0,
-    delay: 1.9,
-    type: "bus",
-  },
-  {
-    id: "route-mb3",
-    source: "bus",
-    destPin: "Bottom Pin 7 (x=612, y=454 to 670)",
-    d: "M 612 454 V 670",
-    stroke: "#FFDA5C", // Amber
-    strokeWidth: 2.2,
-    duration: 4.4,
-    delay: 3.3,
-    type: "bus",
-  },
 ];
 
 export default function ServiceNetworkSection() {
@@ -723,9 +688,6 @@ export default function ServiceNetworkSection() {
             <circle cx="775" cy="240" r="2.5" className={styles.solderPad} />
             <circle cx="425" cy="470" r="2.5" className={styles.solderPad} />
             <circle cx="775" cy="470" r="2.5" className={styles.solderPad} />
-            <circle cx="588" cy="670" r="2.5" className={styles.solderPad} />
-            <circle cx="600" cy="685" r="2.5" className={styles.solderPad} />
-            <circle cx="612" cy="670" r="2.5" className={styles.solderPad} />
           </g>
 
           {/* ════════════════════════════════════════════════════════════════════
@@ -769,11 +731,8 @@ export default function ServiceNetworkSection() {
                 );
               }
 
-              // ── Horizontal / bus routes: CSS Module class (works fine).
-              const animClass =
-                route.type === "bus"
-                  ? styles.signalSegmentBus
-                  : styles.signalSegment;
+              // ── Horizontal service routes: CSS Module animation
+              const animClass = styles.signalSegment;
 
               return (
                 <path

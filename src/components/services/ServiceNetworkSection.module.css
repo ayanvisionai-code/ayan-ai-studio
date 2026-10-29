@@ -119,22 +119,11 @@
 
 .signalSegmentVert {
   fill: none;
-  /* segment=50px, gap=160px — fires every 210px cycle on a 110px path    */
-  /* segment is visible for ~79% of active phase = stays bright and clear  */
   stroke-dasharray: 50 160;
   animation-name: segmentVertDown;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-fill-mode: both;
-  opacity: 0;
-}
-
-.signalSegmentBus {
-  fill: none;
-  stroke-dasharray: 45 350;
-  animation-name: segmentBusDown;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
   opacity: 0;
 }
 
@@ -179,27 +168,6 @@
   }
   100% {
     stroke-dashoffset: -168;
-    opacity: 0;
-  }
-}
-
-@keyframes segmentBusDown {
-  0% {
-    stroke-dashoffset: 0;
-    opacity: 0;
-  }
-  8% {
-    opacity: 0.85;
-  }
-  42% {
-    opacity: 0.85;
-  }
-  49% {
-    stroke-dashoffset: -320;
-    opacity: 0;
-  }
-  100% {
-    stroke-dashoffset: -320;
     opacity: 0;
   }
 }
@@ -584,8 +552,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .signalSegment,
-  .signalSegmentVert,
-  .signalSegmentBus {
+  .signalSegmentVert {
     animation: none !important;
     opacity: 0.35;
     stroke-dasharray: none;
