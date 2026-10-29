@@ -1,0 +1,113 @@
+.wavesContainer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Base high-resolution iridescent ribbon asset */
+.ribbonImageWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  animation: ribbonBreathe 28s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.ribbonImage {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom left;
+  opacity: 0.95;
+  filter: contrast(1.05) saturate(1.1);
+  mix-blend-mode: screen;
+}
+
+/* Subtle ambient warmth glow at the bottom-left base */
+.ambientGlow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 65vw;
+  height: 60vh;
+  max-width: 900px;
+  background: radial-gradient(
+    ellipse at 12% 88%,
+    rgba(255, 110, 60, 0.12) 0%,
+    rgba(239, 72, 216, 0.09) 25%,
+    rgba(0, 217, 255, 0.06) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+/* Dynamic specular filaments canvas overlay */
+.specularCanvas {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 75%;
+  height: 65%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+}
+
+@keyframes ribbonBreathe {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.92;
+  }
+  50% {
+    transform: translate3d(8px, -5px, 0) scale(1.018);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.92;
+  }
+}
+
+/* Tablet & Mobile responsive adjustments */
+@media (max-width: 1024px) {
+  .ribbonImage {
+    opacity: 0.85;
+  }
+  .specularCanvas {
+    width: 90%;
+    height: 55%;
+  }
+}
+
+@media (max-width: 640px) {
+  .ribbonImage {
+    opacity: 0.75;
+  }
+  .ambientGlow {
+    width: 90vw;
+    height: 40vh;
+    opacity: 0.7;
+  }
+  .specularCanvas {
+    width: 100%;
+    height: 45%;
+    opacity: 0.65;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ribbonImageWrapper {
+    animation: none;
+    transform: none;
+  }
+}

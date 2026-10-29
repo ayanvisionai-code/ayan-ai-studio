@@ -168,10 +168,9 @@
 /* ── Abstract wave layer ── */
 .wavesLayer {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 65%;
-  height: 55%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1;
   pointer-events: none;
 }
@@ -292,11 +291,6 @@
     max-height: 420px;
   }
 
-  .wavesLayer {
-    width: 80%;
-    height: 40%;
-  }
-
   .scrollCue {
     right: 50%;
     transform: translateX(50%);
@@ -335,12 +329,6 @@
   .heroCtaSecondary {
     font-size: 0.88rem;
     padding: 0.8rem 1.5rem;
-  }
-
-  .wavesLayer {
-    width: 100%;
-    height: 35%;
-    opacity: 0.6;
   }
 
   .scrollCue {
