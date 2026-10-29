@@ -4,12 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import SectionEyebrow from "@/components/SectionEyebrow";
-import {
-  AutomationIcon,
-  WebDevIcon,
-  LocalSeoIcon,
-  ChatAssistantsIcon,
-} from "./ServiceIcons";
 import styles from "./ServiceNetworkSection.module.css";
 
 interface ServiceItem {
@@ -18,7 +12,7 @@ interface ServiceItem {
   lines: string[];
   href: string;
   accent: string;
-  IconComponent: React.ComponentType<{ className?: string }>;
+  iconSrc: string;
 }
 
 const servicesList: ServiceItem[] = [
@@ -28,7 +22,7 @@ const servicesList: ServiceItem[] = [
     lines: ["AI AUTOMATION"],
     href: "/solutions#automation",
     accent: "#00F0C8",
-    IconComponent: AutomationIcon,
+    iconSrc: "/services/icon-ai-automation.png",
   },
   {
     id: "websites",
@@ -36,7 +30,7 @@ const servicesList: ServiceItem[] = [
     lines: ["HIGH-CONVERTING", "WEB DEVELOPMENT"],
     href: "/solutions#websites",
     accent: "#38BDF8",
-    IconComponent: WebDevIcon,
+    iconSrc: "/services/icon-web-dev.png",
   },
   {
     id: "localseo",
@@ -44,7 +38,7 @@ const servicesList: ServiceItem[] = [
     lines: ["LOCAL SEO"],
     href: "/solutions#applications",
     accent: "#7DFF32",
-    IconComponent: LocalSeoIcon,
+    iconSrc: "/services/icon-local-seo.png",
   },
   {
     id: "assistants",
@@ -52,7 +46,7 @@ const servicesList: ServiceItem[] = [
     lines: ["AI CHAT ASSISTANTS"],
     href: "/solutions#integrated",
     accent: "#FD6BC4",
-    IconComponent: ChatAssistantsIcon,
+    iconSrc: "/services/icon-ai-assistants.png",
   },
 ];
 
@@ -848,8 +842,6 @@ export default function ServiceNetworkSection() {
             .filter(Boolean)
             .join(" ");
 
-          const IconComponent = svc.IconComponent;
-
           return (
             <Link
               key={svc.id}
@@ -862,7 +854,14 @@ export default function ServiceNetworkSection() {
             >
               {/* Left Column: 3D Dimensional Polished Icon */}
               <div className={styles.moduleIconCol}>
-                <IconComponent />
+                <Image
+                  src={svc.iconSrc}
+                  alt={svc.name}
+                  width={56}
+                  height={56}
+                  className={styles.moduleIconImg}
+                  priority
+                />
               </div>
 
               {/* Right Column: Bold Condensed Uppercase Service Label */}

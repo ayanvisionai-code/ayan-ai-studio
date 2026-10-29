@@ -406,69 +406,83 @@
   justify-content: center;
 }
 
-/* ─── 06. Compact Charcoal Service Modules (Moved Inward) ─── */
+/* ─── 06. Premium Dimensional Service Modules (GrowRev Style) ─── */
 .serviceModule {
   position: absolute;
-  width: 295px;
-  height: 100px;
+  width: 316px;
+  height: 108px;
   background: #0E1215;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  padding: 0.9rem 1.25rem;
+  padding: 1.1rem 1.4rem;
   display: flex;
   align-items: center;
-  gap: 1.1rem;
+  gap: 1.25rem;
   text-decoration: none !important;
-  color: #ffffff;
+  color: #F4F5F6;
   box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.8),
+    0 12px 32px rgba(0, 0, 0, 0.75),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.25s ease,
-              box-shadow 0.25s ease;
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.24s ease,
+              box-shadow 0.24s ease;
   z-index: 5;
   cursor: pointer;
 }
 
 .serviceModule:hover,
 .serviceModule:focus-visible {
-  transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2.5px);
+  border-color: rgba(255, 255, 255, 0.16);
   box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.9),
-    0 0 20px rgba(15, 182, 184, 0.15);
+    0 16px 40px rgba(0, 0, 0, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
   outline: none;
 }
 
-/* Tightened Asymmetrical Placement closer to Central Network */
+/* Precise Edge Alignment Meeting Circuit Paths (x=400 left, x=800 right) */
 .module1 {
-  top: 14%;
-  left: 8.5%;
+  top: 13.5%;
+  left: 7%;
 }
 
 .module2 {
-  top: 14%;
-  right: 8.5%;
+  top: 13.5%;
+  right: 7%;
 }
 
 .module3 {
-  bottom: 14%;
-  left: 8.5%;
+  bottom: 13.5%;
+  left: 7%;
 }
 
 .module4 {
-  bottom: 14%;
-  right: 8.5%;
+  bottom: 13.5%;
+  right: 7%;
 }
 
-/* Left Column: 3D Dimensional Polished Icon */
+/* Left Column: 3D Dimensional Polished Icon (No container box) */
 .moduleIconCol {
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: transparent;
+  border: none;
+}
+
+.moduleIconImg {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.serviceModule:hover .moduleIconImg {
+  transform: scale(1.05);
 }
 
 /* Right Column: Bold Condensed Uppercase Service Label */
@@ -477,15 +491,16 @@
   flex-direction: column;
   justify-content: center;
   flex: 1;
+  min-width: 0;
 }
 
 .moduleTitle {
   font-family: var(--font-anton), Anton, sans-serif;
-  font-size: 1.3rem;
-  line-height: 1.12;
-  letter-spacing: 0.035em;
+  font-size: 1.35rem;
+  line-height: 1.14;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: #F4F5F6;
 }
 
 /* ─── 07. Responsive Layouts ─── */
