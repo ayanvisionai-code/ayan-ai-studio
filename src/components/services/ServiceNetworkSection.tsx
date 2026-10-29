@@ -743,12 +743,8 @@ export default function ServiceNetworkSection() {
              ════════════════════════════════════════════════════════════════════ */}
           <g className={styles.activeSignalsGroup}>
             {circuitRoutes.map((route) => {
-              // ── VERTICAL routes: SVG SMIL <animate> — zero CSS dependency.
-              // Animates the SVG attribute directly on the element, completely
-              // bypassing CSS cascade, keyframe-name hashing, and class scoping.
-              // strokeDashoffset: 50 → segment starts above the path (invisible).
-              //                  -168 → segment exits below chip top pins (y=268).
-              // Path length 118px (y=150→268). stroke-dasharray: "50 160".
+              // ── VERTICAL routes: permanently visible colored glow lines.
+              // Always-on colored traces from circular node to chip top pins.
               if (route.type === "vertical") {
                 return (
                   <path
@@ -758,31 +754,9 @@ export default function ServiceNetworkSection() {
                     strokeWidth={route.strokeWidth}
                     strokeLinecap="round"
                     fill="none"
-                    strokeDasharray="50 160"
-                    strokeDashoffset={50}
-                    opacity={0}
+                    opacity={0.72}
                     filter="url(#segmentGlow)"
-                  >
-                    {/* Move segment from above path to below chip */}
-                    <animate
-                      attributeName="stroke-dashoffset"
-                      values="50;-168"
-                      dur={`${route.duration}s`}
-                      begin={`${route.delay}s`}
-                      repeatCount="indefinite"
-                      calcMode="linear"
-                    />
-                    {/* Fade in once segment clears housing, fade out past chip */}
-                    <animate
-                      attributeName="opacity"
-                      values="0;0.92;0.92;0;0"
-                      keyTimes="0;0.25;0.74;0.86;1"
-                      dur={`${route.duration}s`}
-                      begin={`${route.delay}s`}
-                      repeatCount="indefinite"
-                      calcMode="linear"
-                    />
-                  </path>
+                  />
                 );
               }
 
