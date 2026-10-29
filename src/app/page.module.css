@@ -2,489 +2,659 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: var(--background);
 }
 
-/* Animations */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes floatAmbient {
-  0% { transform: translateY(0px); filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5)); }
-  50% { transform: translateY(-12px); filter: drop-shadow(0 40px 70px rgba(0,0,0,0.8)); }
-  100% { transform: translateY(0px); filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5)); }
-}
-
-@keyframes drawLine {
-  to { stroke-dashoffset: 0; }
-}
-
-/* --- Hero --- */
-.hero {
-  position: relative;
-  min-height: auto;
-  padding: 14rem 5vw 8rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  overflow: hidden;
-}
-
-.heroBackground {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: -1;
-  background: radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 1) 0%, rgba(5, 5, 5, 1) 100%);
-}
-
-.heroBackground::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-  mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
-}
-
-.heroBadge {
-  opacity: 0;
-  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  margin-bottom: 3rem;
-  padding: 0.5rem 1.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 100px;
-  background: rgba(255, 255, 255, 0.02);
-  color: var(--muted-foreground);
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  backdrop-filter: blur(10px);
-}
-
-.headline {
-  font-size: clamp(3rem, 6vw, 5.5rem);
-  font-weight: 400;
-  max-width: 1000px;
-  line-height: 1.1;
-  margin-bottom: 2.5rem;
-  opacity: 0;
-  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
-}
-
-.subheadline {
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
-  max-width: 680px;
-  color: var(--muted-foreground);
-  margin-bottom: 5rem;
-  font-weight: 300;
-  opacity: 0;
-  line-height: 1.6;
-  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
-}
-
-.heroVisual {
-  position: relative;
-  width: 100%;
-  max-width: 1100px;
-  height: 60vh;
-  min-height: 450px;
-  max-height: 700px;
-  margin: 0 auto 5rem;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  opacity: 0;
-  background: rgba(5,5,5,0.5);
-  animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s, floatAmbient 8s ease-in-out infinite 1.8s;
-}
-
-.heroVisualOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, var(--background) 0%, transparent 22%);
-  pointer-events: none;
-}
-
-.ctaContainer {
-  opacity: 0;
-  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
-  text-align: center;
-}
-
-.trustIndicators {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 6rem;
-  opacity: 0;
-  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 1s;
-}
-
-.trustItem {
-  font-size: 0.85rem;
-  color: var(--muted-foreground);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.trustItem::before {
-  content: '';
-  display: block;
-  width: 4px;
-  height: 4px;
-  background: var(--border-hover);
-  border-radius: 50%;
-}
-.trustItem:first-child::before {
-  display: none;
-}
-
-/* --- Sections General --- */
+/* --- Section Shared Spacing & Headers --- */
 .section {
-  padding: 10rem 5vw;
+  position: relative;
+  padding: 8rem 5vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  overflow: hidden;
 }
 
-.sectionLeft {
-  padding: 10rem 5vw;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
+.sectionDarker {
+  background-color: #030304;
+  border-top: 1px solid var(--growrev-border);
+  border-bottom: 1px solid var(--growrev-border);
 }
 
 .sectionHeader {
-  margin-bottom: 5rem;
-  max-width: 800px;
-}
-
-.sectionHeaderLeft {
-  margin-bottom: 5rem;
-  max-width: 800px;
-  text-align: left;
-}
-
-.sectionEyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.85rem;
-  color: var(--muted-foreground);
-  margin-bottom: 1.5rem;
-  display: block;
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto 4.5rem;
 }
 
 .sectionTitle {
-  font-size: clamp(2.5rem, 4vw, 4rem);
-  font-weight: 400;
-  line-height: 1.2;
-}
-
-/* --- Buttons --- */
-.primaryBtn {
-  background: var(--foreground);
-  color: var(--background);
-  padding: 1rem 2rem;
-  border-radius: 100px;
+  font-size: clamp(2.25rem, 4.5vw, 3.8rem);
   font-weight: 500;
-  font-size: 1.1rem;
-  border: 1px solid transparent;
-  transition: all var(--transition-smooth);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.primaryBtn:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  margin-top: 0.5rem;
+  margin-bottom: 1.25rem;
 }
 
-/* --- The Chaos (Cards) --- */
-.chaosGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  width: 100%;
-}
-
-/* Additive: forces exactly four equal columns for the Engagement Options section
-   (the only chaosGrid usage with four items) without affecting the other
-   three-item chaosGrid sections elsewhere on this page. */
-.chaosGridFour {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-@media (max-width: 1024px) {
-  .chaosGridFour {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@media (max-width: 640px) {
-  .chaosGridFour {
-    grid-template-columns: 1fr;
-  }
-}
-
-.chaosCard {
-  padding: 3rem;
-  border-top: 1px solid var(--border);
-  text-align: left;
-  transition: background var(--transition-smooth);
-}
-
-/* Additive: narrower side padding for the four-item Engagement Options section only,
-   so its columns get comparable text width to the Transformations page's editorial
-   columns instead of being squeezed by the same 3rem padding used by the wider
-   three-item chaosGrid sections elsewhere on this page. */
-.chaosCardFour {
-  padding: 2.5rem 1.5rem 2rem;
-}
-.chaosCard:hover {
-  background: rgba(255, 255, 255, 0.02);
-}
-.chaosCard h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--foreground);
-}
-.chaosCard p {
-  font-size: 1.1rem;
-  color: var(--muted-foreground);
-}
-
-/* --- The Antidote (Philosophy) --- */
-.philosophyText {
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  line-height: 1.4;
-  color: var(--foreground);
+.sectionDescription {
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  color: var(--growrev-text-muted);
+  line-height: 1.6;
   font-weight: 300;
-  max-width: 1000px;
-}
-.philosophyHighlight {
-  color: var(--muted-foreground);
 }
 
-/* --- The Methodology (CBA) --- */
-.cbaContainer {
+/* --- 01. Hero Section --- */
+.hero {
+  position: relative;
+  min-height: 90vh;
+  padding: 11rem 5vw 7rem;
   display: flex;
   flex-direction: column;
-  gap: 4rem;
-  max-width: 1000px;
-  width: 100%;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.heroBgGlow {
+  position: absolute;
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 600px;
+  background: radial-gradient(ellipse at center, rgba(15, 182, 184, 0.16) 0%, rgba(116, 102, 223, 0.08) 50%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroGridPattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroContent {
   position: relative;
+  z-index: 1;
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.cbaPhase {
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: 2rem;
-  align-items: flex-start;
-  text-align: left;
+.headline {
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  margin-bottom: 1.75rem;
 }
 
-.cbaNumber {
-  font-size: 4rem;
+.subheadline {
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  max-width: 760px;
+  color: var(--growrev-text-muted);
+  line-height: 1.6;
   font-weight: 300;
-  color: var(--border-hover);
+  margin-bottom: 2.75rem;
+}
+
+.heroCtaRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 4.5rem;
+}
+
+/* Hero Showcase Frame */
+.heroShowcase {
+  position: relative;
+  width: 100%;
+  max-width: 1160px;
+  border-radius: 24px;
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(15, 182, 184, 0.35) 0%, rgba(116, 102, 223, 0.15) 50%, rgba(255, 255, 255, 0.05) 100%);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(15, 182, 184, 0.12);
+  margin-bottom: 3rem;
+}
+
+.heroShowcaseInner {
+  position: relative;
+  width: 100%;
+  height: clamp(380px, 50vw, 620px);
+  border-radius: 22px;
+  overflow: hidden;
+  background: #09090C;
+}
+
+.heroShowcaseOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(5, 5, 8, 0.8) 100%);
+  pointer-events: none;
+}
+
+/* Floating Status Pills */
+.heroStatusBadgeTopLeft {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  background: rgba(10, 10, 14, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  font-size: 0.82rem;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.pulseDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--growrev-cyan);
+  box-shadow: 0 0 10px var(--growrev-cyan);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.heroStatusBadgeBottomRight {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: 100px;
+  background: rgba(10, 10, 14, 0.85);
+  border: 1px solid rgba(15, 182, 184, 0.4);
+  backdrop-filter: blur(12px);
+  font-size: 0.82rem;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+/* --- 02. Technology Capability Strip --- */
+.techStrip {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  border-top: 1px solid var(--growrev-border);
+  border-bottom: 1px solid var(--growrev-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.techStripLabel {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--growrev-text-dim);
+  font-weight: 500;
+}
+
+.techStripBadges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.25rem 2.5rem;
+}
+
+.techBadge {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--growrev-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.techBadge:hover {
+  color: #FFFFFF;
+}
+
+/* --- 03. Services (GrowRev Split Row Style) --- */
+.servicesContainer {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.serviceRow {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+  padding: 4.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.serviceRow:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.serviceTitleCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.serviceNumber {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--growrev-cyan);
+}
+
+.serviceTitle {
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-weight: 500;
+  line-height: 1.15;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  transition: all 0.3s ease;
+}
+
+.serviceRow:hover .serviceTitle {
+  background: var(--gradient-title);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: translateX(6px);
+}
+
+.serviceContentCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.serviceDescription {
+  font-size: 1.08rem;
+  color: var(--growrev-text-muted);
+  line-height: 1.7;
+}
+
+.serviceTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.serviceTag {
+  padding: 0.35rem 0.85rem;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.8rem;
+  color: var(--growrev-text-dim);
+}
+
+.serviceActionRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* --- 04. Operational Core (Before vs After) --- */
+.coreGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1260px;
+  margin: 0 auto;
+}
+
+.coreCardBefore {
+  background: rgba(18, 14, 16, 0.8);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 20px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.coreCardAfter {
+  background: rgba(12, 18, 20, 0.8);
+  border: 1px solid rgba(15, 182, 184, 0.3);
+  border-radius: 20px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  box-shadow: 0 0 40px rgba(15, 182, 184, 0.08);
+}
+
+.coreCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.coreBadgeBefore {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  color: #F87171;
+  background: rgba(239, 68, 68, 0.12);
+  padding: 0.4rem 0.9rem;
+  border-radius: 100px;
+}
+
+.coreBadgeAfter {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  color: var(--growrev-cyan);
+  background: rgba(15, 182, 184, 0.12);
+  padding: 0.4rem 0.9rem;
+  border-radius: 100px;
+}
+
+.coreTitle {
+  font-size: 1.55rem;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.coreList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.coreItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  font-size: 1rem;
+  color: var(--growrev-text-muted);
+  line-height: 1.5;
+}
+
+.coreItemIconBefore {
+  color: #F87171;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.coreItemIconAfter {
+  color: var(--growrev-cyan);
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* --- 05. Transformations Showcase --- */
+.transformationsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.transformationCard {
+  background: var(--growrev-card-bg);
+  border: 1px solid var(--growrev-border);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.transformationCard:hover {
+  transform: translateY(-6px);
+  border-color: var(--growrev-border-hover);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 35px rgba(15, 182, 184, 0.12);
+}
+
+.transformationImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  background: #09090D;
+  overflow: hidden;
+}
+
+.transformationCategoryBadge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+  padding: 0.35rem 0.8rem;
+  border-radius: 100px;
+  background: rgba(8, 8, 12, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.transformationBody {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 1;
+}
+
+.transformationTitle {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.transformationProblem {
+  font-size: 0.95rem;
+  color: var(--growrev-text-muted);
+  line-height: 1.6;
+}
+
+.transformationMetricBox {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.metricValue {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--growrev-cyan);
+}
+
+.metricLabel {
+  font-size: 0.82rem;
+  color: var(--growrev-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- 06. Process Navigator (3 Phases) --- */
+.processGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 1260px;
+  margin: 0 auto;
+}
+
+.processCard {
+  background: var(--growrev-card-bg);
+  border: 1px solid var(--growrev-border);
+  border-radius: 20px;
+  padding: 2.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.processCard:hover {
+  border-color: rgba(15, 182, 184, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.processNumber {
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: var(--growrev-cyan);
   line-height: 1;
 }
 
-.cbaContent h3 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: var(--foreground);
+.processTitle {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #FFFFFF;
 }
 
-.cbaContent p {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
+.processDesc {
+  font-size: 0.98rem;
+  color: var(--growrev-text-muted);
+  line-height: 1.65;
 }
 
-/* --- Deep Dive Case Studies --- */
-.caseStudyWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 8rem;
-  width: 100%;
-}
-
-.caseStudy {
+/* --- 07. Principles (Philosophy) --- */
+.principlesGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  text-align: left;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 1260px;
+  margin: 0 auto;
 }
 
-.caseStudyHeader h3 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-.caseStudyHeader p {
-  font-size: 1.2rem;
-  color: var(--muted-foreground);
-}
-
-.caseStudyDetail {
-  margin-top: 3rem;
-  padding-top: 3rem;
-  border-top: 1px solid var(--border);
-}
-
-.caseStudyDetail h4 {
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--muted-foreground);
-  margin-bottom: 1rem;
-}
-
-.caseStudyDetail p {
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
-  color: var(--foreground);
-}
-
-.caseStudyMetricsGrid {
+.principleCard {
+  background: rgba(18, 18, 22, 0.5);
+  border: 1px solid var(--growrev-border);
+  border-radius: 20px;
+  padding: 2.5rem;
   display: flex;
   flex-direction: column;
-  margin-top: 3rem;
-  background: rgba(255, 255, 255, 0.02);
-  padding: 3rem;
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border);
+  gap: 1rem;
 }
 
-.primaryMetric {
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 2rem;
+.principleTitle {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #FFFFFF;
 }
 
-.primaryMetric h5 {
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  color: var(--foreground);
-  font-weight: 300;
-  margin-bottom: 0.5rem;
-  white-space: nowrap;
-  letter-spacing: -0.02em;
+.principleDesc {
+  font-size: 0.98rem;
+  color: var(--growrev-text-muted);
+  line-height: 1.65;
 }
 
-.primaryMetric span {
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--muted-foreground);
-}
-
-.secondaryMetricsWrapper {
+/* --- 08. Stat Metrics Row --- */
+.metricsRow {
   display: flex;
-  gap: 3rem;
-  flex-wrap: wrap;
-}
-
-.secondaryMetric h5 {
-  font-size: 1.5rem;
-  color: var(--foreground);
-  font-weight: 400;
-  margin-bottom: 0.2rem;
-  white-space: nowrap;
-}
-
-.secondaryMetric span {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--muted-foreground);
-}
-
-/* --- Tech Ecosystem --- */
-.techGrid {
-  display: flex;
-  gap: 4rem;
-  opacity: 0.4;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  margin-top: 2rem;
-}
-.techGrid span {
-  font-size: 1.2rem;
-  font-weight: 300;
-  letter-spacing: 0.05em;
+  gap: 4.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 5rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid var(--growrev-border);
 }
 
-/* --- Responsive --- */
-@media (max-width: 1024px) {
-  .caseStudy {
+.metricItem {
+  text-align: center;
+}
+
+.metricBig {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 1;
+}
+
+.metricSub {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--growrev-cyan);
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1100px) {
+  .transformationsGrid, .processGrid, .principlesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .coreGrid {
     grid-template-columns: 1fr;
   }
 }
-@media (max-width: 768px) {
-  .cbaPhase {
+
+@media (max-width: 820px) {
+  .serviceRow {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
+    padding: 3rem 0;
   }
-  .cbaNumber {
-    font-size: 3rem;
+  .transformationsGrid, .processGrid, .principlesGrid {
+    grid-template-columns: 1fr;
   }
-}
-
-/* --- Final CTA (Chapter 5 / Vision), immediately above the site footer ---
-   Scoped modifiers layered on top of .section / .primaryBtn so only this one
-   CTA is affected — every other .section and .primaryBtn on the homepage is
-   untouched. Base (non-media) rules intentionally mirror the exact existing
-   inline values so desktop stays pixel-identical; only the @media blocks
-   below change anything, and only at phone widths. */
-.finalCtaSection {
-  min-height: 80vh;
-}
-.finalCtaText {
-  margin-bottom: 5rem;
-}
-.finalCtaBtn {
-  padding: 1.5rem 3.5rem;
-  font-size: 1.15rem;
-  white-space: nowrap;
-}
-.finalCtaTech {
-  margin-top: 8rem;
-}
-
-@media (max-width: 640px) {
-  .finalCtaSection {
-    padding: 6rem 6vw 5rem;
-    min-height: auto;
+  .metricsRow {
+    gap: 2.5rem;
   }
-  .finalCtaText {
-    margin-bottom: 2.5rem;
+  .hero {
+    padding: 8.5rem 5vw 5rem;
   }
-  .finalCtaBtn {
-    padding: 1.1rem 2.25rem;
-    font-size: 1rem;
-  }
-  .finalCtaTech {
-    margin-top: 4.5rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .heroBadge,
-  .headline,
-  .subheadline,
-  .heroVisual,
-  .ctaContainer,
-  .trustIndicators {
-    animation: none;
-    opacity: 1;
+  .section {
+    padding: 5.5rem 5vw;
   }
 }

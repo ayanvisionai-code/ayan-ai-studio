@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
+import SectionEyebrow from "@/components/SectionEyebrow";
 
 export const metadata: Metadata = {
   title: "Innovation Lab | Ayan AI Studio",
@@ -163,11 +164,13 @@ export default function LabPage() {
   return (
     <main>
       {/* Hero Section */}
-      <header className="page-header">
-        <span className="section-eyebrow animate-fade-up">Innovation Lab</span>
-        <h1 className="page-title animate-fade-up delay-1" style={{ fontSize: "clamp(2.5rem, 8vw, 4.5rem)", maxWidth: "900px" }}>Research & Architecture.</h1>
-        <p className="page-subtitle animate-fade-up delay-2" style={{ maxWidth: "800px", fontSize: "1.25rem", lineHeight: 1.7 }}>
-          This laboratory is dedicated to operational research, business architecture, and workflow experimentation. Every transformation we deliver begins here through rigorous internal validation and continuous structural refinement.
+      <header className="page-header" style={{ padding: "11rem 5vw 4rem" }}>
+        <SectionEyebrow label="R&amp;D Division" variant="teal" />
+        <h1 className="page-title" style={{ fontSize: "clamp(2.5rem, 8vw, 4.5rem)", maxWidth: "900px" }}>
+          Research &amp; <span className="title-gradient">Architecture Lab.</span>
+        </h1>
+        <p className="page-subtitle" style={{ maxWidth: "800px", fontSize: "1.25rem", lineHeight: 1.7, color: "var(--growrev-text-muted)" }}>
+          Dedicated to operational research, business architecture, and workflow experimentation. Every commercial transformation we deliver begins here through rigorous internal validation.
         </p>
       </header>
 

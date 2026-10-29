@@ -1,35 +1,68 @@
 .categoryGrid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1.5rem;
-  align-items: start;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+  align-items: stretch;
 }
 
 .categoryCard {
+  background: var(--growrev-card-bg);
+  backdrop-filter: blur(25px);
+  border: 1px solid var(--growrev-border);
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
   display: flex;
   flex-direction: column;
-  padding: 2rem 1.25rem 1.75rem;
-  border-top: 1px solid var(--border);
+  gap: 1.25rem;
   text-decoration: none;
-  transition: background var(--transition-smooth);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .categoryCard:hover {
-  background: rgba(255, 255, 255, 0.02);
+  border-color: var(--growrev-border-hover);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 35px rgba(15, 182, 184, 0.1);
+}
+
+.categoryNumber {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--growrev-cyan);
+  letter-spacing: 0.1em;
+}
+
+.categoryTitle {
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  transition: all 0.3s ease;
+}
+
+.categoryCard:hover .categoryTitle {
+  background: var(--gradient-title);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.categoryDesc {
+  font-size: 1.05rem;
+  color: var(--growrev-text-muted);
+  line-height: 1.65;
+  flex-grow: 1;
 }
 
 .categoryLink {
-  margin-top: 1.25rem;
+  margin-top: 1rem;
 }
 
-@media (max-width: 1024px) {
-  .categoryGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
+@media (max-width: 820px) {
   .categoryGrid {
     grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  .categoryCard {
+    padding: 2.25rem 1.75rem;
   }
 }

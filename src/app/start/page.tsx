@@ -1,5 +1,6 @@
 "use client";
 import { useState, KeyboardEvent } from "react";
+import SectionEyebrow from "@/components/SectionEyebrow";
 import styles from "./page.module.css";
 
 const SERVICE_OPTIONS = ["A New Website", "Automation & AI Agents", "A Custom Application", "An Integrated System"];
@@ -93,11 +94,13 @@ export default function StartPage() {
 
   return (
     <main>
-      <header className="page-header" style={{ paddingTop: "calc(var(--nav-height) + 6rem)", paddingBottom: "3rem", borderBottom: "none" }}>
-        <span className="section-eyebrow animate-fade-up">Begin Evolution</span>
-        <h1 className="page-title animate-fade-up delay-1">Let&rsquo;s map what you need.</h1>
-        <p className="page-subtitle animate-fade-up delay-2" style={{ maxWidth: "600px" }}>
-          We don&rsquo;t do traditional sales calls. Whether you need one thing done right or a whole system, tell us where you&rsquo;re starting.
+      <header className="page-header" style={{ paddingTop: "calc(var(--nav-height) + 4rem)", paddingBottom: "2.5rem", borderBottom: "none" }}>
+        <SectionEyebrow label="Diagnostic Inquiry" variant="teal" />
+        <h1 className="page-title">
+          Let&rsquo;s map <span className="title-gradient">what you need.</span>
+        </h1>
+        <p className="page-subtitle" style={{ maxWidth: "640px", color: "var(--growrev-text-muted)" }}>
+          We don&rsquo;t do traditional high-pressure sales calls. Whether you need one thing done right or a whole system, tell us where you&rsquo;re starting.
         </p>
       </header>
 
@@ -145,7 +148,7 @@ export default function StartPage() {
                 <div className={styles.ctaRow}>
                   <button
                     type="button"
-                    className="btn-primary"
+                    className="btn-growrev-primary"
                     onClick={() => {
                       if (formData.currentOperation.trim().length < 3) {
                         setFieldError("Please share a little about your current operation.");
@@ -195,7 +198,7 @@ export default function StartPage() {
                 <div className={styles.ctaRow}>
                   <button
                     type="button"
-                    className="btn-primary"
+                    className="btn-growrev-primary"
                     onClick={() => {
                       if (formData.desiredOutcome.trim().length < 3) {
                         setFieldError("Please share the outcome you're looking for.");
@@ -249,7 +252,7 @@ export default function StartPage() {
                 <div className={styles.ctaRow}>
                   <button
                     type="button"
-                    className="btn-primary"
+                    className="btn-growrev-primary"
                     style={{ opacity: isSubmitting ? 0.6 : 1, cursor: isSubmitting ? "not-allowed" : "pointer" }}
                     onClick={handleSubmit}
                     disabled={isSubmitting}

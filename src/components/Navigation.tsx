@@ -69,7 +69,7 @@ export default function Navigation() {
           })}
         </div>
         <div className={styles.cta}>
-          <Link href="/start" className="btn-primary" style={{ padding: "0.5rem 1.5rem", fontSize: "0.95rem" }}>
+          <Link href="/start" className={styles.ctaButton}>
             Start a Conversation →
           </Link>
         </div>
@@ -109,14 +109,16 @@ export default function Navigation() {
             );
           })}
         </div>
-        <Link
-          href="/start"
-          className="btn-primary"
-          style={{ padding: "1rem 2rem", fontSize: "1rem", justifyContent: "center" }}
-          tabIndex={isMenuOpen ? 0 : -1}
-        >
-          Start a Conversation →
-        </Link>
+        <div className={styles.mobileCta}>
+          <Link
+            href="/start"
+            className={styles.ctaButton}
+            style={{ width: "100%", justifyContent: "center", padding: "1rem 2rem", fontSize: "1rem" }}
+            tabIndex={isMenuOpen ? 0 : -1}
+          >
+            Start a Conversation →
+          </Link>
+        </div>
       </div>
     </nav>
   );

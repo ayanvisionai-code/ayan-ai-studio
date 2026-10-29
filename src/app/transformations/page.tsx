@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import { transformationCategories } from "@/data/transformationPortfolio";
+import SectionEyebrow from "@/components/SectionEyebrow";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -11,17 +12,20 @@ export const metadata: Metadata = {
 
 export default function TransformationsPage() {
   return (
-    <main>
-      <header className="page-header" style={{ paddingBottom: "3rem" }}>
-        <span className="section-eyebrow animate-fade-up">Transformations</span>
-        <h1 className="page-title animate-fade-up delay-1">Different businesses need different systems.</h1>
-        <p className="page-subtitle animate-fade-up delay-2" style={{ maxWidth: "720px" }}>
-          The work ranges from a single premium website, to a public experience with a real system behind it, to dedicated software, to processes that run on their own. Choose the kind of transformation you&rsquo;re curious about — each one has its own detailed case studies.
+    <main style={{ minHeight: "100vh", backgroundColor: "var(--background)" }}>
+      <header className="page-header" style={{ padding: "11rem 5vw 4rem" }}>
+        <SectionEyebrow label="Case Studies &amp; Reports" variant="teal" />
+        <h1 className="page-title">
+          Different businesses need <br />
+          <span className="title-gradient">different systems.</span>
+        </h1>
+        <p className="page-subtitle" style={{ maxWidth: "760px", color: "var(--growrev-text-muted)" }}>
+          The work ranges from flagship digital experiences, to curatorial public portals, to dedicated operational applications, to autonomous workflow engines. Explore the case studies by discipline.
         </p>
       </header>
 
-      <section className="section" style={{ paddingTop: "1rem" }}>
-        <div className="container" style={{ maxWidth: "1100px" }}>
+      <section style={{ padding: "2rem 5vw 8rem" }}>
+        <div className="container" style={{ maxWidth: "1200px" }}>
           <div className={styles.categoryGrid}>
             {transformationCategories.map((cat) => (
               <Link
@@ -29,29 +33,33 @@ export default function TransformationsPage() {
                 href={cat.route}
                 className={styles.categoryCard}
               >
-                <span style={{ fontSize: "0.9rem", color: "var(--muted-foreground)" }}>{cat.number}</span>
-                <h2 style={{ fontSize: "1.4rem", color: "var(--foreground)", fontWeight: 400, margin: "0.6rem 0 0.75rem", lineHeight: 1.25 }}>{cat.navLabel}</h2>
-                <p style={{ fontSize: "1rem", color: "var(--muted-foreground)", lineHeight: 1.55 }}>{cat.description}</p>
-                <span className={styles.categoryLink} style={{ fontSize: "0.95rem", color: "var(--foreground)" }}>View the work →</span>
+                <span className={styles.categoryNumber}>{cat.number}</span>
+                <h2 className={styles.categoryTitle}>{cat.navLabel}</h2>
+                <p className={styles.categoryDesc}>{cat.description}</p>
+                <div className={styles.categoryLink}>
+                  <span className="btn-pill-arrow">
+                    View Case Studies <span>→</span>
+                  </span>
+                </div>
               </Link>
             ))}
           </div>
 
-          <p style={{ marginTop: "3rem", fontSize: "0.95rem", color: "var(--muted-foreground)", maxWidth: "720px" }}>
-            Each business chooses the level appropriate to its problem — not every engagement needs all four. Some need a stronger front door. Some need the system behind it too.
+          <p style={{ marginTop: "4rem", textAlign: "center", fontSize: "1rem", color: "var(--growrev-text-muted)", maxWidth: "760px", marginLeft: "auto", marginRight: "auto", lineHeight: 1.6 }}>
+            Each engagement is scoped around the exact problem — not every business needs all four disciplines. Some need a credible front door. Some need the connected operational core behind it.
           </p>
         </div>
       </section>
 
-      <footer className="section" style={{ backgroundColor: "#020202", borderTop: "1px solid var(--border)", textAlign: "center" }}>
-        <div className="container" style={{ maxWidth: "700px" }}>
-          <h2 style={{ fontSize: "clamp(2rem, 3.5vw, 2.75rem)", color: "var(--foreground)", fontWeight: 400, lineHeight: 1.2, marginBottom: "1.5rem" }}>
-            Your business may not need more software.
-            <br />
-            It may need a better way for everything to work together.
+      <footer className="section" style={{ backgroundColor: "#030304", borderTop: "1px solid var(--growrev-border)", textAlign: "center", padding: "6rem 5vw" }}>
+        <div className="container" style={{ maxWidth: "760px" }}>
+          <SectionEyebrow label="Start a Project" variant="teal" />
+          <h2 style={{ fontSize: "clamp(2rem, 3.8vw, 3rem)", color: "#FFFFFF", fontWeight: 500, lineHeight: 1.2, margin: "1rem 0 1.5rem" }}>
+            Your business may not need more software. <br />
+            <span className="title-gradient">It may need a connected system.</span>
           </h2>
-          <Link href="/start" className="btn-primary" style={{ padding: "1.1rem 2.75rem", marginTop: "1rem", display: "inline-block" }}>
-            Discuss Your Business →
+          <Link href="/start" className="btn-growrev-primary" style={{ marginTop: "1rem", display: "inline-flex" }}>
+            Discuss Your Business Operations →
           </Link>
         </div>
       </footer>

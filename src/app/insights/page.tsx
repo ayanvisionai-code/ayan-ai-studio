@@ -1,111 +1,129 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
+import SectionEyebrow from "@/components/SectionEyebrow";
 
 export const metadata: Metadata = {
   title: "Insights & Knowledge | Ayan AI Studio",
   description: "Deep-dive essays on Operational Design, AI Strategy, and Scaling Operations.",
 };
 
+const articles = [
+  {
+    category: "Business Architecture",
+    title: "The Cost of Fragmented Logic",
+    image: "/insight_fragmented_logic_1784545029766.png",
+    alt: "Fragmented logic blocks consolidating into one unified system",
+    summary:
+      "Why adding another software tool can quietly make your business harder to run — and when connecting what you already have is the better architectural decision.",
+    relatedSolution: { label: "Data Unification & Intelligence", href: "/solutions#integrated" },
+    appliedIn: { label: "AgencyOS Case Study", href: "/transformations/custom-applications" },
+    status: "Research Brief Available · Full Essay Q4",
+  },
+  {
+    category: "AI Strategy",
+    title: "Agents vs. Automations",
+    image: "/insight_agents_automation_1784545044780.png",
+    alt: "Comparing deterministic automation with an artificial intelligence neural agent",
+    summary:
+      "Should your business automate a fixed, repeatable task, or deploy an autonomous AI agent that can make contextual judgment calls? A framework for operational trade-offs.",
+    relatedSolution: { label: "Intelligent Automation Systems", href: "/solutions#automation" },
+    appliedIn: { label: "Lead Routing Pipeline", href: "/transformations/automations" },
+    status: "Research Brief Available · Full Essay Q4",
+  },
+  {
+    category: "Operational Design",
+    title: "Designing for Invisibility",
+    image: "/insight_invisible_tech_1784545056312.png",
+    alt: "Invisible technology concept and minimal architecture",
+    summary:
+      "The highest compliment a business operating system can receive is that your team stops noticing it. What frictionless architecture looks like in real business practice.",
+    relatedSolution: { label: "Operating Principles", href: "/principles" },
+    appliedIn: { label: "Rongdhonu Operating System", href: "/transformations/website-plus-applications" },
+    status: "Research Brief Available · Full Essay Q4",
+  },
+];
+
 export default function InsightsPage() {
   return (
-    <main>
-      <header className="page-header">
-        <span className="section-eyebrow animate-fade-up">Knowledge Platform</span>
-        <h1 className="page-title animate-fade-up delay-1">Operational Intelligence.</h1>
-        <p className="page-subtitle animate-fade-up delay-2">
-          Essays and analyses on system thinking, business architecture, and the future of human-AI orchestration.
+    <main style={{ minHeight: "100vh", backgroundColor: "var(--background)" }}>
+      <header className="page-header" style={{ padding: "11rem 5vw 4rem" }}>
+        <SectionEyebrow label="Knowledge Platform" variant="teal" />
+        <h1 className="page-title">
+          Operational <br />
+          <span className="title-gradient">Intelligence &amp; Essays.</span>
+        </h1>
+        <p className="page-subtitle" style={{ color: "var(--growrev-text-muted)" }}>
+          Essays and analyses on systems thinking, enterprise architecture, and the future of human-AI operational orchestration.
         </p>
       </header>
 
-      <section className="section">
-        <div className="container insights-container" style={{ maxWidth: "1000px" }}>
-
-          <div className="insights-stack" style={{ display: "flex", flexDirection: "column" }}>
-
-            <article className="glass-panel panel-pad-md insight-card" style={{ display: "flex", flexDirection: "column" }}>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <span className="section-eyebrow" style={{ margin: 0 }}>Business Architecture</span>
+      <section style={{ padding: "2rem 5vw 8rem" }}>
+        <div className="container" style={{ maxWidth: "1100px", display: "flex", flexDirection: "column", gap: "4rem" }}>
+          {articles.map((item) => (
+            <article
+              key={item.title}
+              className="growrev-card"
+              style={{
+                padding: "clamp(2rem, 5vw, 3.5rem)",
+                display: "flex",
+                flexDirection: "column",
+                gap: "1.75rem",
+              }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.75rem" }}>
+                <span style={{ fontSize: "0.78rem", textTransform: "uppercase", letterSpacing: "0.12em", color: "var(--growrev-cyan)", fontWeight: 600 }}>
+                  {item.category}
+                </span>
+                <span
+                  style={{
+                    fontSize: "0.72rem",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    color: "var(--growrev-iris)",
+                    background: "rgba(116, 102, 223, 0.12)",
+                    border: "1px solid rgba(116, 102, 223, 0.3)",
+                    padding: "0.3rem 0.8rem",
+                    borderRadius: "100px",
+                  }}
+                >
+                  {item.status}
+                </span>
               </div>
-              <h2 className="insight-title" style={{ color: "var(--foreground)" }}>The Cost of Fragmented Logic</h2>
 
-              {/* Insight Visual */}
-              <div className="insight-image" style={{ position: "relative", width: "100%", borderRadius: "12px", overflow: "hidden", margin: "1rem 0" }}>
-                <Image src="/insight_fragmented_logic_1784545029766.png" alt="Fragmented logic blocks consolidating into one unified system" fill style={{ objectFit: "cover", opacity: 0.9 }} />
+              <h2 style={{ fontSize: "clamp(1.8rem, 3.2vw, 2.5rem)", fontWeight: 500, color: "#FFFFFF", letterSpacing: "-0.02em" }}>
+                {item.title}
+              </h2>
+
+              <div style={{ position: "relative", width: "100%", height: "clamp(220px, 32vw, 380px)", borderRadius: "16px", overflow: "hidden", border: "1px solid var(--growrev-border)" }}>
+                <Image src={item.image} alt={item.alt} fill style={{ objectFit: "cover" }} />
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, transparent 60%, rgba(10, 10, 14, 0.7) 100%)" }} />
               </div>
 
-              <p>Why adding another software tool can quietly make your business harder to run — and when connecting what you already have is the better move.</p>
-              <div className="insight-meta-row" style={{ marginTop: "1rem" }}>
-                <div className="insight-meta-group">
-                  <div>
-                    <span style={{ display: "block", fontSize: "0.75rem", color: "var(--muted-foreground)", textTransform: "uppercase", marginBottom: "0.2rem" }}>Related Solution</span>
-                    <Link href="/solutions#integrated" className="link-hover" style={{ color: "var(--foreground)", fontSize: "0.85rem" }}>Data Unification & Intelligence →</Link>
-                  </div>
-                  <div>
-                    <span style={{ display: "block", fontSize: "0.75rem", color: "var(--muted-foreground)", textTransform: "uppercase", marginBottom: "0.2rem" }}>Applied In</span>
-                    <Link href="/transformations/custom-applications" className="link-hover" style={{ color: "var(--foreground)", fontSize: "0.85rem" }}>AgencyOS →</Link>
-                  </div>
+              <p style={{ fontSize: "1.1rem", color: "var(--growrev-text-muted)", lineHeight: 1.7, maxWidth: "860px" }}>
+                {item.summary}
+              </p>
+
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1.5rem", paddingTop: "1.75rem", borderTop: "1px solid var(--growrev-border)" }}>
+                <div>
+                  <span style={{ display: "block", fontSize: "0.75rem", color: "var(--growrev-text-dim)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.3rem" }}>
+                    Related Architecture
+                  </span>
+                  <Link href={item.relatedSolution.href} style={{ color: "var(--growrev-cyan)", fontSize: "0.95rem", textDecoration: "underline" }}>
+                    {item.relatedSolution.label} →
+                  </Link>
                 </div>
-                <span className="btn-secondary insight-status" style={{ opacity: 0.5, cursor: "not-allowed" }}>Full Essay Coming Soon</span>
+                <div>
+                  <span style={{ display: "block", fontSize: "0.75rem", color: "var(--growrev-text-dim)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.3rem" }}>
+                    Applied Case Study
+                  </span>
+                  <Link href={item.appliedIn.href} style={{ color: "var(--growrev-cyan)", fontSize: "0.95rem", textDecoration: "underline" }}>
+                    {item.appliedIn.label} →
+                  </Link>
+                </div>
               </div>
             </article>
-
-            <article className="glass-panel panel-pad-md insight-card" style={{ display: "flex", flexDirection: "column" }}>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <span className="section-eyebrow" style={{ margin: 0 }}>AI Strategy</span>
-              </div>
-              <h2 className="insight-title" style={{ color: "var(--foreground)" }}>Agents vs. Automations</h2>
-
-              {/* Insight Visual */}
-              <div className="insight-image" style={{ position: "relative", width: "100%", borderRadius: "12px", overflow: "hidden", margin: "1rem 0" }}>
-                <Image src="/insight_agents_automation_1784545044780.png" alt="Comparing deterministic automation with an artificial intelligence neural agent" fill style={{ objectFit: "cover", opacity: 0.9 }} />
-              </div>
-
-              <p>Should your business automate a fixed, repeatable task, or use an AI agent that can make judgment calls? Here's how to think about the difference — and what each one actually costs you.</p>
-              <div className="insight-meta-row" style={{ marginTop: "1rem" }}>
-                <div className="insight-meta-group">
-                  <div>
-                    <span style={{ display: "block", fontSize: "0.75rem", color: "var(--muted-foreground)", textTransform: "uppercase", marginBottom: "0.2rem" }}>Related Solution</span>
-                    <Link href="/solutions#automation" className="link-hover" style={{ color: "var(--foreground)", fontSize: "0.85rem" }}>Customer Communication System →</Link>
-                  </div>
-                  <div>
-                    <span style={{ display: "block", fontSize: "0.75rem", color: "var(--muted-foreground)", textTransform: "uppercase", marginBottom: "0.2rem" }}>Research</span>
-                    <Link href="/lab" className="link-hover" style={{ color: "var(--foreground)", fontSize: "0.85rem" }}>Autonomous Client Diagnostics →</Link>
-                  </div>
-                </div>
-                <span className="btn-secondary insight-status" style={{ opacity: 0.5, cursor: "not-allowed" }}>Full Essay Coming Soon</span>
-              </div>
-            </article>
-
-            <article className="glass-panel panel-pad-md insight-card" style={{ display: "flex", flexDirection: "column" }}>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <span className="section-eyebrow" style={{ margin: 0 }}>Operational Design</span>
-              </div>
-              <h2 className="insight-title" style={{ color: "var(--foreground)" }}>Designing for Invisibility</h2>
-
-              {/* Insight Visual */}
-              <div className="insight-image" style={{ position: "relative", width: "100%", borderRadius: "12px", overflow: "hidden", margin: "1rem 0" }}>
-                <Image src="/insight_invisible_tech_1784545056312.png" alt="Invisible technology concept" fill style={{ objectFit: "cover", opacity: 0.9 }} />
-              </div>
-
-              <p>The best technology is the kind your team stops noticing. What that looks like in practice, and why it matters for how your business runs day to day.</p>
-              <div className="insight-meta-row" style={{ marginTop: "1rem" }}>
-                <div className="insight-meta-group">
-                  <div>
-                    <span style={{ display: "block", fontSize: "0.75rem", color: "var(--muted-foreground)", textTransform: "uppercase", marginBottom: "0.2rem" }}>Governing Principle</span>
-                    <Link href="/principles" className="link-hover" style={{ color: "var(--foreground)", fontSize: "0.85rem" }}>Invisible Technology →</Link>
-                  </div>
-                  <div>
-                    <span style={{ display: "block", fontSize: "0.75rem", color: "var(--muted-foreground)", textTransform: "uppercase", marginBottom: "0.2rem" }}>Applied In</span>
-                    <Link href="/transformations/automations" className="link-hover" style={{ color: "var(--foreground)", fontSize: "0.85rem" }}>Intelligent Lead Routing →</Link>
-                  </div>
-                </div>
-                <span className="btn-secondary insight-status" style={{ opacity: 0.5, cursor: "not-allowed" }}>Full Essay Coming Soon</span>
-              </div>
-            </article>
-
-          </div>
-
+          ))}
         </div>
       </section>
     </main>

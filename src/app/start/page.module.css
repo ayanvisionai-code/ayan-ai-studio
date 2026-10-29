@@ -1,16 +1,18 @@
-/* Diagnostic conversation flow — one shared design language across all four steps. */
+/* Diagnostic conversation flow — GrowRev-inspired visual styling */
 
 .card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-xl);
-  padding: 4rem;
-  min-height: 420px;
+  background: rgba(12, 12, 16, 0.88);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--growrev-border);
+  border-radius: 24px;
+  padding: clamp(2rem, 5vw, 4rem);
+  min-height: 440px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75), 0 0 45px rgba(15, 182, 184, 0.08);
+  position: relative;
 }
 
 .stepInner {
@@ -26,20 +28,17 @@
   background: none;
   border: none;
   padding: 0;
-  color: var(--muted-foreground);
-  font-size: 0.85rem;
-  letter-spacing: 0.01em;
+  color: var(--growrev-cyan);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  font-weight: 500;
   cursor: pointer;
-  transition: color var(--transition-fast);
+  transition: all 0.2s ease;
 }
 .backLink:hover,
 .backLink:focus-visible {
-  color: var(--foreground);
-}
-.backLink:focus-visible {
-  outline: 1px solid var(--border-hover);
-  outline-offset: 4px;
-  border-radius: 2px;
+  color: #FFFFFF;
+  transform: translateX(-3px);
 }
 
 .stepHeading {
@@ -48,13 +47,16 @@
   gap: 0.75rem;
 }
 .stepHeading h2 {
-  font-size: clamp(1.65rem, 3vw, 2rem);
-  color: var(--foreground);
+  font-size: clamp(1.75rem, 3.2vw, 2.35rem);
+  color: #FFFFFF;
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 .stepHeading p {
   font-size: 1.05rem;
   line-height: 1.65;
-  max-width: 48ch;
+  color: var(--growrev-text-muted);
+  max-width: 52ch;
 }
 
 .optionList {
@@ -64,164 +66,64 @@
 }
 
 .optionButton {
-  padding: 1.5rem;
+  padding: 1.35rem 1.6rem;
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  color: var(--foreground);
-  font-size: 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  color: #FFFFFF;
+  font-size: 1.08rem;
+  font-weight: 400;
   text-align: left;
   cursor: pointer;
-  transition: border-color var(--transition-fast), background var(--transition-fast);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .optionButton:hover,
 .optionButton:focus-visible {
-  border-color: var(--foreground);
-}
-.optionButton:focus-visible {
-  outline: 1px solid var(--border-hover);
-  outline-offset: 2px;
+  border-color: var(--growrev-cyan);
+  background: rgba(15, 182, 184, 0.07);
+  transform: translateX(4px);
+  box-shadow: 0 0 25px rgba(15, 182, 184, 0.15);
 }
 
 .field {
-  padding: 1.25rem 1.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  color: var(--foreground);
+  padding: 1.15rem 1.4rem;
+  background: rgba(18, 18, 24, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #FFFFFF;
   font-size: 1.05rem;
   line-height: 1.65;
   outline: none;
   font-family: inherit;
   width: 100%;
   resize: vertical;
-  transition: border-color var(--transition-fast), background var(--transition-fast);
-}
-.field::placeholder {
-  color: var(--muted-foreground);
+  transition: all 0.25s ease;
 }
 .field:focus {
-  border-color: var(--border-hover);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--growrev-cyan);
+  background: rgba(22, 22, 30, 0.95);
+  box-shadow: 0 0 25px rgba(15, 182, 184, 0.2);
+}
+.field::placeholder {
+  color: rgba(255, 255, 255, 0.35);
 }
 
-.textarea {
-  min-height: 150px;
-}
-
-.chipGroup {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.chip {
-  padding: 0.75rem 1.25rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  color: var(--muted-foreground);
+.error {
+  padding: 0.85rem 1.25rem;
+  border-radius: 10px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #FCA5A5;
   font-size: 0.9rem;
-  line-height: 1.3;
-  cursor: pointer;
-  transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
-}
-.chip:hover,
-.chip:focus-visible {
-  border-color: var(--border-hover);
-  color: var(--foreground);
-}
-.chip:focus-visible {
-  outline: 1px solid var(--border-hover);
-  outline-offset: 2px;
-}
-.chip[aria-pressed="true"] {
-  background: var(--foreground);
-  color: var(--accent-foreground);
-  border-color: var(--foreground);
+  line-height: 1.4;
 }
 
-.orDivider {
+.actions {
   display: flex;
-  align-items: center;
+  justify-content: flex-end;
   gap: 1rem;
-  color: var(--muted-foreground);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-.orDivider::before,
-.orDivider::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
-.fieldGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.fieldLabel {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--foreground);
-}
-
-.fieldLabelOptional {
-  font-size: 0.8rem;
-  color: var(--muted-foreground);
-}
-
-.fieldError {
-  font-size: 0.9rem;
-  color: var(--foreground);
-}
-.fieldError::before {
-  content: "— ";
-  color: var(--muted-foreground);
-}
-
-.ctaRow {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  margin-top: 0.5rem;
-}
-
-.submitHint {
-  font-size: 0.85rem;
-  color: var(--muted-foreground);
-}
-
-.successIcon {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  color: var(--foreground);
-}
-
-@media (max-width: 640px) {
-  .card {
-    padding: 2.5rem 1.75rem;
-    min-height: 0;
-  }
-  .chipGroup {
-    gap: 0.6rem;
-  }
-  .chip {
-    padding: 0.65rem 1rem;
-    font-size: 0.85rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .optionButton,
-  .field,
-  .chip,
-  .backLink {
-    transition: none;
-  }
+  margin-top: 1rem;
 }

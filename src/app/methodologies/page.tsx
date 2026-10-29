@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import SectionEyebrow from "@/components/SectionEyebrow";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -9,12 +10,15 @@ export const metadata: Metadata = {
 
 export default function MethodologiesPage() {
   return (
-    <main>
-      <header className="page-header">
-        <span className="section-eyebrow animate-fade-up">Methodologies</span>
-        <h1 className="page-title animate-fade-up delay-1">The Architecture of Intelligence.</h1>
-        <p className="page-subtitle animate-fade-up delay-2">
-          We don't guess. Before we touch any software, we map how your business actually works — then use proven, repeatable frameworks to rebuild the connected system behind it: what we call your Operational Core.
+    <main style={{ minHeight: "100vh", backgroundColor: "var(--background)" }}>
+      <header className="page-header" style={{ padding: "11rem 5vw 4rem" }}>
+        <SectionEyebrow label="Engineering Methodology" variant="teal" />
+        <h1 className="page-title">
+          The Architecture of <br />
+          <span className="title-gradient">Connected Intelligence.</span>
+        </h1>
+        <p className="page-subtitle" style={{ color: "var(--growrev-text-muted)" }}>
+          We don&apos;t guess. Before we write code, we map how your company operates today — then use proven, repeatable frameworks to engineer your connected Operational Core.
         </p>
       </header>
 

@@ -46,16 +46,19 @@ function ImageFrame({
 }
 
 function StatusBadge({ status, label }: { status: "live" | "concept"; label: string }) {
+  const isLive = status === "live";
   return (
     <span
       style={{
-        fontSize: "0.7rem",
+        fontSize: "0.72rem",
         textTransform: "uppercase",
-        letterSpacing: "0.08em",
-        color: status === "live" ? "var(--foreground)" : "var(--muted-foreground)",
-        border: "1px solid var(--border)",
+        letterSpacing: "0.1em",
+        fontWeight: 600,
+        color: isLive ? "var(--growrev-cyan)" : "var(--growrev-iris)",
+        backgroundColor: isLive ? "rgba(15, 182, 184, 0.12)" : "rgba(116, 102, 223, 0.12)",
+        border: `1px solid ${isLive ? "rgba(15, 182, 184, 0.35)" : "rgba(116, 102, 223, 0.35)"}`,
         borderRadius: "100px",
-        padding: "0.35rem 0.9rem",
+        padding: "0.35rem 0.95rem",
       }}
     >
       {label}

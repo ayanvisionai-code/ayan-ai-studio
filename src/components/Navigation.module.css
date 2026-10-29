@@ -4,41 +4,47 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(5, 5, 5, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
+  background: rgba(5, 5, 8, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--growrev-border);
+  transition: all 0.3s ease;
 }
 
 .navContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 5vw;
+  padding: 0.85rem 5vw;
   min-height: var(--nav-height);
-  max-width: 1600px;
+  max-width: 1500px;
   margin: 0 auto;
 }
 
 .links {
   display: flex;
-  gap: 2rem;
+  align-items: center;
+  gap: 2.25rem;
 }
 
 .links a {
-  font-size: 0.9rem;
-  color: var(--muted-foreground);
+  font-size: 0.92rem;
+  color: var(--growrev-text-muted);
   font-weight: 400;
-  transition: color var(--transition-fast);
+  letter-spacing: -0.01em;
+  transition: color 0.25s ease, opacity 0.25s ease;
+  position: relative;
+  padding: 0.4rem 0;
 }
 
 .links a:hover {
-  color: var(--foreground);
+  color: #FFFFFF;
+  opacity: 1;
 }
 
 .links a.active {
-  position: relative;
-  color: var(--foreground);
+  color: #FFFFFF;
+  font-weight: 500;
 }
 
 .links a.active::after {
@@ -46,9 +52,39 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -0.4rem;
-  height: 1px;
-  background: var(--foreground);
+  bottom: 0;
+  height: 2px;
+  background: var(--gradient-title);
+  border-radius: 2px;
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.6rem;
+  background: linear-gradient(33.59deg, #0FB6B8 8.76%, #7466DF 91.86%);
+  color: #FFFFFF !important;
+  font-size: 0.88rem;
+  font-weight: 500;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(15, 182, 184, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none !important;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(15, 182, 184, 0.45);
+  opacity: 1 !important;
 }
 
 .menuToggle {
@@ -59,29 +95,37 @@
   gap: 5px;
   width: 44px;
   height: 44px;
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--growrev-border);
+  border-radius: 10px;
   padding: 0;
   cursor: pointer;
   flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.menuToggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .menuBar {
   display: block;
-  width: 22px;
-  height: 1.5px;
-  background: var(--foreground);
-  transition: transform var(--transition-fast), opacity var(--transition-fast);
+  width: 20px;
+  height: 2px;
+  background: #FFFFFF;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
 .menuBarTopOpen {
-  transform: translateY(6.5px) rotate(45deg);
+  transform: translateY(7px) rotate(45deg);
 }
 .menuBarMiddleOpen {
   opacity: 0;
 }
 .menuBarBottomOpen {
-  transform: translateY(-6.5px) rotate(-45deg);
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .mobileMenu {
@@ -92,63 +136,55 @@
   max-height: calc(100vh - var(--nav-height));
   max-height: calc(100dvh - var(--nav-height));
   overflow-y: auto;
-  background: var(--background);
-  border-bottom: 1px solid var(--border);
-  padding: 2rem 5vw 2.5rem;
+  background: rgba(8, 8, 12, 0.98);
+  backdrop-filter: blur(25px);
+  border-bottom: 1px solid var(--growrev-border);
+  padding: 2rem 6vw 3rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-8px);
-  transition: opacity var(--transition-fast), transform var(--transition-fast), visibility 0s linear var(--transition-fast);
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
 }
 
 .mobileMenuOpen {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-  transition: opacity var(--transition-fast), transform var(--transition-fast), visibility 0s linear 0s;
 }
 
 .mobileLinks {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
 }
 
 .mobileLinks a {
-  padding: 0.9rem 0;
-  font-size: 1.1rem;
-  color: var(--muted-foreground);
-  border-bottom: 1px solid var(--border);
-}
-.mobileLinks a:last-child {
-  border-bottom: none;
-}
-.mobileLinks a:hover,
-.mobileLinks a:focus-visible {
-  color: var(--foreground);
+  font-size: 1.25rem;
+  color: var(--growrev-text-muted);
+  font-weight: 400;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: color 0.2s ease;
 }
 
-.mobileLinks a.mobileActive {
-  color: var(--foreground);
+.mobileLinks a.active {
+  color: #FFFFFF;
+  font-weight: 500;
+  border-color: var(--growrev-cyan);
 }
 
-@media (max-width: 1024px) {
-  .links {
-    display: none;
-  }
-  .cta {
+.mobileCta {
+  margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+  .links, .cta {
     display: none;
   }
   .menuToggle {
     display: flex;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .menuBar,
-  .mobileMenu {
-    transition: none;
   }
 }

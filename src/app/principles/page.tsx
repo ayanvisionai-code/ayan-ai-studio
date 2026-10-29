@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import SectionEyebrow from "@/components/SectionEyebrow";
 
 export const metadata: Metadata = {
   title: "Operating Principles | Ayan AI Studio",
@@ -42,11 +43,14 @@ const principles = [
 export default function PrinciplesPage() {
   return (
     <main>
-      <header className="page-header">
-        <span className="section-eyebrow animate-fade-up">Operating Principles</span>
-        <h1 className="page-title animate-fade-up delay-1">The Laws of System Design.</h1>
-        <p className="page-subtitle animate-fade-up delay-2">
-          These are the non-negotiable standards that dictate how we architect, engineer, and deploy business operating systems.
+      <header className="page-header" style={{ padding: "11rem 5vw 4rem" }}>
+        <SectionEyebrow label="Core Philosophy" variant="teal" />
+        <h1 className="page-title">
+          The Laws of <br />
+          <span className="title-gradient">System Design.</span>
+        </h1>
+        <p className="page-subtitle" style={{ color: "var(--growrev-text-muted)" }}>
+          These are the non-negotiable standards that govern how we architect, engineer, and deploy modern business operating systems.
         </p>
       </header>
 
@@ -69,12 +73,13 @@ export default function PrinciplesPage() {
             ))}
           </div>
 
-          <div className="glass-panel panel-pad-lg" style={{ marginTop: "8rem", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <h3 style={{ fontSize: "2rem", color: "var(--foreground)", marginBottom: "1rem" }}>Ready to see these principles in action?</h3>
-            <p style={{ marginBottom: "3rem", maxWidth: "600px" }}>Discover how we apply these laws of system design to rebuild a company's Operational Core.</p>
+          <div className="growrev-card" style={{ marginTop: "8rem", padding: "4rem 2rem", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <SectionEyebrow label="Get Started" variant="teal" />
+            <h3 style={{ fontSize: "2rem", color: "#FFFFFF", margin: "1rem 0" }}>Ready to put these principles into action?</h3>
+            <p style={{ marginBottom: "2.5rem", maxWidth: "600px", color: "var(--growrev-text-muted)" }}>Discover how we apply these laws of system design to rebuild a company&apos;s Operational Core.</p>
             <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "1.25rem 2rem" }}>
-              <Link href="/solutions" className="btn-primary">View Solutions</Link>
-              <Link href="/transformations" className="btn-secondary">Read Transformations</Link>
+              <Link href="/solutions" className="btn-growrev-primary">View Solutions &amp; Architecture →</Link>
+              <Link href="/transformations" className="btn-growrev-secondary">Read Transformations</Link>
             </div>
           </div>
           

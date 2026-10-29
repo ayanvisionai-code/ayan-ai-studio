@@ -1,0 +1,176 @@
+.formContainer {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(15, 182, 184, 0.4) 0%, rgba(116, 102, 223, 0.2) 50%, rgba(255, 255, 255, 0.05) 100%);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 50px rgba(15, 182, 184, 0.1);
+}
+
+.formCard {
+  background: rgba(12, 12, 16, 0.96);
+  backdrop-filter: blur(25px);
+  border-radius: 22px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--growrev-text-muted);
+  line-height: 1.5;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #FFFFFF;
+}
+
+.serviceChips {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.serviceChip {
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--growrev-text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+}
+
+.serviceChip:hover {
+  border-color: rgba(15, 182, 184, 0.4);
+  color: #FFFFFF;
+  background: rgba(15, 182, 184, 0.05);
+}
+
+.serviceChipSelected {
+  border-color: var(--growrev-cyan) !important;
+  background: linear-gradient(135deg, rgba(15, 182, 184, 0.2) 0%, rgba(116, 102, 223, 0.15) 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 20px rgba(15, 182, 184, 0.2);
+}
+
+.input, .textarea {
+  width: 100%;
+  padding: 0.9rem 1.15rem;
+  border-radius: 12px;
+  background: rgba(20, 20, 26, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.input:focus, .textarea:focus {
+  border-color: var(--growrev-cyan);
+  background: rgba(24, 24, 32, 0.9);
+  box-shadow: 0 0 20px rgba(15, 182, 184, 0.2);
+}
+
+.input::placeholder, .textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.9rem;
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.error {
+  padding: 0.85rem 1.25rem;
+  border-radius: 10px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #FCA5A5;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.successBox {
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.successIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(15, 182, 184, 0.2);
+  border: 1px solid var(--growrev-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--growrev-cyan);
+  font-size: 1.5rem;
+}
+
+.successTitle {
+  font-size: 1.5rem;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.successMessage {
+  font-size: 0.95rem;
+  color: var(--growrev-text-muted);
+  max-width: 440px;
+  line-height: 1.6;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 1.1rem;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .formCard {
+    padding: 2rem 1.25rem;
+    gap: 1.4rem;
+  }
+  .serviceChips {
+    grid-template-columns: 1fr;
+  }
+}

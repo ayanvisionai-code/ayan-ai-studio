@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
+import SectionEyebrow from "@/components/SectionEyebrow";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -10,11 +11,14 @@ export const metadata: Metadata = {
 
 export default function PerspectivePage() {
   return (
-    <main>
-      <header className="page-header" style={{ paddingBottom: "4rem" }}>
-        <span className="section-eyebrow animate-fade-up">Our Perspective</span>
-        <h1 className="page-title animate-fade-up delay-1">Chaos is not a symptom of growth.<br/>It is a symptom of design.</h1>
-        <p className="page-subtitle animate-fade-up delay-2">
+    <main style={{ minHeight: "100vh", backgroundColor: "var(--background)" }}>
+      <header className="page-header" style={{ padding: "11rem 5vw 4rem" }}>
+        <SectionEyebrow label="Strategic Perspective" variant="teal" />
+        <h1 className="page-title">
+          Chaos is not a symptom of growth. <br />
+          <span className="title-gradient">It is a symptom of design.</span>
+        </h1>
+        <p className="page-subtitle" style={{ color: "var(--growrev-text-muted)" }}>
           Most businesses reach a point where revenue increases, but velocity decreases. This is the operational paradox.
         </p>
         
