@@ -450,7 +450,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v1",
     source: "node",
     destPin: "Top Pin 2 (x=552, y=268)",
-    d: "M 560 145 Q 552 150 552 160 V 268",
+    d: "M 552 154 V 268",
     stroke: "#00F0C8", // Cyan
     strokeWidth: 2.2,
     duration: 2.0,
@@ -461,7 +461,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v2",
     source: "node",
     destPin: "Top Pin 3 (x=564, y=268)",
-    d: "M 564 145 V 268",
+    d: "M 564 154 V 268",
     stroke: "#8EFFEA", // Turquoise
     strokeWidth: 2.2,
     duration: 1.9,
@@ -472,7 +472,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v3",
     source: "node",
     destPin: "Top Pin 4 (x=576, y=268)",
-    d: "M 576 145 V 268",
+    d: "M 576 154 V 268",
     stroke: "#38BDF8", // Electric Blue
     strokeWidth: 2.2,
     duration: 2.1,
@@ -483,7 +483,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v4",
     source: "node",
     destPin: "Top Pin 5 (x=588, y=268)",
-    d: "M 588 145 V 268",
+    d: "M 588 154 V 268",
     stroke: "#FFDA5C", // Amber
     strokeWidth: 2.2,
     duration: 2.0,
@@ -494,7 +494,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v5",
     source: "node",
     destPin: "Top Pin 6 (x=600, y=268)",
-    d: "M 600 145 V 268",
+    d: "M 600 154 V 268",
     stroke: "#00F0C8", // Cyan
     strokeWidth: 2.4,
     duration: 1.8,
@@ -505,7 +505,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v6",
     source: "node",
     destPin: "Top Pin 7 (x=612, y=268)",
-    d: "M 612 145 V 268",
+    d: "M 612 154 V 268",
     stroke: "#10B981", // Emerald Green
     strokeWidth: 2.2,
     duration: 2.2,
@@ -516,7 +516,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v7",
     source: "node",
     destPin: "Top Pin 8 (x=624, y=268)",
-    d: "M 624 145 V 268",
+    d: "M 624 154 V 268",
     stroke: "#7DFF32", // Muted Lime
     strokeWidth: 2.2,
     duration: 1.9,
@@ -527,7 +527,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v8",
     source: "node",
     destPin: "Top Pin 9 (x=636, y=268)",
-    d: "M 636 145 V 268",
+    d: "M 636 154 V 268",
     stroke: "#FD6BC4", // Magenta
     strokeWidth: 2.2,
     duration: 2.1,
@@ -538,7 +538,7 @@ const circuitRoutes: CircuitRoute[] = [
     id: "route-v9",
     source: "node",
     destPin: "Top Pin 10 (x=648, y=268)",
-    d: "M 640 145 Q 648 150 648 160 V 268",
+    d: "M 648 154 V 268",
     stroke: "#A855F7", // Violet
     strokeWidth: 2.2,
     duration: 2.0,

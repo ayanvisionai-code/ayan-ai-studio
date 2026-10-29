@@ -119,7 +119,7 @@
 
 .signalSegmentVert {
   fill: none;
-  stroke-dasharray: 32 180;
+  stroke-dasharray: 45 300;
   animation-name: segmentVertDown;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
@@ -158,16 +158,16 @@
 
 @keyframes segmentVertDown {
   0% {
-    stroke-dashoffset: 0;
+    stroke-dashoffset: 45;
     opacity: 0;
   }
   6% {
     opacity: 0.85;
   }
-  68% {
+  74% {
     opacity: 0.85;
   }
-  75% {
+  82% {
     stroke-dashoffset: -155;
     opacity: 0;
   }
@@ -311,13 +311,13 @@
   }
 }
 
-/* 12-Band Equalizer Signal Bars Bridge */
+/* 12-Band Signal Distribution Manifold (Integrated Transition Zone) */
 .signalBarsContainer {
   display: flex;
   align-items: flex-start;
   gap: 4.5px;
-  height: 72px;
-  margin-top: 4px;
+  height: 28px;
+  margin-top: 3px;
 }
 
 .signalBar {
@@ -325,18 +325,20 @@
   border-radius: 1.5px;
   background-color: var(--bar-color, #18D9D0);
   box-shadow: 0 0 6px var(--bar-color, #18D9D0);
-  animation: barStream 2.2s ease-in-out infinite alternate;
+  animation: barPulse 2.4s ease-in-out infinite alternate;
   animation-delay: var(--bar-delay, 0s);
 }
 
-@keyframes barStream {
+@keyframes barPulse {
   0% {
-    height: 14px;
-    opacity: 0.4;
+    height: 16px;
+    opacity: 0.55;
+    box-shadow: 0 0 4px var(--bar-color, #18D9D0);
   }
   100% {
-    height: 64px;
+    height: 26px;
     opacity: 0.95;
+    box-shadow: 0 0 8px var(--bar-color, #18D9D0);
   }
 }
 
@@ -617,7 +619,7 @@
   }
   .signalBar {
     animation: none;
-    height: 36px;
+    height: 22px;
   }
   .cavityCoreDot {
     animation: none;
