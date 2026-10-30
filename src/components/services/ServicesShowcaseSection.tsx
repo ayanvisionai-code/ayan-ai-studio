@@ -36,10 +36,6 @@ const showcaseServices: ServiceShowcaseItem[] = [
     accent: "#9333EA",
     blocks: [
       {
-        label: "WHAT WE AUTOMATE",
-        text: "Lead capture, data entry, follow-ups, reporting, appointment workflows, and repetitive tasks across the tools your team already uses.",
-      },
-      {
         label: "HOW IT WORKS",
         text: "We connect your existing apps, configure reliable triggers and workflows, and add AI where it genuinely improves decision-making or customer interactions.",
       },
@@ -168,8 +164,14 @@ export default function ServicesShowcaseSection() {
                 {/* Introductory Description */}
                 <p className={styles.description}>{service.description}</p>
 
-                {/* 3 Supporting Information Blocks */}
-                <div className={styles.blocksGrid}>
+                {/* Supporting Information Blocks */}
+                <div
+                  className={`${styles.blocksGrid} ${
+                    service.blocks.length === 2
+                      ? styles.blocksGridTwo
+                      : styles.blocksGridThree
+                  }`}
+                >
                   {service.blocks.map((block, bIdx) => (
                     <div key={bIdx} className={styles.blockItem}>
                       <h4 className={styles.blockLabel}>{block.label}</h4>

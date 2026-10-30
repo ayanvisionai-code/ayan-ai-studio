@@ -103,42 +103,55 @@
   max-width: 620px;
 }
 
-/* 3 Supporting Information Blocks */
+/* Supporting Information Blocks Container */
 .blocksGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 1rem;
-  padding-top: 1.5rem;
+  margin-top: 1.75rem;
+  padding-top: 1.75rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 2-Column Balanced Layout (e.g. AI Automation) */
+.blocksGridTwo {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 3rem;
+  row-gap: 1.5rem;
+  max-width: 640px;
+}
+
+/* 3-Column Layout (Other services) */
+.blocksGridThree {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
 }
 
 .blockItem {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.65rem;
 }
 
 .blockLabel {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.085em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: #f8fafc;
   margin: 0;
+  line-height: 1.3;
 }
 
 .blockText {
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.52);
-  line-height: 1.55;
-  font-weight: 300;
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.62;
+  font-weight: 350;
   margin: 0;
 }
 
 /* Primary CTA Link */
 .ctaRow {
-  margin-top: 0.75rem;
+  margin-top: 1.5rem;
 }
 
 .primaryCta {
@@ -183,7 +196,10 @@
   .contentWrapper {
     gap: 5.5rem;
   }
-  .blocksGrid {
+  .blocksGridTwo {
+    column-gap: 2rem;
+  }
+  .blocksGridThree {
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
@@ -207,9 +223,23 @@
   .copyCol {
     width: 100%;
   }
-  .blocksGrid {
+  /* On tablets (768px-860px), retain the 2-column layout */
+  .blocksGridTwo {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 2rem;
+    row-gap: 1.25rem;
+  }
+  .blocksGridThree {
     grid-template-columns: 1fr;
     gap: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  /* On smartphones, stack the 2 blocks vertically */
+  .blocksGridTwo {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
 
