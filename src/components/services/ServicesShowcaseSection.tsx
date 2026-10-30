@@ -52,7 +52,7 @@ const showcaseServices: ServiceShowcaseItem[] = [
     ctaHref: "/solutions#automation",
     visualAlignment: "left",
     VisualComponent: () => (
-      <SplineSceneViewer url="https://prod.spline.design/asbzzgfkFPt8bELG/scene.splinecode" />
+      <SplineSceneViewer url="/scene.splinecode" />
     ),
   },
   {
