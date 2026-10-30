@@ -15,60 +15,27 @@ export default function SplineSceneViewer({
 }: SplineSceneViewerProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [isInView, setIsInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const appRef = useRef<any>(null);
-  const isInitializingRef = useRef(false);
+  const isInitializedRef = useRef(false);
 
-  // 1. Intersection Observer: only load when user scrolls near the section
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          // Resume animation if already loaded
-          if (appRef.current && typeof appRef.current.play === "function") {
-            try {
-              appRef.current.play();
-            } catch {
-              // ignore
-            }
-          }
-        } else {
-          // Pause rendering loop when scrolled away to conserve resources
-          if (appRef.current && typeof appRef.current.stop === "function") {
-            try {
-              appRef.current.stop();
-            } catch {
-              // ignore
-            }
-          }
-        }
-      },
-      { rootMargin: "300px" }
-    );
-
-    observer.observe(container);
-    return () => observer.disconnect();
-  }, []);
-
-  // 2. Initialize @splinetool/runtime Application when in view
-  useEffect(() => {
-    if (!isInView || isLoaded || hasError || isInitializingRef.current) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
     let isCancelled = false;
-    isInitializingRef.current = true;
 
-    async function initSpline() {
+    const startLoading = async () => {
+      if (isInitializedRef.current || isCancelled) return;
+      isInitializedRef.current = true;
+
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
       try {
-        // Test WebGL support
+        // Quick WebGL support check
         const testCanvas = document.createElement("canvas");
         const gl =
           testCanvas.getContext("webgl2") || testCanvas.getContext("webgl");
@@ -103,6 +70,11 @@ export default function SplineSceneViewer({
         }
 
         if (!isCancelled) {
+          try {
+            app.play();
+          } catch {
+            // ignore if play is not available
+          }
           setIsLoaded(true);
         }
       } catch (err) {
@@ -113,15 +85,50 @@ export default function SplineSceneViewer({
         if (!isCancelled) {
           setHasError(true);
         }
-      } finally {
-        isInitializingRef.current = false;
       }
-    }
+    };
 
-    initSpline();
+    // 1. Intersection Observer: start loading when scrolled near (within 400px)
+    // and toggle play/stop to optimize background rendering
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!isInitializedRef.current) {
+            startLoading();
+          } else if (appRef.current && typeof appRef.current.play === "function") {
+            try {
+              appRef.current.play();
+            } catch {
+              // ignore
+            }
+          }
+        } else {
+          // Pause rendering loop when scrolled away to conserve GPU resources
+          if (appRef.current && typeof appRef.current.stop === "function") {
+            try {
+              appRef.current.stop();
+            } catch {
+              // ignore
+            }
+          }
+        }
+      },
+      { rootMargin: "400px" }
+    );
+
+    observer.observe(container);
+
+    // 2. Safety fallback timer: guarantee load starts within 2.5s even if IntersectionObserver delays
+    const timer = setTimeout(() => {
+      if (!isInitializedRef.current && !isCancelled) {
+        startLoading();
+      }
+    }, 2500);
 
     return () => {
       isCancelled = true;
+      clearTimeout(timer);
+      observer.disconnect();
       if (appRef.current) {
         try {
           appRef.current.dispose();
@@ -130,8 +137,9 @@ export default function SplineSceneViewer({
         }
         appRef.current = null;
       }
+      isInitializedRef.current = false;
     };
-  }, [isInView, url, isLoaded, hasError]);
+  }, [url]);
 
   return (
     <div ref={containerRef} className={`${styles.splineWrapper} ${className}`}>
