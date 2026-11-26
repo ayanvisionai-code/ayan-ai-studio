@@ -14,10 +14,10 @@ export default function ClosingTestimonialsSection() {
   });
 
   // Transform for left half word "TESTIM" (glides in from left to touch center)
-  const xLeft = useTransform(scrollYProgress, [0, 1], ["-18vw", "0vw"]);
+  const xLeft = useTransform(scrollYProgress, [0, 1], ["-10vw", "0vw"]);
   
   // Transform for right half word "ONIALS" (glides in from right to touch center)
-  const xRight = useTransform(scrollYProgress, [0, 1], ["18vw", "0vw"]);
+  const xRight = useTransform(scrollYProgress, [0, 1], ["10vw", "0vw"]);
 
   // Flare scale & opacity (pulses as the two sides meet)
   const flareOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [0.1, 0.8, 0.25]);

@@ -2,7 +2,6 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
-import SectionEyebrow from "@/components/SectionEyebrow";
 import HeroSection from "@/components/hero/HeroSection";
 import ServiceNetworkSection from "@/components/services/ServiceNetworkSection";
 import ServicesShowcaseSection from "@/components/services/ServicesShowcaseSection";
