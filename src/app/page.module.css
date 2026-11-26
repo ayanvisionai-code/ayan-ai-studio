@@ -27,6 +27,34 @@
   margin: 0 auto 4.5rem;
 }
 
+.laserSubtitle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.laserSubtitle span {
+  font-family: var(--font-anton), Anton, sans-serif;
+  font-size: 0.88rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #00F2FE;
+}
+
+.laserLineLeft {
+  width: 90px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.7) 100%);
+}
+
+.laserLineRight {
+  width: 90px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0%, transparent 100%);
+}
+
 .sectionTitle {
   font-size: clamp(2.25rem, 4.5vw, 3.8rem);
   font-weight: 500;
@@ -527,40 +555,65 @@
 }
 
 .processCard {
-  background: var(--growrev-card-bg);
-  border: 1px solid var(--growrev-border);
+  background: radial-gradient(98.05% 261.61% at 1.95% 3.59%, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0) 100%), #111215;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
-  padding: 2.75rem 2rem;
+  padding: 3rem 2.25rem 2.75rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
   position: relative;
-  transition: all 0.3s ease;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
 }
 
 .processCard:hover {
-  border-color: rgba(15, 182, 184, 0.4);
-  transform: translateY(-4px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 242, 254, 0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 242, 254, 0.15);
+}
+
+.processTopNeon,
+.principleTopNeon {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 3px;
+  border-radius: 4px;
+  background: #00F2FE;
+  box-shadow: 0 0 16px currentColor;
+  transition: width 0.3s ease;
+}
+
+.processCard:hover .processTopNeon,
+.principleCard:hover .principleTopNeon {
+  width: 110px;
 }
 
 .processNumber {
-  font-size: 2.25rem;
-  font-weight: 600;
-  color: var(--growrev-cyan);
+  font-family: var(--font-anton), Anton, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #00F2FE;
   line-height: 1;
 }
 
 .processTitle {
   font-size: 1.4rem;
-  font-weight: 500;
+  font-weight: 600;
   color: #FFFFFF;
+  margin: 0;
 }
 
 .processDesc {
-  font-size: 0.98rem;
-  color: var(--growrev-text-muted);
+  font-size: 0.95rem;
+  color: #94A3B8;
   line-height: 1.65;
+  font-weight: 350;
+  margin: 0;
 }
 
 /* --- 07. Principles (Philosophy) --- */
@@ -574,25 +627,38 @@
 }
 
 .principleCard {
-  background: rgba(18, 18, 22, 0.5);
-  border: 1px solid var(--growrev-border);
+  background: radial-gradient(98.05% 261.61% at 1.95% 3.59%, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0) 100%), #111215;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
-  padding: 2.5rem;
+  padding: 2.75rem 2.25rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
+  position: relative;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+}
+
+.principleCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(253, 107, 196, 0.4);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(253, 107, 196, 0.15);
 }
 
 .principleTitle {
   font-size: 1.35rem;
-  font-weight: 500;
+  font-weight: 600;
   color: #FFFFFF;
+  margin: 0;
 }
 
 .principleDesc {
-  font-size: 0.98rem;
-  color: var(--growrev-text-muted);
+  font-size: 0.95rem;
+  color: #94A3B8;
   line-height: 1.65;
+  font-weight: 350;
+  margin: 0;
 }
 
 /* --- 08. Stat Metrics Row --- */

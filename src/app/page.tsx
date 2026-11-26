@@ -3,49 +3,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 import SectionEyebrow from "@/components/SectionEyebrow";
-import DiagnosticContactForm from "@/components/DiagnosticContactForm";
 import HeroSection from "@/components/hero/HeroSection";
 import ServiceNetworkSection from "@/components/services/ServiceNetworkSection";
 import ServicesShowcaseSection from "@/components/services/ServicesShowcaseSection";
+import AnalyticsResultsSection from "@/components/home/AnalyticsResultsSection";
+import CaseStudiesSection from "@/components/home/CaseStudiesSection";
+import ClosingTestimonialsSection from "@/components/home/ClosingTestimonialsSection";
+import WorkWithUsSection from "@/components/home/WorkWithUsSection";
 
 export const metadata: Metadata = {
   title: "Ayan AI Studio | Business Systems Studio",
   description:
     "We design premium websites, intelligent automation, and custom software that work independently or connect into one coherent business system.",
 };
-
-const transformations = [
-  {
-    client: "AgencyOS",
-    category: "Custom Applications",
-    href: "/transformations/custom-applications",
-    image: "/agencyos-dashboard.png",
-    alt: "AgencyOS custom client portal and executive dashboard",
-    problem: "Fragmented proposals, manual contract chasing, and disconnected invoice tracking across 4 separate tools.",
-    solution: "Designed and engineered an all-in-one operating system unifying client onboarding, contracts, and revenue pipelines.",
-    metric: { value: "-70%", label: "Client Onboarding Time" },
-  },
-  {
-    client: "Rongdhonu",
-    category: "Website + Applications",
-    href: "/transformations/website-plus-applications",
-    image: "/rongdhonu-public-website.png",
-    alt: "Rongdhonu cultural art exhibition platform and curatorial system",
-    problem: "Manual exhibition scheduling, chaotic artist catalog submissions, and disjointed digital archives.",
-    solution: "Built a cultural digital exhibition platform with self-serve curatorial workflows and automated cataloging.",
-    metric: { value: "100%", label: "Digital Workflow Coverage" },
-  },
-  {
-    client: "Intelligent Lead Routing",
-    category: "Automation & AI Agents",
-    href: "/transformations/automations",
-    image: "/lab_lead_pipeline_1784544885964.png",
-    alt: "Intelligent lead qualification and routing automation architecture",
-    problem: "High-value inquiries sat in inbox queues for 12+ hours before manual triage by account executives.",
-    solution: "Multi-stage autonomous pipeline parsing inquiry intent, enriching firmographics, and scheduling meetings instantly.",
-    metric: { value: "3 mins", label: "Average Response Time" },
-  },
-];
 
 const insights = [
   {
@@ -96,146 +66,23 @@ export default function Home() {
       {/* 04 — SERVICES EDITORIAL SHOWCASE (Spline 3D Automation & Core Disciplines) */}
       <ServicesShowcaseSection />
 
-      {/* 05 — THE BUSINESS PROBLEM & THE OPERATIONAL CORE */}
-      <section className={`${styles.section} ${styles.sectionDarker}`} id="approach">
-        <div className={styles.sectionHeader}>
-          <SectionEyebrow label="The Operational Core" variant="teal" />
-          <h2 className={styles.sectionTitle}>
-            Disconnected tools quietly <br />
-            <span className="title-gradient">drain business momentum.</span>
-          </h2>
-          <p className={styles.sectionDescription}>
-            Most businesses do not have a software shortage. They have an integration breakdown. When your CRM, website, invoices, and spreadsheets do not talk, your team becomes the manual glue holding them together.
-          </p>
-        </div>
+      {/* 05 — OUR RESULTS (GrowRev Style 3D Analytics Cards with Coloring Lights & Dotted Pattern) */}
+      <AnalyticsResultsSection />
 
-        <div className={styles.coreGrid}>
-          {/* Before: Fragmented Silos */}
-          <div className={styles.coreCardBefore}>
-            <div className={styles.coreCardHeader}>
-              <h3 className={styles.coreTitle}>The Fragmented Trap</h3>
-              <span className={styles.coreBadgeBefore}>Typical Setup</span>
-            </div>
-            <ul className={styles.coreList}>
-              <li className={styles.coreItem}>
-                <span className={styles.coreItemIconBefore}>✕</span>
-                <span><strong>Data Silos:</strong> Customer inquiries, contracts, and fulfillment data scattered across 5+ disconnected SaaS tools.</span>
-              </li>
-              <li className={styles.coreItem}>
-                <span className={styles.coreItemIconBefore}>✕</span>
-                <span><strong>Human Glue:</strong> Team members wasting 15+ hours weekly copying, re-typing, and chasing client information.</span>
-              </li>
-              <li className={styles.coreItem}>
-                <span className={styles.coreItemIconBefore}>✕</span>
-                <span><strong>Brittle Automations:</strong> Fragile one-off zap workflows that quietly break when an API or schema changes.</span>
-              </li>
-              <li className={styles.coreItem}>
-                <span className={styles.coreItemIconBefore}>✕</span>
-                <span><strong>Delayed Response:</strong> Inbound leads waiting hours or days for qualification, losing deals to faster competitors.</span>
-              </li>
-            </ul>
-          </div>
+      {/* 06 — CASE STUDIES (GrowRev Style Staggered Industry Results Cards) */}
+      <CaseStudiesSection />
 
-          {/* After: The Connected Studio */}
-          <div className={styles.coreCardAfter}>
-            <div className={styles.coreCardHeader}>
-              <h3 className={styles.coreTitle}>The Connected Studio</h3>
-              <span className={styles.coreBadgeAfter}>Engineered Core</span>
-            </div>
-            <ul className={styles.coreList}>
-              <li className={styles.coreItem}>
-                <span className={styles.coreItemIconAfter}>✓</span>
-                <span><strong>Single Source of Truth:</strong> One central database and event bus routing clean operational state across the company.</span>
-              </li>
-              <li className={styles.coreItem}>
-                <span className={styles.coreItemIconAfter}>✓</span>
-                <span><strong>Autonomous Agents:</strong> AI agents triaging inquiries, qualifying criteria, and spinning up workspaces in seconds.</span>
-              </li>
-              <li className={styles.coreItem}>
-                <span className={styles.coreItemIconAfter}>✓</span>
-                <span><strong>Resilient Code:</strong> Production-grade APIs and error-handled webhooks designed for years of uninterrupted uptime.</span>
-              </li>
-              <li className={styles.coreItem}>
-                <span className={styles.coreItemIconAfter}>✓</span>
-                <span><strong>Instant Execution:</strong> Customers receive immediate answers, automated proposals, and seamless onboarding.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
+      {/* 07 — INTERACTIVE TESTIMONIALS (Scroll-Closing "TESTIM | ONIALS" Animation) */}
+      <ClosingTestimonialsSection />
 
-      {/* 05 — FEATURED TRANSFORMATIONS (Case Studies) */}
-      <section className={styles.section} id="transformations">
-        <div className={styles.sectionHeader}>
-          <SectionEyebrow label="Proven Work" variant="teal" />
-          <h2 className={styles.sectionTitle}>
-            Engineered for <br />
-            <span className="title-gradient">Measurable Impact.</span>
-          </h2>
-          <p className={styles.sectionDescription}>
-            Real systems designed for real businesses. See how operational bottlenecks were diagnosed and resolved into high-performing digital engines.
-          </p>
-        </div>
-
-        {/* Studio Delivery Statistics */}
-        <div className={styles.metricsRow}>
-          <div className={styles.metricItem}>
-            <div className={styles.metricBig}>-70%</div>
-            <div className={styles.metricSub}>Average Onboarding Cycle</div>
-          </div>
-          <div className={styles.metricItem}>
-            <div className={styles.metricBig}>100%</div>
-            <div className={styles.metricSub}>Connected Workflows</div>
-          </div>
-          <div className={styles.metricItem}>
-            <div className={styles.metricBig}>0</div>
-            <div className={styles.metricSub}>Fragmented Silos</div>
-          </div>
-        </div>
-
-        <div className={styles.transformationsGrid}>
-          {transformations.map((t) => (
-            <Link key={t.client} href={t.href} className={styles.transformationCard}>
-              <div className={styles.transformationImageWrapper}>
-                <span className={styles.transformationCategoryBadge}>{t.category}</span>
-                <Image
-                  src={t.image}
-                  alt={t.alt}
-                  fill
-                  sizes="(max-width: 800px) 100vw, 420px"
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-
-              <div className={styles.transformationBody}>
-                <h3 className={styles.transformationTitle}>{t.client}</h3>
-                <p className={styles.transformationProblem}>{t.problem}</p>
-
-                <div className={styles.transformationMetricBox}>
-                  <div>
-                    <div className={styles.metricValue}>{t.metric.value}</div>
-                    <div className={styles.metricLabel}>{t.metric.label}</div>
-                  </div>
-                  <span className="btn-pill-arrow" style={{ padding: "0 0.9rem", height: "34px" }}>
-                    Case Study →
-                  </span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <div style={{ textAlign: "center", marginTop: "4rem" }}>
-          <Link href="/transformations" className="btn-growrev-secondary">
-            View All Transformation Reports →
-          </Link>
-        </div>
-      </section>
-
-      {/* 06 — PROCESS NAVIGATOR (GrowRev Process Style) */}
+      {/* 08 — PROCESS METHODOLOGY (GrowRev Process Navigator Style) */}
       <section className={`${styles.section} ${styles.sectionDarker}`} id="methodology">
         <div className={styles.sectionHeader}>
-          <SectionEyebrow label="Our Process" variant="teal" />
+          <div className={styles.laserSubtitle}>
+            <div className={styles.laserLineLeft} />
+            <span>Our Process</span>
+            <div className={styles.laserLineRight} />
+          </div>
           <h2 className={styles.sectionTitle}>
             From Bottleneck to <br />
             <span className="title-gradient">Autonomous Flow.</span>
@@ -247,6 +94,7 @@ export default function Home() {
 
         <div className={styles.processGrid}>
           <div className={styles.processCard}>
+            <div className={styles.processTopNeon} />
             <span className={styles.processNumber}>01</span>
             <h3 className={styles.processTitle}>Operational Mapping</h3>
             <p className={styles.processDesc}>
@@ -255,6 +103,7 @@ export default function Home() {
           </div>
 
           <div className={styles.processCard}>
+            <div className={styles.processTopNeon} style={{ background: "#00F2FE" }} />
             <span className={styles.processNumber}>02</span>
             <h3 className={styles.processTitle}>System Architecture</h3>
             <p className={styles.processDesc}>
@@ -263,6 +112,7 @@ export default function Home() {
           </div>
 
           <div className={styles.processCard}>
+            <div className={styles.processTopNeon} style={{ background: "#7DFF32" }} />
             <span className={styles.processNumber}>03</span>
             <h3 className={styles.processTitle}>Intelligent Orchestration</h3>
             <p className={styles.processDesc}>
@@ -271,17 +121,21 @@ export default function Home() {
           </div>
         </div>
 
-        <div style={{ textAlign: "center", marginTop: "3.5rem" }}>
-          <Link href="/methodologies" style={{ color: "var(--growrev-cyan)", textDecoration: "underline", textUnderlineOffset: "4px", fontSize: "0.95rem" }}>
+        <div style={{ textAlign: "center", marginTop: "4rem" }}>
+          <Link href="/methodologies" className="btn-growrev-secondary">
             Explore the Detailed Methodology Runbook →
           </Link>
         </div>
       </section>
 
-      {/* 07 — OPERATING PRINCIPLES (Why Us) */}
+      {/* 09 — OPERATING PRINCIPLES (Why Us / The Philosophy) */}
       <section className={styles.section} id="principles">
         <div className={styles.sectionHeader}>
-          <SectionEyebrow label="The Philosophy" variant="teal" />
+          <div className={styles.laserSubtitle}>
+            <div className={styles.laserLineLeft} />
+            <span>The Philosophy</span>
+            <div className={styles.laserLineRight} />
+          </div>
           <h2 className={styles.sectionTitle}>
             Business First. <br />
             <span className="title-gradient">Technology Second.</span>
@@ -293,6 +147,7 @@ export default function Home() {
 
         <div className={styles.principlesGrid}>
           <div className={styles.principleCard}>
+            <div className={styles.principleTopNeon} />
             <h3 className={styles.principleTitle}>Clarity Before Code</h3>
             <p className={styles.principleDesc}>
               We never write a line of software until the underlying business workflow is fully understood and streamlined. Building on top of broken processes only accelerates chaos.
@@ -300,6 +155,7 @@ export default function Home() {
           </div>
 
           <div className={styles.principleCard}>
+            <div className={styles.principleTopNeon} style={{ background: "#FD6BC4" }} />
             <h3 className={styles.principleTitle}>Invisible Technology</h3>
             <p className={styles.principleDesc}>
               The best digital systems do not require your team to constantly manage them. They eliminate friction silently in the background so work simply happens.
@@ -307,6 +163,7 @@ export default function Home() {
           </div>
 
           <div className={styles.principleCard}>
+            <div className={styles.principleTopNeon} style={{ background: "#FB9C55" }} />
             <h3 className={styles.principleTitle}>Long-Term Foundations</h3>
             <p className={styles.principleDesc}>
               We build on open, enterprise-grade frameworks (Next.js, TypeScript, PostgreSQL) that you own completely. No vendor lock-in or proprietary traps.
@@ -321,16 +178,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 08 — INSIGHTS & RESEARCH */}
+      {/* 10 — INSIGHTS & RESEARCH */}
       <section className={`${styles.section} ${styles.sectionDarker}`} id="insights">
         <div className={styles.sectionHeader}>
-          <SectionEyebrow label="Innovation &amp; Research" variant="teal" />
+          <div className={styles.laserSubtitle}>
+            <div className={styles.laserLineLeft} />
+            <span>Innovation &amp; Research</span>
+            <div className={styles.laserLineRight} />
+          </div>
           <h2 className={styles.sectionTitle}>
             Every Transformation <br />
             <span className="title-gradient">Begins as Research.</span>
           </h2>
           <p className={styles.sectionDescription}>
-            We rigorously test new models, workflow engines, and architectural patterns inside our internal <Link href="/lab" style={{ color: "var(--growrev-cyan)" }}>Innovation Lab</Link> before deploying them to production.
+            We rigorously test new models, workflow engines, and architectural patterns inside our internal{" "}
+            <Link href="/lab" style={{ color: "var(--growrev-cyan)" }}>
+              Innovation Lab
+            </Link>{" "}
+            before deploying them to production.
           </p>
         </div>
 
@@ -368,24 +233,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 09 — FINAL CONVERSION & DIAGNOSTIC FORM (GrowRev Work With Us Style) */}
-      <section className={styles.section} id="contact" style={{ paddingBottom: "10rem" }}>
-        <div className={styles.sectionHeader} style={{ marginBottom: "3rem" }}>
-          <SectionEyebrow label="Work With Us" variant="teal" />
-          <h2 className={styles.sectionTitle}>
-            Ready to Build Your <br />
-            <span className="title-gradient">Operating Advantage?</span>
-          </h2>
-          <p className={styles.sectionDescription}>
-            Tell us about what is slow, manual, or disconnected in your business. We will review your operation and provide direct architectural recommendations.
-          </p>
-        </div>
-
-        <DiagnosticContactForm
-          title="Begin a Business Diagnostic"
-          subtitle="Direct founder review · No high-pressure sales · Architectural clarity within 24 hours"
-        />
-      </section>
+      {/* 11 — WORK WITH US (GrowRev Style with Neon Lights moving Left to Right) */}
+      <WorkWithUsSection />
     </main>
   );
 }
