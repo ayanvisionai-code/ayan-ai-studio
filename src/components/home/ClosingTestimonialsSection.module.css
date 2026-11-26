@@ -80,8 +80,19 @@
   width: 100%;
   user-select: none;
   z-index: 2;
-  margin-bottom: 3.5rem;
+  margin-bottom: 1.5rem;
   overflow: visible;
+}
+
+.motionTagline {
+  font-size: 0.98rem;
+  color: #94A3B8;
+  text-align: center;
+  margin: 0 auto 3rem;
+  font-weight: 350;
+  max-width: 500px;
+  letter-spacing: 0.02em;
+  z-index: 2;
 }
 
 .halfWord {

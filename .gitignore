@@ -44,3 +44,5 @@ credentials.txt
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+scratch/

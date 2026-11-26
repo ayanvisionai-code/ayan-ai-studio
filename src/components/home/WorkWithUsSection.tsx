@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import styles from "./WorkWithUsSection.module.css";
 
 const HELP_AREAS = [
@@ -66,254 +67,270 @@ export default function WorkWithUsSection() {
       {/* Background Top Ambient Radiance */}
       <div className={styles.ambientGlowTop} aria-hidden="true" />
 
-      <div className={styles.container}>
-        {/* Header */}
-        <div className={styles.header}>
-          {/* Subtitle with dual laser lines */}
-          <div className={styles.subtitleWrapper}>
-            <div className={`${styles.laserLine} ${styles.laserLineLeft}`} />
-            <span className={styles.subtitleText}>Work With Us</span>
-            <div className={`${styles.laserLine} ${styles.laserLineRight}`} />
-          </div>
+      {/* ─── GrowRev Transition Banner: "Unlock Your Potential" ─── */}
+      <div className={styles.potentialBanner}>
+        <h2 className={styles.potentialTitle}>
+          Unlock Your <span className={styles.potentialGradient}>Potential</span>
+        </h2>
+        <a href="#contact-form" className={styles.potentialBtn}>
+          Get Started Today
+        </a>
+      </div>
 
-          {/* Biometric Cyber Fingerprint Scan SVG */}
-          <svg className={styles.fingerScanIcon} viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="60" height="60" rx="14" fill="#121318" stroke="rgba(0, 242, 254, 0.3)" strokeWidth="1.5" />
-            <path
-              d="M30 14C21.1634 14 14 21.1634 14 30C14 34.4183 15.7909 38.4183 18.6863 41.3137"
-              stroke="#00F2FE"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M41.3137 41.3137C44.2091 38.4183 46 34.4183 46 30C46 21.1634 38.8366 14 30 14"
-              stroke="#00F2FE"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M30 20C24.4772 20 20 24.4772 20 30C20 32.7614 21.1193 35.2614 22.9289 37.0711"
-              stroke="#4FACFE"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M37.0711 37.0711C38.8807 35.2614 40 32.7614 40 30C40 24.4772 35.5228 20 30 20"
-              stroke="#4FACFE"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M30 26C27.7909 26 26 27.7909 26 30V36C26 38.2091 27.7909 40 30 40C32.2091 40 34 38.2091 34 36V30C34 27.7909 32.2091 26 30 26Z"
-              stroke="#9333EA"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <circle cx="30" cy="30" r="2" fill="#00F2FE" />
-          </svg>
-
-          <h2 className={styles.title}>
-            The Last Step to Build Your <br />
-            <span className={styles.titleGradient}>Operating Advantage.</span>
-          </h2>
-
-          <p className={styles.description}>
-            Unlock the final piece of the puzzle with our proven architecture and direct founder guidance, designed to accelerate operational throughput and scale your business.
-          </p>
-        </div>
-
-        {/* ─── Form Card ─── */}
+      <div className={styles.container} id="contact-form">
+        {/* ─── 2-Column Work With Us Card (GrowRev Signature Layout) ─── */}
         <div className={styles.formCard}>
           <div className={styles.formTopNeon} aria-hidden="true" />
 
-          {success ? (
-            <div className={styles.successBanner}>
-              <h3 style={{ color: "#34D399", fontSize: "1.3rem", marginBottom: "0.5rem" }}>
-                Inquiry Received Successfully
+          {/* Card Header Eyebrow */}
+          <div className={styles.cardHeaderEyebrow}>
+            <div className={styles.laserLineLeft} />
+            <span className={styles.eyebrowText}>Work With Us</span>
+            <div className={styles.laserLineRight} />
+          </div>
+
+          <div className={styles.twoColumnLayout}>
+            {/* ─── Left Column: Brand Statement & Biometric Icon ─── */}
+            <div className={styles.infoCol}>
+              <div className={styles.fingerprintBox}>
+                <svg
+                  className={styles.fingerScanIcon}
+                  viewBox="0 0 60 60"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    width="60"
+                    height="60"
+                    rx="14"
+                    fill="#15171E"
+                    stroke="rgba(0, 242, 254, 0.35)"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M30 14C21.1634 14 14 21.1634 14 30C14 34.4183 15.7909 38.4183 18.6863 41.3137"
+                    stroke="#00F2FE"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M41.3137 41.3137C44.2091 38.4183 46 34.4183 46 30C46 21.1634 38.8366 14 30 14"
+                    stroke="#00F2FE"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M30 20C24.4772 20 20 24.4772 20 30C20 32.7614 21.1193 35.2614 22.9289 37.0711"
+                    stroke="#4FACFE"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M37.0711 37.0711C38.8807 35.2614 40 32.7614 40 30C40 24.4772 35.5228 20 30 20"
+                    stroke="#4FACFE"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M30 26C27.7909 26 26 27.7909 26 30V36C26 38.2091 27.7909 40 30 40C32.2091 40 34 38.2091 34 36V30C34 27.7909 32.2091 26 30 26Z"
+                    stroke="#9333EA"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                  <circle cx="30" cy="30" r="2" fill="#00F2FE" />
+                </svg>
+              </div>
+
+              <h3 className={styles.infoHeadline}>
+                The last step to Grow Results of your Business
               </h3>
-              <p style={{ margin: 0 }}>
-                Thank you! Your project details have been transmitted directly to our principal engineers. We will review your operations and provide direct recommendations within 24 hours.
+
+              <p className={styles.infoParagraph}>
+                Unlock the final piece of the puzzle with our proven strategies and expert guidance, designed to accelerate growth and maximize the success of your business in a competitive landscape.
               </p>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className={styles.formGrid}>
-              {errorMsg && <div className={styles.errorBanner}>{errorMsg}</div>}
 
-              {/* Row 1: First Name & Last Name */}
-              <div className={styles.rowTwo}>
-                <div className={styles.fieldGroup}>
-                  <label htmlFor="firstName" className={styles.label}>
-                    First Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    required
-                    placeholder="Marcus"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    className={styles.input}
-                  />
+            {/* ─── Right Column: Interactive Form ─── */}
+            <div className={styles.formCol}>
+              {success ? (
+                <div className={styles.successBanner}>
+                  <h4 style={{ color: "#34D399", fontSize: "1.25rem", marginBottom: "0.5rem" }}>
+                    Inquiry Received Successfully
+                  </h4>
+                  <p style={{ margin: 0, color: "#CBD5E1", fontSize: "0.95rem", lineHeight: 1.6 }}>
+                    Thank you! Your information has been transmitted directly to our studio. We will review your requirements and respond within 24 hours.
+                  </p>
                 </div>
+              ) : (
+                <form onSubmit={handleSubmit} className={styles.formGrid}>
+                  {errorMsg && <div className={styles.errorBanner}>{errorMsg}</div>}
 
-                <div className={styles.fieldGroup}>
-                  <label htmlFor="lastName" className={styles.label}>
-                    Last Name
+                  {/* Row 1: First Name & Last Name */}
+                  <div className={styles.rowTwo}>
+                    <div className={styles.fieldGroup}>
+                      <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        required
+                        placeholder="Your First Name"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        className={styles.input}
+                      />
+                    </div>
+
+                    <div className={styles.fieldGroup}>
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        placeholder="Your Last Name"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        className={styles.input}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Row 2: Phone Number */}
+                  <div className={styles.fieldGroup}>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="Your Phone Number"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className={styles.input}
+                    />
+                  </div>
+
+                  {/* Row 3: Email Address */}
+                  <div className={styles.fieldGroup}>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      placeholder="Your Email Address"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className={styles.input}
+                    />
+                  </div>
+
+                  {/* Row 4: Area of Help */}
+                  <div className={styles.fieldGroup}>
+                    <select
+                      id="areaOfHelp"
+                      name="areaOfHelp"
+                      value={formData.areaOfHelp}
+                      onChange={handleChange}
+                      className={styles.select}
+                    >
+                      {HELP_AREAS.map((area) => (
+                        <option key={area} value={area}>
+                          {area}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Row 5: Message Box */}
+                  <div className={styles.fieldGroup}>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={3}
+                      placeholder="Tell us about your business goals and current bottlenecks..."
+                      value={formData.message}
+                      onChange={handleChange}
+                      className={styles.textarea}
+                    />
+                  </div>
+
+                  {/* Disclaimer checkbox */}
+                  <label className={styles.checkboxLabel}>
+                    <input type="checkbox" required defaultChecked className={styles.checkboxInput} />
+                    <span>
+                      I agree to receive communications regarding our business systems and advisory consultation.
+                    </span>
                   </label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    placeholder="Vance"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    className={styles.input}
-                  />
-                </div>
-              </div>
 
-              {/* Row 2: Work Email & Phone Number */}
-              <div className={styles.rowTwo}>
-                <div className={styles.fieldGroup}>
-                  <label htmlFor="email" className={styles.label}>
-                    Work Email *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    placeholder="marcus@company.com"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={styles.input}
-                  />
-                </div>
-
-                <div className={styles.fieldGroup}>
-                  <label htmlFor="phone" className={styles.label}>
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    placeholder="+1 (555) 000-0000"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className={styles.input}
-                  />
-                </div>
-              </div>
-
-              {/* Row 3: Area of Help */}
-              <div className={styles.fieldGroup}>
-                <label htmlFor="areaOfHelp" className={styles.label}>
-                  In Which Area Do You Need Help? *
-                </label>
-                <select
-                  id="areaOfHelp"
-                  name="areaOfHelp"
-                  value={formData.areaOfHelp}
-                  onChange={handleChange}
-                  className={styles.select}
-                >
-                  {HELP_AREAS.map((area) => (
-                    <option key={area} value={area}>
-                      {area}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Row 4: Project Message Box */}
-              <div className={styles.fieldGroup}>
-                <label htmlFor="message" className={styles.label}>
-                  Describe Your Current Challenge &amp; Goal *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={4}
-                  placeholder="Tell us what is currently slow, manual, or disconnected in your business..."
-                  value={formData.message}
-                  onChange={handleChange}
-                  className={styles.textarea}
-                />
-              </div>
-
-              {/* Submit CTA Button */}
-              <button
-                type="submit"
-                disabled={loading}
-                className={styles.submitBtn}
-              >
-                <span>{loading ? "Transmitting Scope..." : "Initiate Business Diagnostic →"}</span>
-              </button>
-            </form>
-          )}
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className={styles.submitBtn}
+                  >
+                    <span>{loading ? "Transmitting..." : "Get Started Today"}</span>
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
       {/* ═════════════════════════════════════════════════════════════════════════
-         BOTTOM NEON LIGHT TRAILS (Light moving from left to right)
+         BOTTOM NEON LIGHT TRAILS (Luminous sweeping multi-color wave beams)
          ═════════════════════════════════════════════════════════════════════════ */}
       <div className={styles.bottomLightContainer} aria-hidden="true">
         <div className={styles.lightStreamTrack}>
           {/* Layer 1: Electric Cyan & Purple Sweep */}
-          <svg className={`${styles.lightWaveSvg} ${styles.lightBeam1}`} viewBox="0 0 1600 180" fill="none">
+          <svg className={`${styles.lightWaveSvg} ${styles.lightBeam1}`} viewBox="0 0 1600 200" fill="none">
             <path
-              d="M-200 140C200 80 500 170 900 110C1300 50 1500 130 1900 90"
+              d="M-200 150C200 70 500 180 900 110C1300 40 1500 140 1900 80"
               stroke="url(#trailGrad1)"
-              strokeWidth="4"
+              strokeWidth="5"
               strokeLinecap="round"
               filter="url(#glowFilter)"
             />
             <defs>
               <linearGradient id="trailGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#00F2FE" stopOpacity="0" />
-                <stop offset="30%" stopColor="#00F2FE" stopOpacity="0.8" />
-                <stop offset="60%" stopColor="#9333EA" stopOpacity="0.9" />
+                <stop offset="30%" stopColor="#00F2FE" stopOpacity="0.85" />
+                <stop offset="60%" stopColor="#9333EA" stopOpacity="0.95" />
                 <stop offset="100%" stopColor="#FD6BC4" stopOpacity="0" />
               </linearGradient>
               <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="6" result="blur" />
+                <feGaussianBlur stdDeviation="8" result="blur" />
                 <feComposite in="SourceGraphic" in2="blur" operator="over" />
               </filter>
             </defs>
           </svg>
 
-          {/* Layer 2: Amber & Magenta Secondary Sweep */}
-          <svg className={`${styles.lightWaveSvg} ${styles.lightBeam2}`} viewBox="0 0 1600 180" fill="none">
+          {/* Layer 2: Amber, Orange & Gold Sweep */}
+          <svg className={`${styles.lightWaveSvg} ${styles.lightBeam2}`} viewBox="0 0 1600 200" fill="none">
             <path
-              d="M-150 110C250 160 650 70 1050 140C1450 70 1650 150 1950 120"
+              d="M-150 120C250 170 650 60 1050 150C1450 60 1650 160 1950 110"
               stroke="url(#trailGrad2)"
-              strokeWidth="3"
+              strokeWidth="4"
               strokeLinecap="round"
               filter="url(#glowFilter2)"
             />
             <defs>
               <linearGradient id="trailGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#FB9C55" stopOpacity="0" />
-                <stop offset="40%" stopColor="#FB9C55" stopOpacity="0.85" />
+                <stop offset="35%" stopColor="#FB9C55" stopOpacity="0.9" />
                 <stop offset="70%" stopColor="#FD6BC4" stopOpacity="0.85" />
                 <stop offset="100%" stopColor="#9333EA" stopOpacity="0" />
               </linearGradient>
               <filter id="glowFilter2" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="8" result="blur2" />
+                <feGaussianBlur stdDeviation="10" result="blur2" />
                 <feComposite in="SourceGraphic" in2="blur2" operator="over" />
               </filter>
             </defs>
           </svg>
 
           {/* Layer 3: Intense Core Stream */}
-          <svg className={`${styles.lightWaveSvg} ${styles.lightBeam3}`} viewBox="0 0 1600 180" fill="none">
+          <svg className={`${styles.lightWaveSvg} ${styles.lightBeam3}`} viewBox="0 0 1600 200" fill="none">
             <path
-              d="M-300 130C100 110 600 150 1100 100C1400 60 1700 120 2000 140"
+              d="M-300 140C100 110 600 160 1100 90C1400 50 1700 130 2000 150"
               stroke="url(#trailGrad3)"
-              strokeWidth="2"
+              strokeWidth="2.5"
               strokeLinecap="round"
             />
             <defs>

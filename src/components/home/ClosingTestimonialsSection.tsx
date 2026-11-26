@@ -36,7 +36,7 @@ export default function ClosingTestimonialsSection() {
       {/* Section Pill Header */}
       <div className={styles.headerPill}>
         <div className={`${styles.laserLine} ${styles.laserLineLeft}`} />
-        <span className={styles.pillText}>Client Endorsements</span>
+        <span className={styles.pillText}>Highlights</span>
         <div className={`${styles.laserLine} ${styles.laserLineRight}`} />
       </div>
 
@@ -47,7 +47,7 @@ export default function ClosingTestimonialsSection() {
           className={`${styles.halfWord} ${styles.halfWordLeft}`}
           style={{ x: xLeft }}
         >
-          Testim
+          TESTIM
         </motion.span>
 
         {/* Central Optical Energy Flare */}
@@ -65,9 +65,13 @@ export default function ClosingTestimonialsSection() {
           className={`${styles.halfWord} ${styles.halfWordRight}`}
           style={{ x: xRight }}
         >
-          onials
+          ONIALS
         </motion.span>
       </div>
+
+      <p className={styles.motionTagline}>
+        Our work is best experienced in motion. Engineered for autonomous velocity.
+      </p>
 
       {/* ─── Revealed Testimonial Card ─── */}
       <motion.div
